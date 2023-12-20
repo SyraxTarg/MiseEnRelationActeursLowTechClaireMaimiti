@@ -8,18 +8,32 @@ $particuliersManager= new particuliersManager();
 $particuliersManager->dbConnect();
 
 
+// if(isset($_POST['tri_particuliers'])){
+//     if($triValue =="DESC"){
+//         $triValue = "ASC";
+//         echo $triValue;
+//         $particuliers=$particuliersManager->getParticuliers($triValue);
+        
+//     } else{
+//         $triValue = "DESC";
+//         $particuliers=$particuliersManager->getParticuliers($triValue);
+//     }
+// }else {
+//     $triValue = "DESC";
+//     $particuliers=$particuliersManager->getParticuliers($triValue);
 
-if(!empty($_GET['tri_particuliers'])){
-    if($triValue ==='DESC'){
+// }
+
+$triValue = "DESC"; // Valeur par défaut
+
+if (isset($_POST['tri_particuliers'])) {
+    if ($_POST['triValue'] == "DESC") {
         $triValue = "ASC";
-        $particuliers=$particuliersManager->getParticuliers($triValue);
-    } else{
+    } else {
         $triValue = "DESC";
-        $particuliers=$particuliersManager->getParticuliers($triValue);
     }
-
-}else {
-    $triValue = "DESC";
-    $particuliers=$particuliersManager->getParticuliers($triValue);
 }
 
+
+// Obtient les particuliers en utilisant la valeur actuelle de tri
+$particuliers = $particuliersManager->getParticuliers($triValue);

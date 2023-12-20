@@ -1,7 +1,19 @@
 <h1>Annuaire public</h1>
-<form action="" method="get">
-    <input type="button" value="De a à z" name="tri_particuliers" id="tri_particuliers">
+<form method="post" action="">
+    <input type="hidden" name="triValue" value="<?php echo $triValue; ?>">
+    <?php
+        if($_POST['triValue'] == "DESC"){
+            ?><input type="submit" name="tri_particuliers" value="A à Z" id="boutonTri"><?php
+        } else {
+            ?><input type="submit" name="tri_particuliers" value="Z à A" id="boutonTri"><?php
+        }
+
+    ?>
+    <input type="text" name="recherche" id="recherche">
+    <input type="submit" value="rechercher">
+    
 </form>
+
 
 
 <table id="annuaire">

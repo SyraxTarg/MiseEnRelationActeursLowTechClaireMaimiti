@@ -9,3 +9,4 @@ $annoncesManager->dbConnect();
 
 
 $annonces=$annoncesManager->getAnnonces();
+
