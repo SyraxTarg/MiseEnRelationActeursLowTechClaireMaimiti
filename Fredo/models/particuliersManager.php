@@ -6,8 +6,8 @@ class particuliersManager extends AbstractManager {
 
     const TABLE_NAME="Particuliers";
 
-    function getParticuliers(){
-        $sql = "SELECT id, username, password, email, activités FROM ".particuliersManager::TABLE_NAME." JOIN Users ON ".particuliersManager::TABLE_NAME.".id_user = Users.id;";
+    function getParticuliers($desc_or_asc){
+        $sql = "SELECT id_user, Users.username, Users.password, Users.email, particuliers.activit‚s  FROM ".particuliersManager::TABLE_NAME." JOIN Users ON ".particuliersManager::TABLE_NAME.".id_user = Users.id ORDER BY username ".$desc_or_asc.";";
         $query = $this->dbConnect()->query($sql);
         return $query->fetchAll();
     }
