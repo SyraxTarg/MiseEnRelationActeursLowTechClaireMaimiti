@@ -68,4 +68,4 @@ function grantPrivileges($user){
     }
 }
 
-$user = './views/pages/connexion.php';
+$jean = './views/pages/connexion.php';
