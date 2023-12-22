@@ -63,6 +63,7 @@ function grantPrivileges($user){
                 $_SESSION['privileges'] = "particulier";
             }
         }
+        // var_dump($user);
     }
 }
 
