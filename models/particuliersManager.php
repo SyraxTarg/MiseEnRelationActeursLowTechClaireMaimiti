@@ -54,15 +54,14 @@ class particuliersManager extends AbstractManager {
         ]);
     }
 
-    function rechercheParticuliers(){
-        $sql = "SELECT id_user, profile_picture, Users.username, Users.password, Users.email, particuliers.activit‚s  FROM ".particuliersManager::TABLE_NAME." JOIN Users ON ".particuliersManager::TABLE_NAME.".id_user = Users.id WHERE LOWER(username) LIKE '%:mot_clé%' OR LOWER(activit‚s) LIKE '%:mot_clé%' OR OR LOWER(email) LIKE '%:mot_clé%';";
-        $query = $this->dbConnect()->prepare($sql);
-        $query->execute([
-            ':mot_clé' => $_POST['recherche'],
-            
-        ]);
-        return $query->fetchAll();
-    }
+    function rechercheParticuliers($mot_clé)
+{
+    $mot_clé = strtolower($mot_clé);
+    $sql = "SELECT id_user, Users.profile_picture, Users.username, Users.password, Users.email,  particuliers.activit‚s FROM " . particuliersManager::TABLE_NAME . " JOIN Users ON " . particuliersManager::TABLE_NAME . ".id_user = Users.id WHERE LOWER(Users.username) LIKE '%" . $mot_clé . "%' OR LOWER( particuliers.activit‚s) LIKE '%" . $mot_clé . "%';";
+
+    $query = $this->dbConnect()->query($sql);
+    return $query->fetchAll();
+}
     
 
 
