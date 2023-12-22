@@ -5,5 +5,5 @@ const DB_CONFIG = [
     'port'     => '5432',
     'dbname'   => 'lowtech',
     'username' => 'postgres',
-    'password' => 'Lh471bv8'
+    'password' => 'loveSaucisson'
   ];
