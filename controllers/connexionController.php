@@ -5,6 +5,7 @@ require './models/usersManager.php';
 $usersManager = new usersManager();
 
 $users = $usersManager->getUsers();
+// var_dump($users);
 
 if(isset($_GET['msg']) && $_GET['msg'] == "IL"){
     $msg = "<p>Username ou mot de passe incorrect</p>";
