@@ -4,7 +4,7 @@ if(isset($_SESSION['idUser'])){
     $connecte = true;
     require_once 'models/usersManager.php';
     $usersManager = new usersManager();
-    $currentUser = $usersManager->getCurrentUser()[0];
+    $currentUser = $usersManager->getCurrentUser();
 }
 else{
     $connecte = false;

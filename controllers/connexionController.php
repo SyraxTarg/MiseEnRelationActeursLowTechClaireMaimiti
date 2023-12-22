@@ -2,34 +2,29 @@
 
 require './models/usersManager.php';
 
-$usersManager = new usersManager();
-
-$users = $usersManager->getUsers();
-
 if(isset($_GET['msg']) && $_GET['msg'] == "IL"){
-    $msg = "<p>Username ou mot de passe incorrect</p>";
+    $msg = "<p>Username ou mot de passe incorrect.</p>";
 }
 
 // function connexion(){
     if(isset($_POST['username']) && isset($_POST['password'])){
-        $check = false;
-        foreach($users as $user){
-            if($_POST['username'] == $user['username'] && $_POST['password'] == $user['password']){
-                $check = true;
-                $_SESSION['username'] = $user['username'];
-                $_SESSION['idUser'] = $user['id'];
-                unset($_POST['username']);
-                unset($_POST['password']);
-                
-                grantPrivileges($user);
-                
-                header('Location: index.php?page=home');
-                break;
-            }
-        }
-        if(!$check){
+        $usersManager = new usersManager();
+        $user = $usersManager->getUniqueUser();
+
+        if(gettype($user) == "string"){
             header('Location: index.php?page=connexion&msg=IL');
             //IL : Invalid Login
+        }
+        else{
+            var_dump($user);
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['idUser'] = $user['id'];
+            unset($_POST['username']);
+            unset($_POST['password']);
+            
+            grantPrivileges($user);
+
+            header('Location: index.php?page=home');
         }
     }
 // }
