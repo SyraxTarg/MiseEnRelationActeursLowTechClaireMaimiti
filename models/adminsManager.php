@@ -12,6 +12,20 @@ class adminsManager extends AbstractManager {
         return $query->fetchAll();
     }
 
+    function getUniqueAdmin($id){
+        $sql = "SELECT id, username, password, email/* , activités */ FROM ".adminsManager::TABLE_NAME." JOIN Users ON ".adminsManager::TABLE_NAME.".id_user = Users.id WHERE id=(:id);";
+        $query = $this->db->prepare($sql);
+        $query->execute([
+            ':id' => $id
+        ]);
+        $admin = $query->fetch();
+
+        if($admin)
+            return $admin;
+        else
+            return null;
+    }
+
     function remove_user($id){
         $sql = "DELETE FROM Users WHERE id = ".$id.";";
         $query = $this->dbConnect()->query($sql);
