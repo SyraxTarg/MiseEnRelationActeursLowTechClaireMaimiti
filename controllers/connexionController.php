@@ -68,4 +68,4 @@ function grantPrivileges($user){
     }
 }
 
-$template = './views/pages/connexion.php';
+$modele = './views/pages/connexion.php';
