@@ -4,10 +4,10 @@ require_once 'models/abstactManager.php';
 
 class modérateursManager extends AbstractManager {
 
-    const TABLE_NAME="Modérateurs";
+    const TABLE_NAME="mod‚rateurs";
 
     function getModérateurs(){
-        $sql = "SELECT id, username, password, email, activités FROM ".modérateursManager::TABLE_NAME." JOIN Users ON ".modérateursManager::TABLE_NAME.".id_user = Users.id;";
+        $sql = "SELECT id, username, password, email/* , activités */ FROM ".modérateursManager::TABLE_NAME." JOIN Users ON ".modérateursManager::TABLE_NAME.".id_user = Users.id;";
         $query = $this->dbConnect()->query($sql);
         return $query->fetchAll();
     }

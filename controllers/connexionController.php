@@ -12,17 +12,19 @@ if(isset($_GET['msg']) && $_GET['msg'] == "IL"){
 
 // function connexion(){
     if(isset($_POST['username']) && isset($_POST['password'])){
-        // global $users;
         $check = false;
         foreach($users as $user){
             if($_POST['username'] == $user['username'] && $_POST['password'] == $user['password']){
-                // var_dump($user);
                 $check = true;
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['idUser'] = $user['id'];
                 unset($_POST['username']);
                 unset($_POST['password']);
+                
+                grantPrivileges($user);
+                
                 header('Location: index.php?page=home');
+                break;
             }
         }
         if(!$check){
@@ -31,5 +33,36 @@ if(isset($_GET['msg']) && $_GET['msg'] == "IL"){
         }
     }
 // }
+
+function grantPrivileges($user){
+    require_once 'models/adminsManager.php';
+    $adminsManager = new adminsManager();
+    $admins = $adminsManager->getAdmins();
+
+    require_once 'models/modérateursManager.php';
+    $moderateursManager = new modérateursManager();
+    $moderateurs = $moderateursManager->getModérateurs();
+
+    if(!isset($_SESSION['privileges'])){
+        $notGranted = true;
+        foreach ($admins as $admin) {
+            if($admin['id'] == $user['id']){
+                $notGranted = false;
+                $_SESSION['privileges'] = "admin";
+            }
+        }
+        if($notGranted){
+            foreach ($moderateurs as $modo) {
+                if($modo['id'] == $user['id']){
+                    $notGranted = false;
+                    $_SESSION['privileges'] = "modo";
+                }
+            }
+            if($notGranted){
+                $_SESSION['privileges'] = "particulier";
+            }
+        }
+    }
+}
 
 $template = './views/pages/connexion.php';

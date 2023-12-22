@@ -7,7 +7,7 @@ class adminsManager extends AbstractManager {
     const TABLE_NAME="Admins";
 
     function getAdmins(){
-        $sql = "SELECT id, username, password, email, activités FROM ".adminsManager::TABLE_NAME." JOIN Users ON ".adminsManager::TABLE_NAME.".id_user = Users.id;";
+        $sql = "SELECT id, username, password, email/* , activités */ FROM ".adminsManager::TABLE_NAME." JOIN Users ON ".adminsManager::TABLE_NAME.".id_user = Users.id;";
         $query = $this->dbConnect()->query($sql);
         return $query->fetchAll();
     }
