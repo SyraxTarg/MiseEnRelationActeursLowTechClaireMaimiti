@@ -26,7 +26,7 @@
         if ($particulier['username'] != 'utilisateur introuvable') {
             echo "<tr>";
             echo "<td>";
-            $image = "https://www.google.com/url?sa=i&url=https%3A%2F%2Farchive.org%2Fdetails%2Ftwitter-default-pfp&psig=AOvVaw3nabfu3kbr9VEYGg5iRdkp&ust=1703239839133000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLjBxv-koIMDFQAAAAAdAAAAABAD";
+            $image = "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg";
             if ($particulier['profile_picture'] == null) {
                 echo "<img src =" . $image . " alt='default pfp' class='pfp'/>";
             } else {

@@ -5,6 +5,7 @@ const AVAILABLE_ROUTES = [
     'annuaire' => '../controllers/annuaireController.php',
     'connexion' => '../controllers/connexionController.php',
     'deconnexion' => '../controllers/deconnexionController.php',
+    'mur' => '../controllers/murAnnoncesController.php',
   ];
   
   const DEFAULT_ROUTE = AVAILABLE_ROUTES['home'];
