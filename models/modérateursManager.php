@@ -12,6 +12,21 @@ class modérateursManager extends AbstractManager {
         return $query->fetchAll();
     }
 
+    function getUniqueModo($id){
+        $sql = "SELECT id, username, password, email/* , activités */ FROM ".adminsManager::TABLE_NAME." JOIN Users ON ".adminsManager::TABLE_NAME.".id_user = Users.id WHERE id=(:id);";
+        $query = $this->db->prepare($sql);
+        $query->execute([
+            ':id' => $id
+        ]);
+        $modo = $query->fetch();
+
+        if($modo)
+            return $modo;
+        else
+            return null;
+    }
+
+
     function post_recherche($titre, $description, $id_user){
         $sql = "INSERT INTO Annonces(titre, description, id_user) VALUES(:titre, :description, ".$id_user."); INSERT INTO Recherche (id_annonce) VALUES(SELECT id FROM Annonces ORDER BY ID DESC LIMIT 1);";
         $query = $this->dbConnect()->prepare($sql);
