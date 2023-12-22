@@ -64,7 +64,7 @@ class particuliersManager extends AbstractManager {
 
 // function createParticulier(){
 //     $sql="INSERT INTO Users(username, password, email, activit,s "
-// }
+// } peut utiliser un tab des elements que l'on veut ajouter
     
 
 

@@ -11,3 +11,12 @@ td{
     height: 100px;
     width: 100px;
 }
+
+.annonce{
+    border: 1px solid black;
+}
+
+.commentaires{
+    border: 1px solid black;
+ 
+}
