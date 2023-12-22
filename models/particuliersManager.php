@@ -7,7 +7,7 @@ class particuliersManager extends AbstractManager {
     const TABLE_NAME="Particuliers";
 
     function getParticuliers($desc_or_asc){
-        $sql = "SELECT id_user, Users.username, Users.password, Users.email, particuliers.activit‚s  FROM ".particuliersManager::TABLE_NAME." JOIN Users ON ".particuliersManager::TABLE_NAME.".id_user = Users.id ORDER BY username ".$desc_or_asc.";";
+        $sql = "SELECT id_user, profile_picture, Users.username, Users.password, Users.email, Users.activit‚s  FROM ".particuliersManager::TABLE_NAME." JOIN Users ON ".particuliersManager::TABLE_NAME.".id_user = Users.id ORDER BY username ".$desc_or_asc.";";
         $query = $this->dbConnect()->query($sql);
         return $query->fetchAll();
     }
@@ -53,6 +53,19 @@ class particuliersManager extends AbstractManager {
             ':edited_value' => $_POST['edited_value']
         ]);
     }
+
+    function rechercheParticuliers($mot_clé)
+{
+    $mot_clé = strtolower($mot_clé);
+    $sql = "SELECT id_user, Users.profile_picture, Users.username, Users.password, Users.email,  User.activit‚s FROM " . particuliersManager::TABLE_NAME . " JOIN Users ON " . particuliersManager::TABLE_NAME . ".id_user = Users.id WHERE LOWER(Users.username) LIKE '%" . $mot_clé . "%' OR LOWER( Users.activit‚s) LIKE '%" . $mot_clé . "%';";
+
+    $query = $this->dbConnect()->query($sql);
+    return $query->fetchAll();
+}
+
+// function createParticulier(){
+//     $sql="INSERT INTO Users(username, password, email, activit,s "
+// }
     
 
 

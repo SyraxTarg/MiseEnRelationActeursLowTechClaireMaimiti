@@ -5,3 +5,9 @@ table{
 td{
     border: 1px black solid; 
 }
+
+
+.pfp{
+    height: 100px;
+    width: 100px;
+}
