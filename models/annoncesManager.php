@@ -6,11 +6,15 @@ class annoncesManager extends AbstractManager {
 
     const TABLE_NAME="Annonces";
 
-    function getAnnonces(): array {
-        $sql = "SELECT Annonces.id, titre, description, username FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere is null AND pinned = 't' ORDER BY date; SELECT Annonces.id, titre, description, username FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere is null ORDER BY date;";
-        $query = $this->dbConnect()->query($sql);
-        return $query->fetchAll();
-    }
+    // function getAnnonces(): array {
+    //     $sql = "(SELECT Annonces.id, titre, description, username FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere is null AND pinned = 't' ORDER BY date)
+    //             UNION
+    //             (SELECT Annonces.id, titre, description, username FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere is null ORDER BY date)";
+    
+    //     $query = $this->dbConnect()->query($sql);
+    //     return $query->fetchAll();
+    // }
+    
 
     public function set_annonce_mère($id_annonce, $id_annonce_mère) {
         $sql = "UPDATE ".annoncesManager::TABLE_NAME." SET id_annonce_mère = ".$id_annonce_mère. " WHERE id = ".$id_annonce.";";
@@ -23,6 +27,21 @@ class annoncesManager extends AbstractManager {
         $query = $this->dbConnect()->query($sql);
         return $query->fetchAll();
     }
+
+
+    function getPinnedAnnonces(){
+        $sql = "SELECT Annonces.id, titre, description, username, date, nb_likes FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere is null AND pinned = 't' ORDER BY date;";
+        $query = $this->dbConnect()->query($sql);
+        return $query->fetchAll();
+    }
+
+    function getNonPinnedAnnonces(){
+        $sql = "SELECT Annonces.id, titre, description, username, date, nb_likes FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere IS NULL AND (pinned = 'f' OR pinned IS NULL) ORDER BY date ASC;";
+        $query = $this->dbConnect()->query($sql);
+        return $query->fetchAll();
+    }
+    
+    
 
 
 }

@@ -7,4 +7,6 @@ require_once('models/annoncesManager.php');
 $annoncesManager= new annoncesManager();
 $annoncesManager->dbConnect();
 
-$annonces = $annoncesManager->getAnnonces();
+$annoncesPinned = $annoncesManager->getPinnedAnnonces();
+
+$annoncesNonPinned = $annoncesManager->getNonPinnedAnnonces();

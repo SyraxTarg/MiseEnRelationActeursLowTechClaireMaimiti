@@ -71,3 +71,9 @@ ALTER TABLE Annonces ALTER COLUMN image TYPE VARCHAR(500);
 INSERT INTO Annonces(titre, description, id_user, image, nb_likes, pinned) VALUES('Titre de ma super Annonce', 'description de ma super annonce blablabla lorem ipsum jsp', (SELECT id_user FROM Modérateurs WHERE id_user = 3), 'https://opac.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9811bb53-5392-47b7-a8b3-3d26d47e8c49%2Fd35c2720-4b39-4b38-afda-3cfe8025e2cb%2Ffour-solaire.JPG-1.webp?table=block&id=2d754ec7-2855-40b8-a3a6-e86ef539a7c6&spaceId=9811bb53-5392-47b7-a8b3-3d26d47e8c49&width=2000&userId=&cache=v2', 5, true);
 
 INSERT INTO Annonces(description, id_user, id_annonce_mere, nb_likes) VALUES('wouaou mais quelle belle annonce!', (SELECT id_user FROM Particuliers WHERE id_user = 7), (SELECT id FROM Annonces WHERE id = (SELECT id FROM Annonces LIMIT 1)), 2);
+
+INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pinned', 'ma description qui tue', 3, 2, true);
+INSERT INTO Annonces(description, id_user, id_annonce_mere) VALUES('description commentaire 1', 5, (SELECT id FROM Annonces WHERE id = (SELECT id FROM Annonces LIMIT 1)));
+INSERT INTO Annonces(description, id_user, id_annonce_mere) VALUES('description commentaire 1', 5, 7);
+INSERT INTO Annonces(description, id_user, id_annonce_mere) VALUES('description commentaire 1', 5, 7);
+INSERT INTO Annonces(description, id_user, id_annonce_mere) VALUES('description commentaire 1', 5, 7);
