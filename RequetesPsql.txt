@@ -77,3 +77,8 @@ INSERT INTO Annonces(description, id_user, id_annonce_mere) VALUES('description 
 INSERT INTO Annonces(description, id_user, id_annonce_mere) VALUES('description commentaire 1', 5, 7);
 INSERT INTO Annonces(description, id_user, id_annonce_mere) VALUES('description commentaire 1', 5, 7);
 INSERT INTO Annonces(description, id_user, id_annonce_mere) VALUES('description commentaire 1', 5, 7);
+
+INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
+INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
+INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
+INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
