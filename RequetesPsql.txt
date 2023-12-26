@@ -82,3 +82,5 @@ INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('tit
 INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
 INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
 INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
+
+UPDATE Annonces SET date = (SELECT NOW()) WHERE date is null;

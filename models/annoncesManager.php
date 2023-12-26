@@ -30,15 +30,22 @@ class annoncesManager extends AbstractManager {
 
 
     function getPinnedAnnonces(){
-        $sql = "SELECT Annonces.id, titre, description, username, date, nb_likes FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere is null AND pinned = 't' ORDER BY date;";
+        $sql = "SELECT Annonces.id, titre, description, username, date, nb_likes FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere is null AND pinned = 't' ORDER BY date DESC;";
         $query = $this->dbConnect()->query($sql);
         return $query->fetchAll();
     }
 
     function getNonPinnedAnnonces(){
-        $sql = "SELECT Annonces.id, titre, description, username, date, nb_likes FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere IS NULL AND (pinned = 'f' OR pinned IS NULL) ORDER BY date ASC;";
+        $sql = "SELECT Annonces.id, titre, description, username, date, nb_likes FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere IS NULL AND (pinned = 'f' OR pinned IS NULL) ORDER BY date DESC;";
         $query = $this->dbConnect()->query($sql);
         return $query->fetchAll();
+    }
+
+    function leaveLike($id_annonce){
+        $sql = "UPDATE Annonces SET nb_likes = nb_likes + 1 WHERE id = " . $id_annonce . ";";
+        $query = $this->dbConnect()->query($sql);
+        return $query->fetchAll();
+
     }
     
     

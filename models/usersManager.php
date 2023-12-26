@@ -37,4 +37,19 @@ class usersManager extends AbstractManager {
         else
             return null;
     }
+
+    function addUser(string $username, string $password, string $email, string $profile_picture, string $activite){
+        $sql = "(INSERT INTO ".usersManager::TABLE_NAME." (username, password, email, profile_picture, activite) VALUES(:username, :password, :email, :profile_picture, :activite)) UNION (INSERT INTO Particuliers (SELECT id FROM Annonces LIMIT 1));";
+        $query = $this->db->prepare($sql);
+        $query->execute([
+            ':username' => $username,
+            ':password' => $password,
+            ':email' => $email,
+            ':profile_picture' => $profile_picture,
+            ':activite' => $activite
+        ]);
+        $query = $this->dbConnect()->query($sql);
+        return $query->fetchAll();
+
+    }
 }
