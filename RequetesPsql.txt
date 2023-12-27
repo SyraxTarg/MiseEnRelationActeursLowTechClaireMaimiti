@@ -84,3 +84,40 @@ INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('tit
 INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
 
 UPDATE Annonces SET date = (SELECT NOW()) WHERE date is null;
+
+*****AJOUTS DU 27/12/2023*************
+
+
+UPDATE Annonces SET date = (SELECT NOW()) where id = 1;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 2;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 3;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 4;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 5;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 6;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 7;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 8;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 9;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 10;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 11;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 12;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 13;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 14;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 15;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 16;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 17;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 18;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 19;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 20;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 21;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 22;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 23;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 24;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 25;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 26;
+UPDATE Annonces SET date = (SELECT NOW()) where id = 27;
+
+ALTER TABLE Avancées RENAME TO Avancees;
+
+INSERT INTO Recherche(id_annonce) VALUES(7),(10),(13),(16),(19),(22),(25);
+INSERT INTO Dispos(id_annonce) VALUES(5),(8),(11),(14),(17),(20),(23),(26);
+INSERT INTO Avancees(id_annonce) VALUES(6),(9),(12),(15),(18),(21),(24),(27);

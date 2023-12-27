@@ -4,10 +4,10 @@ require_once 'models/abstactManager.php';
 
 class avancéesManager extends AbstractManager {
 
-    const TABLE_NAME="Avancées";
+    const TABLE_NAME="Avancees";
 
-    function getavancées(): array {
-        $sql = "SELECT titre, description, username FROM ".avancéesManager::TABLE_NAME." JOIN Users ON ".avancéesManager::TABLE_NAME.".id_user = Users.id ;";
+    function getAvancees(): array {
+        $sql = "SELECT * FROM ".avancéesManager::TABLE_NAME." ;";
         $query = $this->dbConnect()->query($sql);
         return $query->fetchAll();
     }
