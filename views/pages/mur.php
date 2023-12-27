@@ -1,68 +1,144 @@
 <?php
-// Supposons que $annoncesPinned et $annoncesNonPinned soient déjà définis
 foreach ($annoncesPinned as $index => $annoncePinned) {
     $annonceId = $annoncePinned['id'];
     $etatBoutonKey = 'etat_bouton_' . $annonceId;
-
-    // Initialise l'état du bouton si ce n'est pas encore défini
-    if (!isset($_POST[$etatBoutonKey])) {
-        $_POST[$etatBoutonKey] = 0;
-    }
+    
+    $etatBouton = isset($_SESSION[$etatBoutonKey]) ? $_SESSION[$etatBoutonKey] : 0;
 
     if (isset($_POST['like'][$index])) {
-        // Inverse l'état du bouton spécifique à cette annonce
-        $_POST[$etatBoutonKey] = ($_POST[$etatBoutonKey] == 0) ? 1 : 0;
+        $etatBouton = ($etatBouton == 0) ? 1 : 0;
 
-        // Mettez à jour le nombre de likes dans votre base de données
-        $addLike = ($_POST[$etatBoutonKey] == 1);
-        $annoncesManager->leaveOrRemoveLike($annonceId, $addLike);
 
-        // Rafraîchissez les données après la mise à jour
+        $annoncesManager->leaveOrRemoveLike($annonceId, ($etatBouton == 1));
+
         $annoncePinned['nb_likes'] = $annoncesManager->getLikesCount($annonceId);
+        
+        $_SESSION[$etatBoutonKey] = $etatBouton;
     }
+    
+    $heartColor = ($etatBouton == 1) ? 'red' : 'black';
     ?>
 
     <div class="annonce">
+        <?php getAnnonceType($annonceId, $avancees, $dispos, $recherches); ?>
+        <i class="fas fa-thumbtack"></i>
         <h3><?php echo $annoncePinned['titre']; ?></h3>
+        <?php 
+        if($annoncePinned['image']){
+            ?> <img class="imageAnnonce" src="<?php echo $annoncePinned['image'] ; ?>" alt="image"><?php
+        }?>
         <p><?php echo $annoncePinned['description']; ?></p>
         <p><?php echo $annoncePinned['date']; ?></p>
+        
 
         <form method="post" action="">
             <input type="hidden" name="annonce_id" value="<?php echo $annonceId; ?>">
             <p>
-                <?php echo $annoncePinned['nb_likes']; ?>
-                <button type="submit" name="like[<?php echo $index; ?>]" style="color: <?php echo ($_POST[$etatBoutonKey] == 1) ? 'red' : 'black'; ?>" class="like-btn">
-                    <i class="fas fa-heart"></i>
-                </button>
+                <span id="likes-count-<?php echo $annonceId; ?>"><?php echo $annoncePinned['nb_likes']; ?></span>
+                <?php
+                if(isset($_SESSION['username'])){
+                    ?>
+                    <button type="submit" name="like[<?php echo $index; ?>]" class="like-btn" data-is-liked="<?php echo $etatBouton; ?>">
+                    <i class="fas fa-heart" style="color: <?php echo $heartColor; ?>"></i>
+                </button><?php
+                } else{
+                    ?>
+                    <i class="fas fa-heart" style="color: red"></i><?php
+                } ?>
+                
             </p>
         </form>
+        <?php 
+        $comms = $annoncesManager->getCommentaires($annonceId);
+        if(!empty($comms)){
+            echo "<p>Derniers commentaires:</p>";
+            foreach($comms as $comm){
+                ?>
+                <div class="commentaires">
+                    <p><?php echo $comm['description'];?></p>
+                    <p><?php echo $comm['username'];?></p>
+                    <p><?php echo $comm['date'];?></p>
 
-        <div id="likes-count-<?php echo $annonceId; ?>"><?php echo $annoncePinned['nb_likes']; ?> likes</div>
+                </div>
+                    <?php
+            }
+        }
 
-        <!-- Le reste de votre code pour les commentaires -->
-
+    ?>
     </div>
     <br>
-
 <?php
 }
 ?>
 
-<script>
-    $(document).ready(function(){
-        $(".like-btn").click(function(e){
-            e.preventDefault();
-            var form = $(this).closest('form');
-            $.ajax({
-                type: form.attr('method'),
-                url: form.attr('action'),  // Assurez-vous que c'est le bon chemin vers votre script PHP
-                data: form.serialize(),
-                success: function(response){
-                    // Mettez à jour le nombre de likes sur la page sans recharger
-                    var annonceId = form.find('input[name="annonce_id"]').val();
-                    $("#likes-count-" + annonceId).text(response + " likes");
-                }
-            });
-        });
-    });
-</script>
+<?php
+foreach ($annoncesNonPinned as $index => $annonceNonPinned) {
+    $annonceId = $annonceNonPinned['id'];
+    $etatBoutonKey = 'etat_bouton_' . $annonceId;
+    
+    $etatBouton = isset($_SESSION[$etatBoutonKey]) ? $_SESSION[$etatBoutonKey] : 0;
+
+    if (isset($_POST['like'][$index])) {
+        $etatBouton = ($etatBouton == 0) ? 1 : 0;
+
+
+        $annoncesManager->leaveOrRemoveLike($annonceId, ($etatBouton == 1));
+
+        $annonceNonPinned['nb_likes'] = $annoncesManager->getLikesCount($annonceId);
+        
+        $_SESSION[$etatBoutonKey] = $etatBouton;
+    }
+    
+    $heartColor = ($etatBouton == 1) ? 'red' : 'black';
+    ?>
+
+    <div class="annonce">
+        <?php getAnnonceType($annonceId, $avancees, $dispos, $recherches); ?>
+        <h3><?php echo $annonceNonPinned['titre']; ?></h3>
+        <?php 
+        if($annonceNonPinned['image']){
+            ?> <img class="imageAnnonce" src="<?php echo $annonceNonPinned['image'] ; ?>" alt="image"><?php
+        }?>
+        <p><?php echo $annonceNonPinned['description']; ?></p>
+        <p><?php echo $annonceNonPinned['date']; ?></p>
+
+        <form method="post" action="">
+            <input type="hidden" name="annonce_id" value="<?php echo $annonceId; ?>">
+            <p>
+                <span id="likes-count-<?php echo $annonceId; ?>"><?php echo $annonceNonPinned['nb_likes']; ?></span>
+                <?php
+                if(isset($_SESSION['username'])){
+                    ?>
+                    <button type="submit" name="like[<?php echo $index; ?>]" class="like-btn" data-is-liked="<?php echo $etatBouton; ?>">
+                    <i class="fas fa-heart" style="color: <?php echo $heartColor; ?>"></i>
+                </button><?php
+                } else{
+                    ?>
+                    <i class="fas fa-heart" style="color: red"></i><?php
+                }?>
+                
+            </p>
+        </form>
+        <?php 
+        $comms = $annoncesManager->getCommentaires($annonceId);
+        if(!empty($comms)){
+            echo "<p>Derniers commentaires:</p>";
+            foreach($comms as $comm){
+                ?>
+                <div class="commentaires">
+                    <p><?php echo $comm['description'];?></p>
+                    <p><?php echo $comm['username'];?></p>
+                    <p><?php echo $comm['date'];?></p>
+
+                </div>
+                    <?php
+            }
+        }
+
+    ?>
+
+    </div>
+    <br>
+<?php
+}
+?>
