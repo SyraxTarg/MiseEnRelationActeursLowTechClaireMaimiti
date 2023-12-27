@@ -10,8 +10,7 @@ CREATE TABLE Recherche(id_annonce int, FOREIGN KEY(id_annonce) REFERENCES Annonc
 CREATE TABLE Avancées(id_annonce int, FOREIGN KEY(id_annonce) REFERENCES Annonces(id));
 CREATE TABLE Dispos(id_annonce int, FOREIGN KEY(id_annonce) REFERENCES Annonces(id));
 
-INSERT INTO Users(username, password, profile_picture, email) VALUES ('John Doe', 'motDePass
-e', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Ffr.wikipedia.org%2Fwiki%2FLion&psig=AOvVaw3nNornN2MDSeaq5F62rsVH&ust=1703105590269000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCODoqvCwnIMDFQAAAAAdAAAAABAD', 'john.doe@mail.com');
+INSERT INTO Users(username, password, profile_picture, email) VALUES ('John Doe', 'motDePasse', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Ffr.wikipedia.org%2Fwiki%2FLion&psig=AOvVaw3nNornN2MDSeaq5F62rsVH&ust=1703105590269000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCODoqvCwnIMDFQAAAAAdAAAAABAD', 'john.doe@mail.com');
 INSERT INTO Particuliers( SELECT id FROM Users WHERE email = 'john.doe@mail.com');
 
 INSERT INTO Users(username, password, email) VALUES ('Jane Doe', 'motDePasseDeJane', 'jane.doe@mail.com');

@@ -4,6 +4,7 @@ const AVAILABLE_ROUTES = [
     'home' => '../controllers/homeController.php',
     'annuaire' => '../controllers/annuaireController.php',
     'connexion' => '../controllers/connexionController.php',
+    'inscription' => '../controllers/inscriptionController.php',
     'deconnexion' => '../controllers/deconnexionController.php',
     'mur' => '../controllers/murAnnoncesController.php',
   ];

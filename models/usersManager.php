@@ -38,6 +38,20 @@ class usersManager extends AbstractManager {
             return null;
     }
 
+    function getUniqueUserWithEmail(string $email){
+        $sql = "SELECT id, username, password, email FROM " . usersManager::TABLE_NAME . " WHERE email=(:email);";
+        $query = $this->db->prepare($sql);
+        $query->execute([
+            ':email' => $email
+        ]);
+        $user = $query->fetch();
+
+        if($user)
+            return $user;
+        else
+            return null;
+    }
+
     function addUser(string $username, string $password, string $email, string $profile_picture, string $activite){
         $sql = "(INSERT INTO ".usersManager::TABLE_NAME." (username, password, email, profile_picture, activite) VALUES(:username, :password, :email, :profile_picture, :activite)) UNION (INSERT INTO Particuliers (SELECT id FROM Annonces LIMIT 1));";
         $query = $this->db->prepare($sql);
