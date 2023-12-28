@@ -7,6 +7,7 @@ const AVAILABLE_ROUTES = [
     'inscription' => '../controllers/inscriptionController.php',
     'deconnexion' => '../controllers/deconnexionController.php',
     'mur' => '../controllers/murAnnoncesController.php',
+    'focusAnnonce' => '../controllers/focusAnnonceController.php',
   ];
   
   const DEFAULT_ROUTE = AVAILABLE_ROUTES['home'];

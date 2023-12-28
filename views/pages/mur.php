@@ -1,7 +1,12 @@
+
+
 <?php
 foreach ($annoncesPinned as $index => $annoncePinned) {
     $annonceId = $annoncePinned['id'];
     $etatBoutonKey = 'etat_bouton_' . $annonceId;
+
+    echo "<a href='index.php?page=mur&id=$annonceId'>Annonce spécifique</a>";
+
     
     $etatBouton = isset($_SESSION[$etatBoutonKey]) ? $_SESSION[$etatBoutonKey] : 0;
 
@@ -20,7 +25,7 @@ foreach ($annoncesPinned as $index => $annoncePinned) {
     ?>
 
     <div class="annonce">
-        <?php getAnnonceType($annonceId, $avancees, $dispos, $recherches); ?>
+        <?php $annoncesManager->getAnnonceType($annonceId, $avancees, $dispos, $recherches); ?>
         <i class="fas fa-thumbtack"></i>
         <h3><?php echo $annoncePinned['titre']; ?></h3>
         <?php 
@@ -93,7 +98,7 @@ foreach ($annoncesNonPinned as $index => $annonceNonPinned) {
     ?>
 
     <div class="annonce">
-        <?php getAnnonceType($annonceId, $avancees, $dispos, $recherches); ?>
+        <?php $annoncesManager->getAnnonceType($annonceId, $avancees, $dispos, $recherches); ?>
         <h3><?php echo $annonceNonPinned['titre']; ?></h3>
         <?php 
         if($annonceNonPinned['image']){

@@ -70,7 +70,40 @@ class annoncesManager extends AbstractManager {
         return $stmt->fetchAll();
     }
     
+    function getSingleAnnonce($annonceId){
+        $sql = "SELECT Annonces.id, titre, description, username, date, nb_likes, image FROM " . annoncesManager::TABLE_NAME . " JOIN Users ON " . annoncesManager::TABLE_NAME . ".id_user = Users.id WHERE " . annoncesManager::TABLE_NAME . ".id=" . $annonceId . " ;";
+        $query = $this->dbConnect()->query($sql);
+        return $query->fetch(); // Utilisez fetch(PDO::FETCH_ASSOC) pour obtenir un tableau associatif
+    }
     
+
+    function getAnnonceType($annonceId, $avancees, $dispos, $recherches){
+        foreach($avancees as $avancee){
+            if($avancee['id_annonce'] === $annonceId){
+                echo "<p class ='annonceType'>Avancée</p>";
+            }
+        }
+        foreach($dispos as $dispo){
+            if($dispo['id_annonce'] === $annonceId){
+                echo "<p class ='annonceType'>Disponibilité</p>";
+            }
+        }
+        foreach($recherches as $recherche){
+            if($recherche['id_annonce'] === $annonceId){
+                echo "<p class ='annonceType'>Recherche</p>";
+            }
+        }
+    }
+
+    function postCommentaire($annonceId){
+        $sql="INSERT INTO ". annoncesManager::TABLE_NAME . "(description, id_annonce_mere, id_user, date) VALUES(:description, ".$annonceId.", :id, (SELECT NOW()));";
+        $query = $this->db->prepare($sql);
+            $query->execute([
+                ':description' => $_POST['description'],
+                ':id' => $_SESSION['idUser']
+            ]);
+            return $query->fetch();
+    }
 
 
 }
