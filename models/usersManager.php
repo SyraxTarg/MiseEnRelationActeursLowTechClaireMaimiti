@@ -23,27 +23,25 @@ class usersManager extends AbstractManager {
         }
     }
 
-    function getUniqueUser(string $username, string $password){
-        $sql = "SELECT id, username, password, email FROM " . usersManager::TABLE_NAME . " WHERE username=(:username) AND password= (:password);";
+    function getUniqueUser(string $email, $password){
+        if($password){
+            $sql = "SELECT id, username, password, email FROM " . usersManager::TABLE_NAME . " WHERE email=(:email) AND password= (:password);";
+        }
+        else{
+            $sql = "SELECT id, username, password, email FROM " . usersManager::TABLE_NAME . " WHERE email=(:email);";
+        }
         $query = $this->db->prepare($sql);
-        $query->execute([
-            ':username' => $username,
-            ':password' => $password
-        ]);
-        $user = $query->fetch();
-
-        if($user)
-            return $user;
-        else
-            return null;
-    }
-
-    function getUniqueUserWithEmail(string $email){
-        $sql = "SELECT id, username, password, email FROM " . usersManager::TABLE_NAME . " WHERE email=(:email);";
-        $query = $this->db->prepare($sql);
-        $query->execute([
-            ':email' => $email
-        ]);
+        if($password){
+            $query->execute([
+                ':email' => $email,
+                ':password' => $password
+            ]);
+        }
+        else{
+            $query->execute([
+                ':email' => $email
+            ]);
+        }
         $user = $query->fetch();
 
         if($user)

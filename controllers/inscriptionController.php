@@ -73,7 +73,7 @@ function checkFormValidity($username, $password, $reEnterPassword, $email){
     //check email uniqueness
     require './models/usersManager.php';
     $usersManager = new usersManager();
-    $user = $usersManager->getUniqueUserWithEmail($_POST['email']);
+    $user = $usersManager->getUniqueUser($_POST['email'], null);
 
     if($user){
         return "EU";
