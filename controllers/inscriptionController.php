@@ -2,6 +2,12 @@
 
 if (isset($_GET['msg'])) {
     switch ($_GET['msg']) {
+        case "NP":
+            $msg = "<p>Les mots de passe ne correspondent pas.</p>";
+            break;
+        case "IU":
+            $msg = "<p>Le nom d'utilisateur ne doit pas contenir de caractères spéciaux.</p>";
+            break;
         case "PS":
             $msg = "<p>Le mot de passe doit faire au moins 8 caractères.</p>";
             break;
@@ -17,8 +23,9 @@ if (isset($_GET['msg'])) {
     }
 }
 
-if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])){
-    $formValidity = checkFormValidity($_POST['password'], $_POST['email']);
+
+if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEnterPassword']) && isset($_POST['email'])){
+    $formValidity = checkFormValidity($_POST['username'], $_POST['password'], $_POST['reEnterPassword'], $_POST['email']);
     if(gettype($formValidity) == "string"){
         header("Location: index.php?page=inscription&msg=" . $formValidity);
     }
@@ -28,7 +35,20 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email
     }
 }
 
-function checkFormValidity($password, $email){
+function checkFormValidity($username, $password, $reEnterPassword, $email){
+
+    //check correspondance entre les 2 champs password
+    if($password != $reEnterPassword){
+        return "NP";
+        //NP : Not Matching Passwords
+    }
+
+    //check username validity
+    $pattern = '/[!@#$%^&*(),.?":{}|<>]/';
+    if(preg_match($pattern, $username, $matches)) {
+        return "IU";
+        //IE : Invalid Username
+    }
 
     //check password validity
     $pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/";

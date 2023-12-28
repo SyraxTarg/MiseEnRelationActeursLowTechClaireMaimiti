@@ -13,8 +13,8 @@ if(isset($msg))
 
     <label for="password">Mot de passe </label>
     <input type="password" name="password" id="password" required>
-    <!-- <label for="reEnterPassword">Entrez à nouveau votre mot de passe </label>
-    <input type="password" name="reEnterPassword" id="reEnterPassword" required> -->
+    <label for="reEnterPassword">Entrez à nouveau votre mot de passe </label>
+    <input type="password" name="reEnterPassword" id="reEnterPassword" required>
 
     <label for="email">Email </label>
     <input type="email" name="email" id="email" required>
