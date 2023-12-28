@@ -7,14 +7,14 @@ class usersManager extends AbstractManager {
     const TABLE_NAME="Users";
 
     function getUsers(){
-        $sql = "SELECT id, username, password, email/* , activites */ FROM ".usersManager::TABLE_NAME.";";
-        $query = $this->dbConnect()->query($sql);
+        $sql = "SELECT id, username, password, email, activites FROM ".usersManager::TABLE_NAME.";";
+        $query = $this->db->query($sql);
         return $query->fetchAll();
     }
 
     function getCurrentUser(){
         if(!empty($_SESSION)){
-            $sql = "SELECT id, username, password, email/* , activites */ FROM ".usersManager::TABLE_NAME." WHERE id=(:id);";
+            $sql = "SELECT id, username, password, email, activites FROM ".usersManager::TABLE_NAME." WHERE id=(:id);";
             $query = $this->db->prepare($sql);
             $query->execute([
                 ':id' => $_SESSION['idUser']
@@ -50,18 +50,22 @@ class usersManager extends AbstractManager {
             return null;
     }
 
-    function addUser(string $username, string $password, string $email, string $profile_picture, string $activite){
-        $sql = "(INSERT INTO ".usersManager::TABLE_NAME." (username, password, email, profile_picture, activite) VALUES(:username, :password, :email, :profile_picture, :activite)) UNION (INSERT INTO Particuliers (SELECT id FROM Annonces LIMIT 1));";
+    function addUser(string $username, string $password, string $email, string $profile_picture, string $activites){
+        $sql = "INSERT INTO ".usersManager::TABLE_NAME." (username, password, email, profile_picture, activites) VALUES(:username, :password, :email, :profile_picture, :activites);";
         $query = $this->db->prepare($sql);
         $query->execute([
             ':username' => $username,
             ':password' => $password,
             ':email' => $email,
             ':profile_picture' => $profile_picture,
-            ':activite' => $activite
+            ':activites' => $activites
         ]);
-        $query = $this->dbConnect()->query($sql);
-        return $query->fetchAll();
+        // $query = $this->db->query($sql);
 
+        $sql2 = "INSERT INTO Particuliers (id_user) SELECT id FROM ".usersManager::TABLE_NAME." ORDER BY id DESC LIMIT 1";
+        $query2 = $this->db->query($sql2);
+
+
+        return $query->fetchAll();
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+require './models/usersManager.php';
+
 if (isset($_GET['msg'])) {
     switch ($_GET['msg']) {
         case "NP":
@@ -24,13 +26,15 @@ if (isset($_GET['msg'])) {
 }
 
 
-if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEnterPassword']) && isset($_POST['email'])){
+if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEnterPassword']) && isset($_POST['email']) && isset($_POST['activites'])){
     $formValidity = checkFormValidity($_POST['username'], $_POST['password'], $_POST['reEnterPassword'], $_POST['email']);
     if(gettype($formValidity) == "string"){
         header("Location: index.php?page=inscription&msg=" . $formValidity);
     }
     else{
         //enregistrer le user
+        $usersManager = new usersManager();
+        $usersManager->addUser($_POST['username'], $_POST['password'], $_POST['email'], 'https://as2.ftcdn.net/v2/jpg/00/64/67/63/1000_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg', $_POST['activites']);
         header("Location: index.php?page=connexion");
     }
 }
@@ -71,7 +75,6 @@ function checkFormValidity($username, $password, $reEnterPassword, $email){
     }
 
     //check email uniqueness
-    require './models/usersManager.php';
     $usersManager = new usersManager();
     $user = $usersManager->getUniqueUser($_POST['email'], null);
 
