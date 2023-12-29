@@ -1,5 +1,3 @@
-
-
 <?php
 foreach ($annoncesPinned as $index => $annoncePinned) {
     $annonceId = $annoncePinned['id'];
@@ -124,7 +122,7 @@ foreach ($annoncesNonPinned as $index => $annonceNonPinned) {
         <form method="post" action="">
             <input type="hidden" name="annonce_id" value="<?php echo $annonceId; ?>">
             <p>
-                <span id="likes-count-<?php echo $annonceId; ?>"><?php echo $annonceNonPinned['nb_likes']; ?></span>
+                <span id="likes-count-<?php echo $index; ?>"><?php echo $annonceNonPinned['nb_likes']; ?></span>
                 <?php
                 if(isset($_SESSION['username'])){
                     ?>

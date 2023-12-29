@@ -35,9 +35,23 @@ $etatBoutonKey = 'etat_bouton_' . $annonceId;
 $etatBouton = isset($_SESSION[$etatBoutonKey]) ? $_SESSION[$etatBoutonKey] : 0;
 
 if (isset($_POST['posterComm'])) {
+    $motsInterdits = [
+        "con",
+        "conasse",
+        "merde",
+        "salaud"
+    ];
+    
+    foreach ($motsInterdits as $motInterdit) {
+        $pattern = "/\b" . preg_quote($motInterdit, '/') . "\b/i";
+        $_POST['description'] = preg_replace($pattern, str_repeat("*", mb_strlen($motInterdit)), $_POST['description']);
+    }
+
     $annoncesManager->postCommentaire($annonceId);
     header("Refresh:0");
 }
+
+
 
 if (isset($_POST['like'])) {
     $etatBouton = ($etatBouton == 0) ? 1 : 0;
@@ -48,3 +62,6 @@ if (isset($_POST['like'])) {
 
     $_SESSION[$etatBoutonKey] = $etatBouton;
 }
+
+
+
