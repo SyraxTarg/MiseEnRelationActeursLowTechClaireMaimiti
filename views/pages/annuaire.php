@@ -26,7 +26,7 @@
         if ($particulier['username'] != 'utilisateur introuvable') {
             echo "<tr>";
             echo "<td>";
-            $image = "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg";
+            $image = "https://as2.ftcdn.net/v2/jpg/00/64/67/63/1000_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg";
             if ($particulier['profile_picture'] == null) {
                 echo "<img src =" . $image . " alt='default pfp' class='pfp'/>";
             } else {

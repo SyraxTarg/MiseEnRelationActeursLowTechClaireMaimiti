@@ -120,3 +120,8 @@ ALTER TABLE Avancées RENAME TO Avancees;
 INSERT INTO Recherche(id_annonce) VALUES(7),(10),(13),(16),(19),(22),(25);
 INSERT INTO Dispos(id_annonce) VALUES(5),(8),(11),(14),(17),(20),(23),(26);
 INSERT INTO Avancees(id_annonce) VALUES(6),(9),(12),(15),(18),(21),(24),(27);
+
+
+
+************************modif du 29/12/2023**********************
+ALTER TABLE Annonces ALTER COLUMN date TYPE TIMESTAMP;

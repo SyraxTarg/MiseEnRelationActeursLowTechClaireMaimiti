@@ -4,7 +4,7 @@
 $idAnnonce = isset($_GET['id']) ? $_GET['id'] : null;
 
 if ($idAnnonce) {
-    header("Location: $_SERVER[PHP_SELF]/?page=focusAnnonce&id=$idAnnonce");
+    header("Location: $_SERVER[PHP_SELF]?page=focusAnnonce&id=$idAnnonce");
     exit();
 } else {
 

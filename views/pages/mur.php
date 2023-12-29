@@ -33,7 +33,10 @@ foreach ($annoncesPinned as $index => $annoncePinned) {
             ?> <img class="imageAnnonce" src="<?php echo $annoncePinned['image'] ; ?>" alt="image"><?php
         }?>
         <p><?php echo $annoncePinned['description']; ?></p>
-        <p><?php echo $annoncePinned['date']; ?></p>
+        <p><?php 
+                    $date = explode('.', $annoncePinned['date']);
+                    echo $date[0]; ?>
+        </p>
         
 
         <form method="post" action="">
@@ -62,7 +65,13 @@ foreach ($annoncesPinned as $index => $annoncePinned) {
                 <div class="commentaires">
                     <p><?php echo $comm['description'];?></p>
                     <p><?php echo $comm['username'];?></p>
-                    <p><?php echo $comm['date'];?></p>
+                    <!-- <?php if($comm['profile_picture']){
+                        ?><img class="smallPfp" src="<?php echo $comm['profile_picture']; ?>" alt="profilePicture"><?php
+                    }?> -->
+                    <p><?php 
+                    $date = explode('.', $comm['date']);
+                    echo $date[0]; ?>
+                    </p>
 
                 </div>
                     <?php
@@ -82,6 +91,8 @@ foreach ($annoncesNonPinned as $index => $annonceNonPinned) {
     $etatBoutonKey = 'etat_bouton_' . $annonceId;
     
     $etatBouton = isset($_SESSION[$etatBoutonKey]) ? $_SESSION[$etatBoutonKey] : 0;
+
+    echo "<a href='index.php?page=mur&id=$annonceId'>Annonce spécifique</a>";
 
     if (isset($_POST['like'][$index])) {
         $etatBouton = ($etatBouton == 0) ? 1 : 0;
@@ -105,7 +116,10 @@ foreach ($annoncesNonPinned as $index => $annonceNonPinned) {
             ?> <img class="imageAnnonce" src="<?php echo $annonceNonPinned['image'] ; ?>" alt="image"><?php
         }?>
         <p><?php echo $annonceNonPinned['description']; ?></p>
-        <p><?php echo $annonceNonPinned['date']; ?></p>
+        <p><?php 
+                    $date = explode('.', $annonceNonPinned['date']);
+                    echo $date[0]; ?>
+        </p>
 
         <form method="post" action="">
             <input type="hidden" name="annonce_id" value="<?php echo $annonceId; ?>">
@@ -133,7 +147,10 @@ foreach ($annoncesNonPinned as $index => $annonceNonPinned) {
                 <div class="commentaires">
                     <p><?php echo $comm['description'];?></p>
                     <p><?php echo $comm['username'];?></p>
-                    <p><?php echo $comm['date'];?></p>
+                    <p><?php 
+                    $date = explode('.', $comm['date']);
+                    echo $date[0]; ?>
+                    </p>
 
                 </div>
                     <?php

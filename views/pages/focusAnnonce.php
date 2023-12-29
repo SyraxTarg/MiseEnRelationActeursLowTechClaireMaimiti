@@ -1,16 +1,12 @@
 <?php
-$annonceId = isset($_GET['id']) ? $_GET['id'] : null;
-$annonce = $annoncesManager->getSingleAnnonce($annonceId);
-
-$etatBoutonKey = 'etat_bouton_' . $annonceId;
-$etatBouton = isset($_SESSION[$etatBoutonKey]) ? $_SESSION[$etatBoutonKey] : 0;
-
+?><a href="index.php?page=mur">Retour En arrière</a><?php
 if (!$annonceId) {
     echo "Oups :/ une erreur est survenue.";
 } else {
     echo "<h1>Focus de l'annonce $annonceId</h1>"; ?>
     <div class="annonce">
-        <h3><?php echo $annonce['titre']; ?></h3>
+    <?php $annoncesManager->getAnnonceType($annonceId, $avancees, $dispos, $recherches); ?>
+        <h1><?php echo $annonce['titre']; ?></h1>
         <?php
         if ($annonce['image']) {
             ?><img class="imageAnnonce" src="<?php echo $annonce['image']; ?>" alt="image"><?php
@@ -42,7 +38,12 @@ if (!$annonceId) {
                 <div class="commentaires">
                     <p><?php echo $comm['description']; ?></p>
                     <p><?php echo $comm['username']; ?></p>
-                    <p><?php echo $comm['date']; ?></p>
+                    <!-- <?php if($comm['profile_picture']){
+                        ?><img class="smallPfp" src="<?php echo $comm['profile_picture']; ?>" alt="profilePicture"><?php
+                    }?> -->
+                    <p><?php 
+                    $date = explode('.', $comm['date']);
+                    echo $date[0]; ?></p>
                 </div>
                 <?php
             }
@@ -67,19 +68,5 @@ if (!$annonceId) {
     ?>
     
     <?php
-    if (isset($_POST['posterComm'])) {
-        $annoncesManager->postCommentaire($annonceId);
-        header("Refresh:0");
-    }
-
-    if (isset($_POST['like'])) {
-        $etatBouton = ($etatBouton == 0) ? 1 : 0;
-
-        $annoncesManager->leaveOrRemoveLike($annonceId, ($etatBouton == 1));
-
-        $annonce['nb_likes'] = $annoncesManager->getLikesCount($annonceId);
-
-        $_SESSION[$etatBoutonKey] = $etatBouton;
-    }
 }
 ?>

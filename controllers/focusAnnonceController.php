@@ -26,4 +26,25 @@ $rechercheManager->dbConnect();
 
 $recherches = $rechercheManager->getRecherche();
 
-   
+
+
+$annonceId = isset($_GET['id']) ? $_GET['id'] : null;
+$annonce = $annoncesManager->getSingleAnnonce($annonceId);
+
+$etatBoutonKey = 'etat_bouton_' . $annonceId;
+$etatBouton = isset($_SESSION[$etatBoutonKey]) ? $_SESSION[$etatBoutonKey] : 0;
+
+if (isset($_POST['posterComm'])) {
+    $annoncesManager->postCommentaire($annonceId);
+    header("Refresh:0");
+}
+
+if (isset($_POST['like'])) {
+    $etatBouton = ($etatBouton == 0) ? 1 : 0;
+
+    $annoncesManager->leaveOrRemoveLike($annonceId, ($etatBouton == 1));
+
+    $annonce['nb_likes'] = $annoncesManager->getLikesCount($annonceId);
+
+    $_SESSION[$etatBoutonKey] = $etatBouton;
+}

@@ -23,7 +23,7 @@ class annoncesManager extends AbstractManager {
     }
 
     public function getCommentaires($id_annonce){
-        $sql = "SELECT titre, description, username, date FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere = ".$id_annonce.";";
+        $sql = "SELECT titre, description, username, date, profile_picture FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere = ".$id_annonce.";";
         $query = $this->dbConnect()->query($sql);
         return $query->fetchAll();
     }
