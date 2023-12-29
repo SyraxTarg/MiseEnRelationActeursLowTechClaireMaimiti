@@ -6,6 +6,8 @@ const AVAILABLE_ROUTES = [
     'connexion' => '../controllers/connexionController.php',
     'inscription' => '../controllers/inscriptionController.php',
     'deconnexion' => '../controllers/deconnexionController.php',
+    'profil' => '../controllers/profilController.php',
+    'modifierProfil' => '../controllers/modifierProfilController.php',
     'mur' => '../controllers/murAnnoncesController.php',
     'focusAnnonce' => '../controllers/focusAnnonceController.php',
   ];

@@ -86,6 +86,19 @@ UPDATE Annonces SET date = (SELECT NOW()) WHERE date is null;
 
 *****AJOUTS DU 27/12/2023*************
 
+INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
+INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
+INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
+INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
+INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
+INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
+INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
+INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
+INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
+INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
+INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
+INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
+INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned) VALUES('titre annonce pas pinned', 'ma description qui tue', 3, 2, false);
 
 UPDATE Annonces SET date = (SELECT NOW()) where id = 1;
 UPDATE Annonces SET date = (SELECT NOW()) where id = 2;

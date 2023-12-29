@@ -9,4 +9,13 @@
     <li>
         <a href="index.php?page=mur">Mur d'annonces</a>
     </li>
+    <?php
+        if(isset($_SESSION['idUser']) && isset($_SESSION['username']) && isset($_SESSION['privileges'])){
+            echo "
+                <li>
+                    <a href='index.php?page=profil&id=" . $_SESSION['idUser'] . "'>Mon profil</a>
+                </li>
+            ";
+        }
+    ?>
 </ul>

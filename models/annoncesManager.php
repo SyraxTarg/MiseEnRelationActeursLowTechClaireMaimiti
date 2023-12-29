@@ -98,13 +98,23 @@ class annoncesManager extends AbstractManager {
     function postCommentaire($annonceId){
         $sql="INSERT INTO ". annoncesManager::TABLE_NAME . "(description, id_annonce_mere, id_user, date) VALUES(:description, ".$annonceId.", :id, (SELECT NOW()));";
         $query = $this->db->prepare($sql);
-            $query->execute([
-                ':description' => $_POST['description'],
-                ':id' => $_SESSION['idUser']
-            ]);
-            return $query->fetch();
+        $query->execute([
+            ':description' => $_POST['description'],
+            ':id' => $_SESSION['idUser']
+        ]);
+        return $query->fetch();
     }
 
+    function getAnnoncesUser(string $id){
+        if($id){
+            $sql = "SELECT id, titre, description, date FROM ".annoncesManager::TABLE_NAME." WHERE id_user=(:id) AND id_annonce_mere IS NULL ORDER BY date DESC";
+            $query = $this->db->prepare($sql);
+            $query->execute([
+                ':id' => $id
+            ]);
+            return $query->fetchAll();
+        }
+    }
 
 }
 

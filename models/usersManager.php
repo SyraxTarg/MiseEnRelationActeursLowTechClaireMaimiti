@@ -1,6 +1,7 @@
 <?php
 
 require_once 'models/abstactManager.php';
+require_once 'models/annoncesManager.php';
 
 class usersManager extends AbstractManager {
 
@@ -18,6 +19,17 @@ class usersManager extends AbstractManager {
             $query = $this->db->prepare($sql);
             $query->execute([
                 ':id' => $_SESSION['idUser']
+            ]);
+            return $query->fetch();
+        }
+    }
+
+    function getUserWithId(string $id){
+        if($id){
+            $sql = "SELECT id, username, password, email, activites FROM ".usersManager::TABLE_NAME." WHERE id=(:id);";
+            $query = $this->db->prepare($sql);
+            $query->execute([
+                ':id' => $id
             ]);
             return $query->fetch();
         }
