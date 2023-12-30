@@ -15,6 +15,8 @@
                 <li>
                     <a href='index.php?page=profil&id=" . $_SESSION['idUser'] . "'>Mon profil</a>
                 </li>
+                <li>
+                    <a href='index.php?page=postAnnonce'>Poster une Annonce</a>
             ";
     } else {
         echo "
