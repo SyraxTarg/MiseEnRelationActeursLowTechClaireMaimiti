@@ -35,7 +35,7 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEnt
         //enregistrer le user
         $usersManager = new usersManager();
         $usersManager->addUser($_POST['username'], $_POST['password'], $_POST['email'], './public/images/defaultPfp.png', $_POST['activites']);
-        header("Location: index.php?page=connexion?msg=SI");
+        header("Location: index.php?page=connexion&msg=SI");
         //SI : Successful Inscription
     }
 }

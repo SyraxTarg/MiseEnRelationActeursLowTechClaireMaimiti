@@ -26,17 +26,6 @@ class modérateursManager extends AbstractManager {
             return null;
     }
 
-    function grantModoPrivileges($id){
-        $sql = "INSERT INTO ".modérateursManager::TABLE_NAME." (id_user) VALUES(" . $id . ");";
-        $query = $this->db->query($sql);
-    }
-
-    function removeModoPrivileges($id){
-        $sql = "DELETE FROM ".modérateursManager::TABLE_NAME." WHERE id_user=" . $id . ";";
-        $query = $this->db->query($sql);
-    }
-
-
     function post_recherche($titre, $description, $id_user){
         $sql = "INSERT INTO Annonces(titre, description, id_user) VALUES(:titre, :description, ".$id_user."); INSERT INTO Recherche (id_annonce) VALUES(SELECT id FROM Annonces ORDER BY ID DESC LIMIT 1);";
         $query = $this->dbConnect()->prepare($sql);

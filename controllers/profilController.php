@@ -2,7 +2,7 @@
 
 require_once './models/usersManager.php';
 require_once './models/modérateursManager.php';
-$moderateursManager = new modérateursManager();
+require_once './models/adminsManager.php';
 
 if (isset($_GET['id'])) {
     $template = './views/pages/profil.php';
@@ -30,14 +30,20 @@ if (isset($_GET['id'])) {
 
 
 if (isset($_GET['action'])) {
+    $adminsManager = new adminsManager();
     switch ($_GET['action']) {
         case "grant":
-            $moderateursManager->grantModoPrivileges($user['id']);
+            $adminsManager->give_modo_rights($user['id']);
             header("Location: index.php?page=profil&id=" . $user['id']);
             break;
         case "remove":
-            $moderateursManager->removeModoPrivileges($user['id']);
+            $adminsManager->remove_modo_rights($user['id']);
             header("Location: index.php?page=profil&id=" . $user['id']);
+            break;
+        case "ban":
+            $adminsManager->remove_user($user['id']);
+            header("Location: index.php?page=home&msg=SD");
+            //SD : Successful Deletion
             break;
     }
 }
@@ -53,3 +59,16 @@ function getPrivileges($id)
     else
         return "particulier";
 }
+
+?>
+
+<script>
+    //appelé au click sur le bouton "Ban"
+    function confirmDelete(userId) {
+    var confirmation = confirm("Êtes-vous sûr de vouloir bannir cet utilisateur ? Il ne sera pas prévenu.");
+    
+    if (confirmation) {
+        window.location.href = "index.php?page=profil&id=" + userId + "&action=ban";
+    }
+}
+</script>

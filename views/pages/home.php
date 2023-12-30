@@ -5,7 +5,9 @@ else{
     echo "<h2>Bienvenue " . $currentUser['username'] . "</h2>";
     echo "<h4>" . $_SESSION['privileges'] . "</h4>";
 }
-    
+
+if(isset($msg))
+    echo $msg;
 ?>
 
 <h1>HOME</h1>

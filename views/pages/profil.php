@@ -14,7 +14,8 @@ else{
         }
         else{
             if($_SESSION['privileges'] == "admin"){
-                echo "<a href='#'>Ban</a>"; //supprimer le compte de l'utilisateur
+                echo "<a href='#' onclick='confirmDelete(" . $user['id'] . ")'>Ban</a>";
+                
                 if($userPrivileges == "particulier")
                     echo "<a href='index.php?page=profil&id=" . $user['id'] . "&action=grant'>Nommer modérateur</a>";
                 else
@@ -50,7 +51,3 @@ else{
     ?>
     <?php
 }
-
-
-
-?>

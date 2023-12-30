@@ -72,12 +72,8 @@ class usersManager extends AbstractManager {
             ':profile_picture' => $profile_picture,
             ':activites' => $activites
         ]);
-        // $query = $this->db->query($sql);
-
         $sql2 = "INSERT INTO Particuliers (id_user) SELECT id FROM ".usersManager::TABLE_NAME." ORDER BY id DESC LIMIT 1";
         $query2 = $this->db->query($sql2);
-
-
         return $query->fetchAll();
     }
 }
