@@ -7,13 +7,13 @@ class modérateursManager extends AbstractManager {
     const TABLE_NAME="mod‚rateurs";
 
     function getModérateurs(){
-        $sql = "SELECT id, username, password, email/* , activités */ FROM ".modérateursManager::TABLE_NAME." JOIN Users ON ".modérateursManager::TABLE_NAME.".id_user = Users.id;";
+        $sql = "SELECT id, username, password, email , activites  FROM ".modérateursManager::TABLE_NAME." JOIN Users ON ".modérateursManager::TABLE_NAME.".id_user = Users.id;";
         $query = $this->dbConnect()->query($sql);
         return $query->fetchAll();
     }
 
     function getUniqueModo($id){
-        $sql = "SELECT id, username, password, email/* , activités */ FROM ".adminsManager::TABLE_NAME." JOIN Users ON ".adminsManager::TABLE_NAME.".id_user = Users.id WHERE id=(:id);";
+        $sql = "SELECT id, username, password, email , activites FROM ".modérateursManager::TABLE_NAME." JOIN Users ON ".modérateursManager::TABLE_NAME.".id_user = Users.id WHERE id=(:id);";
         $query = $this->db->prepare($sql);
         $query->execute([
             ':id' => $id
@@ -24,6 +24,16 @@ class modérateursManager extends AbstractManager {
             return $modo;
         else
             return null;
+    }
+
+    function grantModoPrivileges($id){
+        $sql = "INSERT INTO ".modérateursManager::TABLE_NAME." (id_user) VALUES(" . $id . ");";
+        $query = $this->db->query($sql);
+    }
+
+    function removeModoPrivileges($id){
+        $sql = "DELETE FROM ".modérateursManager::TABLE_NAME." WHERE id_user=" . $id . ";";
+        $query = $this->db->query($sql);
     }
 
 
