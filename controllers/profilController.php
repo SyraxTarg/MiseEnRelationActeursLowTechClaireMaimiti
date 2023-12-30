@@ -21,10 +21,10 @@ if (isset($_GET['id'])) {
 
         $annonces = $annoncesManager->getAnnoncesUser($user['id']);
     } else {
-        header("Location: index.php?page=connexion");
+        $user = $usersManager->getUserWithId(5);
     }
 } else {
-    header("Location: index.php?page=connexion");
+    header("Location: index.php?page=home");
 }
 
 
@@ -32,12 +32,16 @@ if (isset($_GET['id'])) {
 if (isset($_GET['action'])) {
     $adminsManager = new adminsManager();
     switch ($_GET['action']) {
-        case "grant":
+        case "grantModo":
             $adminsManager->give_modo_rights($user['id']);
             header("Location: index.php?page=profil&id=" . $user['id']);
             break;
-        case "remove":
+        case "removeModo":
             $adminsManager->remove_modo_rights($user['id']);
+            header("Location: index.php?page=profil&id=" . $user['id']);
+            break;
+        case "grantAdmin":
+            $adminsManager->give_admin_rights($user['id']);
             header("Location: index.php?page=profil&id=" . $user['id']);
             break;
         case "ban":
@@ -45,16 +49,23 @@ if (isset($_GET['action'])) {
             header("Location: index.php?page=home&msg=SD");
             //SD : Successful Deletion
             break;
+        default:
+            header("Location: index.php?page=profil&id=" . $user['id']);
+            break;
     }
 }
 
 
 function getPrivileges($id)
 {
+    $adminsManager = new adminsManager();
+    $admin = $adminsManager->getUniqueAdmin($id);
     $moderateursManager = new modérateursManager();
     $modo = $moderateursManager->getUniqueModo($id);
 
-    if ($modo)
+    if($admin)
+        return "admin";
+    elseif ($modo)
         return "modo";
     else
         return "particulier";
@@ -65,10 +76,10 @@ function getPrivileges($id)
 <script>
     //appelé au click sur le bouton "Ban"
     function confirmDelete(userId) {
-    var confirmation = confirm("Êtes-vous sûr de vouloir bannir cet utilisateur ? Il ne sera pas prévenu.");
-    
-    if (confirmation) {
-        window.location.href = "index.php?page=profil&id=" + userId + "&action=ban";
+        var confirmation = confirm("Êtes-vous sûr de vouloir bannir cet utilisateur ? Il ne sera pas prévenu.");
+
+        if (confirmation) {
+            window.location.href = "index.php?page=profil&id=" + userId + "&action=ban";
+        }
     }
-}
 </script>

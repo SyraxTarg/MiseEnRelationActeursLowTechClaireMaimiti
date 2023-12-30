@@ -14,12 +14,15 @@ else{
         }
         else{
             if($_SESSION['privileges'] == "admin"){
-                echo "<a href='#' onclick='confirmDelete(" . $user['id'] . ")'>Ban</a>";
+                if($userPrivileges != "admin")
+                    echo "<a href='#' onclick='confirmDelete(" . $user['id'] . ")'>Ban</a>";
                 
                 if($userPrivileges == "particulier")
-                    echo "<a href='index.php?page=profil&id=" . $user['id'] . "&action=grant'>Nommer modérateur</a>";
-                else
-                    echo "<a href='index.php?page=profil&id=" . $user['id'] . "&action=remove'>Supprimer les privilèges de modérateur</a>";
+                    echo "<a href='index.php?page=profil&id=" . $user['id'] . "&action=grantModo'>Nommer modérateur</a>";
+                elseif($userPrivileges == "modo"){
+                    echo "<a href='index.php?page=profil&id=" . $user['id'] . "&action=grantAdmin'>Nommer administrateur</a>";
+                    echo "<a href='index.php?page=profil&id=" . $user['id'] . "&action=removeModo'>Supprimer les privilèges de modérateur</a>";
+                }
             }
         }
     ?>
