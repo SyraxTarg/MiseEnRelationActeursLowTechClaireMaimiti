@@ -1,6 +1,8 @@
 <?php
 
-$template = './views/pages/focusAnnonce.php';
+if(isset($_SESSION['privileges'])){
+    if($_SESSION['privileges'] != 'admin'){
+        $template = './views/pages/focusAnnonce.php';
 
 require_once('models/annoncesManager.php');
 require_once('models/avancéesManager.php');
@@ -60,6 +62,9 @@ if (isset($_POST['like'])) {
     $annonce['nb_likes'] = $annoncesManager->getLikesCount($annonceId);
 
     $_SESSION[$etatBoutonKey] = $etatBouton;
+}
+
+    }
 }
 
 
