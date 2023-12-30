@@ -2,6 +2,7 @@
 
 <?php
     if($currentUser){
+        echo "<a href='index.php?page=deconnexion'>Me déconnecter</a>";
         echo "<a href='index.php?page=modifierProfil'>Modifier mon profil</a>";
     }
 ?>

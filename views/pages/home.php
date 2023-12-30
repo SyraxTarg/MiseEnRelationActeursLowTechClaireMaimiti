@@ -4,7 +4,6 @@ if(!$connecte)
 else{
     echo "<h2>Bienvenue " . $currentUser['username'] . "</h2>";
     echo "<h4>" . $_SESSION['privileges'] . "</h4>";
-    echo "<a href='index.php?page=deconnexion'>Me déconnecter</a>";
 }
     
 ?>

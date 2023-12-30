@@ -34,8 +34,9 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEnt
     else{
         //enregistrer le user
         $usersManager = new usersManager();
-        $usersManager->addUser($_POST['username'], $_POST['password'], $_POST['email'], 'https://as2.ftcdn.net/v2/jpg/00/64/67/63/1000_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg', $_POST['activites']);
-        header("Location: index.php?page=connexion");
+        $usersManager->addUser($_POST['username'], $_POST['password'], $_POST['email'], './public/images/defaultPfp.png', $_POST['activites']);
+        header("Location: index.php?page=connexion?msg=SI");
+        //SI : Successful Inscription
     }
 }
 
