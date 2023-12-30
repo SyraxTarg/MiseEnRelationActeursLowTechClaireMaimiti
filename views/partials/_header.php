@@ -31,5 +31,12 @@
                 
             }
         }
+        else{
+            echo "
+                <li>
+                    <a href='index.php?page=connexion'>Me connecter</a>
+                </li>
+            ";
+        }
     ?>
 </ul>
