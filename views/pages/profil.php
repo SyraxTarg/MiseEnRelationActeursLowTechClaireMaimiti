@@ -1,7 +1,7 @@
 <?php
 
 if($user['id'] == 5 && $user['username'] == "utilisateur introuvable"){
-    echo "<h1>Cet utilisateur a supprimé son profil</h1>";
+    echo "<h1>Cet utilisateur n'existe pas.</h1>";
 }
 else{
     ?>

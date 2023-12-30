@@ -5,23 +5,29 @@ require_once './models/modérateursManager.php';
 require_once './models/adminsManager.php';
 
 if (isset($_GET['id'])) {
-    $template = './views/pages/profil.php';
+    //vérifier que l'id ne contient que des chiffres
+    if(preg_match('/^[0-9]+$/', $_GET['id'])) {
+        $template = './views/pages/profil.php';
 
-    $usersManager = new usersManager();
-    $annoncesManager = new annoncesManager();
-    $user = $usersManager->getUserWithId($_GET['id']);
-    if ($user) {
-        if ($user['id'] == $_SESSION['idUser'])
-            $currentUser = true;
-        else
-            $currentUser = false;
-
-        if (!$currentUser)
-            $userPrivileges = getPrivileges($user['id']);
-
-        $annonces = $annoncesManager->getAnnoncesUser($user['id']);
-    } else {
-        $user = $usersManager->getUserWithId(5);
+        $usersManager = new usersManager();
+        $annoncesManager = new annoncesManager();
+        $user = $usersManager->getUserWithId($_GET['id']);
+        if ($user) {
+            if ($user['id'] == $_SESSION['idUser'])
+                $currentUser = true;
+            else
+                $currentUser = false;
+    
+            if (!$currentUser)
+                $userPrivileges = getPrivileges($user['id']);
+    
+            $annonces = $annoncesManager->getAnnoncesUser($user['id']);
+        } else {
+            $user = $usersManager->getUserWithId(5);
+        }
+    }
+    else{
+        header("Location: index.php?page=home");
     }
 } else {
     header("Location: index.php?page=home");
@@ -31,27 +37,29 @@ if (isset($_GET['id'])) {
 
 if (isset($_GET['action'])) {
     $adminsManager = new adminsManager();
-    switch ($_GET['action']) {
-        case "grantModo":
-            $adminsManager->give_modo_rights($user['id']);
-            header("Location: index.php?page=profil&id=" . $user['id']);
-            break;
-        case "removeModo":
-            $adminsManager->remove_modo_rights($user['id']);
-            header("Location: index.php?page=profil&id=" . $user['id']);
-            break;
-        case "grantAdmin":
-            $adminsManager->give_admin_rights($user['id']);
-            header("Location: index.php?page=profil&id=" . $user['id']);
-            break;
-        case "ban":
-            $adminsManager->remove_user($user['id']);
-            header("Location: index.php?page=home&msg=SD");
-            //SD : Successful Deletion
-            break;
-        default:
-            header("Location: index.php?page=profil&id=" . $user['id']);
-            break;
+    if(isset($_SESSION['privileges']) && $_SESSION['privileges'] == "admin"){
+        switch ($_GET['action']) {
+            case "grantModo":
+                $adminsManager->give_modo_rights($user['id']);
+                header("Location: index.php?page=profil&id=" . $user['id']);
+                break;
+            case "removeModo":
+                $adminsManager->remove_modo_rights($user['id']);
+                header("Location: index.php?page=profil&id=" . $user['id']);
+                break;
+            case "grantAdmin":
+                $adminsManager->give_admin_rights($user['id']);
+                header("Location: index.php?page=profil&id=" . $user['id']);
+                break;
+            case "ban":
+                $adminsManager->remove_user($user['id']);
+                header("Location: index.php?page=home&msg=SD");
+                //SD : Successful Deletion
+                break;
+            default:
+                header("Location: index.php?page=profil&id=" . $user['id']);
+                break;
+        }
     }
 }
 
