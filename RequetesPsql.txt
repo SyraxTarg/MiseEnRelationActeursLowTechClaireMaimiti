@@ -138,3 +138,36 @@ INSERT INTO Avancees(id_annonce) VALUES(6),(9),(12),(15),(18),(21),(24),(27);
 
 ************************modif du 29/12/2023**********************
 ALTER TABLE Annonces ALTER COLUMN date TYPE TIMESTAMP;
+
+
+
+
+
+UPDATE Annonces SET date = NOW() WHERE id = 1;
+UPDATE Annonces SET date = NOW() WHERE id = 2;
+UPDATE Annonces SET date = NOW() WHERE id = 3;
+UPDATE Annonces SET date = NOW() WHERE id = 4;
+UPDATE Annonces SET date = NOW() WHERE id = 5;
+UPDATE Annonces SET date = NOW() WHERE id = 6;
+UPDATE Annonces SET date = NOW() WHERE id = 7;
+UPDATE Annonces SET date = NOW() WHERE id = 8;
+UPDATE Annonces SET date = NOW() WHERE id = 9;
+UPDATE Annonces SET date = NOW() WHERE id = 10;
+UPDATE Annonces SET date = NOW() WHERE id = 11;
+UPDATE Annonces SET date = NOW() WHERE id = 12;
+UPDATE Annonces SET date = NOW() WHERE id = 13;
+UPDATE Annonces SET date = NOW() WHERE id = 14;
+UPDATE Annonces SET date = NOW() WHERE id = 15;
+UPDATE Annonces SET date = NOW() WHERE id = 16;
+UPDATE Annonces SET date = NOW() WHERE id = 17;
+UPDATE Annonces SET date = NOW() WHERE id = 18;
+UPDATE Annonces SET date = NOW() WHERE id = 19;
+UPDATE Annonces SET date = NOW() WHERE id = 20;
+UPDATE Annonces SET date = NOW() WHERE id = 21;
+UPDATE Annonces SET date = NOW() WHERE id = 22;
+UPDATE Annonces SET date = NOW() WHERE id = 23;
+UPDATE Annonces SET date = NOW() WHERE id = 24;
+UPDATE Annonces SET date = NOW() WHERE id = 25;
+UPDATE Annonces SET date = NOW() WHERE id = 26;
+UPDATE Annonces SET date = NOW() WHERE id = 27;
+UPDATE Annonces SET date = NOW() WHERE id = 28;
