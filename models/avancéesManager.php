@@ -12,5 +12,12 @@ class avancéesManager extends AbstractManager {
         return $query->fetchAll();
     }
 
+    function postAvancees($id_annonce){
+        $sql = "INSERT INTO " . avancéesManager::TABLE_NAME . "(id_annonce) VALUES (:id_annonce);";
+        $query = $this->dbConnect()->prepare($sql);
+        $query->execute([':id_annonce' => $id_annonce]);
+        return $query->fetchAll();
+    }
+
 
 }

@@ -23,7 +23,7 @@ class annoncesManager extends AbstractManager {
     }
 
     public function getCommentaires($id_annonce){
-        $sql = "SELECT titre, description, username, date, profile_picture FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere = ".$id_annonce.";";
+        $sql = "SELECT titre, description, username, date, profile_picture FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere = ".$id_annonce." ORDER BY date DESC;";
         $query = $this->dbConnect()->query($sql);
         return $query->fetchAll();
     }
@@ -63,11 +63,11 @@ class annoncesManager extends AbstractManager {
         
         $sql = "UPDATE Annonces SET nb_likes = nb_likes {$operator} 1 WHERE id = :id_annonce;";
         
-        $stmt = $this->dbConnect()->prepare($sql);
-        $stmt->bindParam(':id_annonce', $id_annonce, PDO::PARAM_INT);
-        $stmt->execute();
+        $query = $this->dbConnect()->prepare($sql);
+        $query->bindParam(':id_annonce', $id_annonce, PDO::PARAM_INT);
+        $query->execute();
         
-        return $stmt->fetchAll();
+        return $query->fetchAll();
     }
     
     function getSingleAnnonce($annonceId){
@@ -115,6 +115,31 @@ class annoncesManager extends AbstractManager {
             return $query->fetchAll();
         }
     }
+
+
+    function postAnnonce(bool $pinned) {
+        $sql = "INSERT INTO ".annoncesManager::TABLE_NAME."(titre, description, image, id_user, pinned, date, nb_likes) VALUES (:titre, :description, :image, :id_user, :pinned, (SELECT NOW()), 0);";
+        $query = $this->db->prepare($sql);
+        
+        // Utilisez $pinned comme paramètre lié dans la requête SQL
+        $query->execute([
+            ':titre' => $_POST['titre'],
+            ':description' => $_POST['description'],
+            ':image' => $_POST['photo'],
+            ':id_user' => $_SESSION['idUser'],
+            ':pinned' => $pinned ? 1 : 0, // Convertissez le booléen en entier (1 ou 0)
+        ]);
+    
+        return $query->fetchAll();
+    }
+    
+
+    function getlastAnnonce(){
+        $sql= "SELECT id, titre FROM ".annoncesManager::TABLE_NAME." ORDER BY date DESC LIMIT 1;";
+        $query = $this->dbConnect()->query($sql);
+        return $query->fetchAll();
+    }
+
 
 }
 

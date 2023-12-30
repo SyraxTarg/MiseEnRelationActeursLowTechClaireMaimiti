@@ -1,7 +1,8 @@
 <?php
+$userId = $_SESSION['idUser'];
 foreach ($annoncesPinned as $index => $annoncePinned) {
     $annonceId = $annoncePinned['id'];
-    $etatBoutonKey = 'etat_bouton_' . $annonceId;
+    $etatBoutonKey = 'etat_bouton_' . $annonceId . '_' . $userId;
 
     echo "<a href='index.php?page=mur&id=$annonceId'>Annonce spécifique</a>";
 
@@ -31,6 +32,9 @@ foreach ($annoncesPinned as $index => $annoncePinned) {
             ?> <img class="imageAnnonce" src="<?php echo $annoncePinned['image'] ; ?>" alt="image"><?php
         }?>
         <p><?php echo $annoncePinned['description']; ?></p>
+        <p>
+            <?php echo $annoncePinned['username'];?>
+        </p>
         <p><?php 
                     $date = explode('.', $annoncePinned['date']);
                     echo $date[0]; ?>
@@ -81,16 +85,19 @@ foreach ($annoncesPinned as $index => $annoncePinned) {
     <br>
 <?php
 }
-?>
 
-<?php
+
+
+
+
 foreach ($annoncesNonPinned as $index => $annonceNonPinned) {
     $annonceId = $annonceNonPinned['id'];
-    $etatBoutonKey = 'etat_bouton_' . $annonceId;
-    
-    $etatBouton = isset($_SESSION[$etatBoutonKey]) ? $_SESSION[$etatBoutonKey] : 0;
+    $etatBoutonKey = 'etat_bouton_' . $annonceId . '_' . $userId;
 
     echo "<a href='index.php?page=mur&id=$annonceId'>Annonce spécifique</a>";
+
+    
+    $etatBouton = isset($_SESSION[$etatBoutonKey]) ? $_SESSION[$etatBoutonKey] : 0;
 
     if (isset($_POST['like'][$index])) {
         $etatBouton = ($etatBouton == 0) ? 1 : 0;
@@ -114,15 +121,20 @@ foreach ($annoncesNonPinned as $index => $annonceNonPinned) {
             ?> <img class="imageAnnonce" src="<?php echo $annonceNonPinned['image'] ; ?>" alt="image"><?php
         }?>
         <p><?php echo $annonceNonPinned['description']; ?></p>
+        <p>
+            <?php echo $annonceNonPinned['username'];?>
+        </p>
         <p><?php 
                     $date = explode('.', $annonceNonPinned['date']);
                     echo $date[0]; ?>
         </p>
 
+        
+
         <form method="post" action="">
             <input type="hidden" name="annonce_id" value="<?php echo $annonceId; ?>">
             <p>
-                <span id="likes-count-<?php echo $index; ?>"><?php echo $annonceNonPinned['nb_likes']; ?></span>
+                <span id="likes-count-<?php echo $annonceId; ?>"><?php echo $annonceNonPinned['nb_likes']; ?></span>
                 <?php
                 if(isset($_SESSION['username'])){
                     ?>
@@ -132,7 +144,7 @@ foreach ($annoncesNonPinned as $index => $annonceNonPinned) {
                 } else{
                     ?>
                     <i class="fas fa-heart" style="color: red"></i><?php
-                }?>
+                } ?>
                 
             </p>
         </form>
@@ -145,6 +157,9 @@ foreach ($annoncesNonPinned as $index => $annonceNonPinned) {
                 <div class="commentaires">
                     <p><?php echo $comm['description'];?></p>
                     <p><?php echo $comm['username'];?></p>
+                    <!-- <?php if($comm['profile_picture']){
+                        ?><img class="smallPfp" src="<?php echo $comm['profile_picture']; ?>" alt="profilePicture"><?php
+                    }?> -->
                     <p><?php 
                     $date = explode('.', $comm['date']);
                     echo $date[0]; ?>
@@ -156,9 +171,9 @@ foreach ($annoncesNonPinned as $index => $annonceNonPinned) {
         }
 
     ?>
-
     </div>
     <br>
 <?php
 }
 ?>
+
