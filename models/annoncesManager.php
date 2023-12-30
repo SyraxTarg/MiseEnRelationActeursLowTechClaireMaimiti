@@ -140,6 +140,11 @@ class annoncesManager extends AbstractManager {
         return $query->fetchAll();
     }
 
+    function pinAnnonce($annonceId){
+        $sql = "UPDATE ".annoncesManager::TABLE_NAME." SET pinned = true WHERE id = ".$annonceId.";";
+        $query = $this->dbConnect()->query($sql);
+        return $query->fetchAll();
+    }
 
 }
 
