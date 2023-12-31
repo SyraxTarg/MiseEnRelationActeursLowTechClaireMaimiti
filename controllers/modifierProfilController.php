@@ -1,6 +1,7 @@
 <?php
 
 require_once './models/usersManager.php';
+require_once './models/adminsManager.php';
 
 if (isset($_GET['msg'])) {
     switch ($_GET['msg']) {
@@ -25,8 +26,13 @@ if (isset($_GET['msg'])) {
     }
 }
 
+if(isset($_GET['action']) && $_GET['action'] == "delete"){
+    $adminsManager = new adminsManager();
+    $adminsManager->remove_user($_SESSION['idUser']);
+    header("Location: index.php?page=deconnexion");
+}
+
 $usersManager = new usersManager();
-$annoncesManager = new annoncesManager();
 $user = $usersManager->getUserWithId($_SESSION['idUser']);
 $template = './views/pages/modifierProfil.php';
 
@@ -91,3 +97,16 @@ function checkFormValidity($username, $password, $reEnterPassword, $email)
         return true;
     }
 }
+
+?>
+
+<script>
+    //appelé au click sur le bouton "Supprimer mon profil"
+    function confirmDelete() {
+        var confirmation = confirm("Êtes-vous sûr de vouloir supprimer votre profil ? Cette action est irréversible.");
+
+        if (confirmation) {
+            window.location.href = "index.php?page=modifierProfil&action=delete";
+        }
+    }
+</script>

@@ -26,14 +26,5 @@ if (isset($msg))
 </form>
 
 
-
-
-
-
-
-
-<a href="#">Supprimer mon profil</a>
+<a href='#' onclick='confirmDelete()'>Supprimer mon profil</a>
 <!-- afficher en rouge, tout en bas -->
-<!-- demander confirmation avant d'appeler la méthode -->
-<!-- utiliser la même méthode que le ban -->
-<!-- déconnecter l'utilisateur -->
