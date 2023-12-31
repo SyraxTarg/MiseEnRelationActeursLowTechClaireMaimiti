@@ -1,9 +1,10 @@
 <h1>Poster une annonce</h1>
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <input type="text" name="titre" id="titre" placeholder="Votre titre ici">
     <input type="text" name="description" id="description" placeholder="Votre description ici">
-    <input type="file" name="photo" id="photo">
+    <label for="file">Ajouter une image</label>
+    <input type="file" name ="file" id = "photo">
     <?php
         if($_SESSION['privileges'] == "modo")
         {

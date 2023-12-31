@@ -3,8 +3,10 @@
 if (!$annonceId) {
     echo "Oups :/ une erreur est survenue.";
 } else {
+    
     echo "<h1>Focus de l'annonce $annonceId</h1>"; ?>
-    <div class="annonce">
+
+    <div class="annonce" style="overflow: hidden; word-wrap:break-word;">
     <?php $annoncesManager->getAnnonceType($annonceId, $avancees, $dispos, $recherches); ?>
         <h1><?php echo $annonce['titre']; ?></h1>
         <?php
@@ -35,7 +37,7 @@ if (!$annonceId) {
             echo "<p>Derniers commentaires:</p>";
             foreach ($comms as $comm) {
                 ?>
-                <div class="commentaires">
+                <div class="commentaires" style="overflow: hidden; word-wrap:break-word;">
                     <p><?php echo $comm['description']; ?></p>
                     <p><?php echo $comm['username']; ?></p>
                     <!-- <?php if($comm['profile_picture']){

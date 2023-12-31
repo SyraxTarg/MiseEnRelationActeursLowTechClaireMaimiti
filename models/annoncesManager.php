@@ -117,17 +117,16 @@ class annoncesManager extends AbstractManager {
     }
 
 
-    function postAnnonce(bool $pinned) {
+    function postAnnonce(bool $pinned, string $imagePath) {
         $sql = "INSERT INTO ".annoncesManager::TABLE_NAME."(titre, description, image, id_user, pinned, date, nb_likes) VALUES (:titre, :description, :image, :id_user, :pinned, (SELECT NOW()), 0);";
         $query = $this->db->prepare($sql);
         
-        // Utilisez $pinned comme paramètre lié dans la requête SQL
         $query->execute([
             ':titre' => $_POST['titre'],
             ':description' => $_POST['description'],
-            ':image' => $_POST['photo'],
+            ':image' => $imagePath,
             ':id_user' => $_SESSION['idUser'],
-            ':pinned' => $pinned ? 1 : 0, // Convertissez le booléen en entier (1 ou 0)
+            ':pinned' => $pinned ? 1 : 0, 
         ]);
     
         return $query->fetchAll();

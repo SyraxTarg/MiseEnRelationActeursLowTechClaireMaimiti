@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 
 if(isset($_SESSION['privileges'])){
     if($_SESSION['privileges'] != 'admin'){
@@ -8,6 +9,8 @@ require_once('models/annoncesManager.php');
 require_once('models/avancéesManager.php');
 require_once('models/disposManager.php');
 require_once('models/rechercheManager.php');
+
+
 
 $annoncesManager = new annoncesManager();
 $annoncesManager->dbConnect();
@@ -32,8 +35,8 @@ $recherches = $rechercheManager->getRecherche();
 
 $annonceId = isset($_GET['id']) ? $_GET['id'] : null;
 $annonce = $annoncesManager->getSingleAnnonce($annonceId);
-
-$etatBoutonKey = 'etat_bouton_' . $annonceId;
+$userId=$_SESSION['idUser'];
+$etatBoutonKey = 'etat_bouton_' . $annonceId . '_' . $userId;
 $etatBouton = isset($_SESSION[$etatBoutonKey]) ? $_SESSION[$etatBoutonKey] : 0;
 
 if (isset($_POST['posterComm'])) {
@@ -42,7 +45,7 @@ if (isset($_POST['posterComm'])) {
     ];
     
     foreach ($motsInterdits as $motInterdit) {
-        $pattern = "/\b" . preg_quote($motInterdit, '/') . "\b/i";
+        $pattern = "/\b" . preg_quote($motInterdit, '/') . "\b/ui";
         $replacement = str_repeat("*", mb_strlen($motInterdit));
 
         $_POST['description'] = preg_replace($pattern, $replacement, $_POST['description']);
@@ -66,6 +69,5 @@ if (isset($_POST['like'])) {
 
     }
 }
-
 
 
