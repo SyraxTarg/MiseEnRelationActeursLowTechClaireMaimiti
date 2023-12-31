@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 
 if(isset($_SESSION['privileges'])){
     if($_SESSION['privileges'] != 'admin'){
@@ -44,7 +45,7 @@ if (isset($_POST['posterComm'])) {
     ];
     
     foreach ($motsInterdits as $motInterdit) {
-        $pattern = "/\b" . preg_quote($motInterdit, '/') . "\b/i";
+        $pattern = "/\b" . preg_quote($motInterdit, '/') . "\b/ui";
         $replacement = str_repeat("*", mb_strlen($motInterdit));
 
         $_POST['description'] = preg_replace($pattern, $replacement, $_POST['description']);
