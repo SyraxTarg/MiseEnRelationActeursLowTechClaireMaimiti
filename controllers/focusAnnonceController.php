@@ -9,6 +9,8 @@ require_once('models/avancéesManager.php');
 require_once('models/disposManager.php');
 require_once('models/rechercheManager.php');
 
+
+
 $annoncesManager = new annoncesManager();
 $annoncesManager->dbConnect();
 
@@ -32,8 +34,8 @@ $recherches = $rechercheManager->getRecherche();
 
 $annonceId = isset($_GET['id']) ? $_GET['id'] : null;
 $annonce = $annoncesManager->getSingleAnnonce($annonceId);
-
-$etatBoutonKey = 'etat_bouton_' . $annonceId;
+$userId=$_SESSION['idUser'];
+$etatBoutonKey = 'etat_bouton_' . $annonceId . '_' . $userId;
 $etatBouton = isset($_SESSION[$etatBoutonKey]) ? $_SESSION[$etatBoutonKey] : 0;
 
 if (isset($_POST['posterComm'])) {
@@ -66,6 +68,5 @@ if (isset($_POST['like'])) {
 
     }
 }
-
 
 

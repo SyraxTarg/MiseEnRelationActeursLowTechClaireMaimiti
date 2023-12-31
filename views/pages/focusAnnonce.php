@@ -3,7 +3,9 @@
 if (!$annonceId) {
     echo "Oups :/ une erreur est survenue.";
 } else {
+    
     echo "<h1>Focus de l'annonce $annonceId</h1>"; ?>
+
     <div class="annonce">
     <?php $annoncesManager->getAnnonceType($annonceId, $avancees, $dispos, $recherches); ?>
         <h1><?php echo $annonce['titre']; ?></h1>
