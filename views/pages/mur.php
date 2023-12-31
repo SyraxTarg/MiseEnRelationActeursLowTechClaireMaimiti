@@ -29,7 +29,7 @@ foreach ($annoncesPinned as $index => $annoncePinned) {
     $heartColor = ($etatBouton == 1) ? 'red' : 'black';
     ?>
 
-    <div class="annonce">
+    <div class="annonce" style="overflow: hidden; word-wrap:break-word;">
         <?php $annoncesManager->getAnnonceType($annonceId, $avancees, $dispos, $recherches); ?>
         <i class="fas fa-thumbtack"></i>
         <h3><?php echo $annoncePinned['titre']; ?></h3>
@@ -69,7 +69,7 @@ foreach ($annoncesPinned as $index => $annoncePinned) {
             echo "<p>Derniers commentaires:</p>";
             foreach ($comms as $comm) {
                 ?>
-                <div class="commentaires">
+                <div class="commentaires" style="overflow: hidden; word-wrap:break-word;">
                     <p><?php echo $comm['description']; ?></p>
                     <p><?php echo $comm['username']; ?></p>
                     <p><?php
@@ -109,7 +109,7 @@ foreach ($annoncesNonPinned as $index => $annonceNonPinned) {
     $heartColor = ($etatBouton == 1) ? 'red' : 'black';
     ?>
 
-    <div class="annonce">
+    <div class="annonce" style="overflow: hidden; word-wrap:break-word;">
         <?php $annoncesManager->getAnnonceType($annonceId, $avancees, $dispos, $recherches); ?>
         <h3><?php echo $annonceNonPinned['titre']; ?></h3>
         <?php
@@ -148,7 +148,7 @@ foreach ($annoncesNonPinned as $index => $annonceNonPinned) {
             echo "<p>Derniers commentaires:</p>";
             foreach ($comms as $comm) {
                 ?>
-                <div class="commentaires">
+                <div class="commentaires" style="overflow: hidden; word-wrap:break-word;">
                     <p><?php echo $comm['description']; ?></p>
                     <p><?php echo $comm['username']; ?></p>
                     <p><?php
