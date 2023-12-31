@@ -5,8 +5,16 @@ require_once './models/modérateursManager.php';
 require_once './models/adminsManager.php';
 
 if (isset($_GET['id'])) {
+    if (isset($_GET['msg'])) {
+        switch ($_GET['msg']) {
+            case "SM":
+                if ($_GET['id'] == $_SESSION['idUser'])
+                    $msg = "<p>Le profil a bien été mis à jour.</p>";
+                break;
+        }
+    }
     //vérifier que l'id ne contient que des chiffres
-    if(preg_match('/^[0-9]+$/', $_GET['id'])) {
+    if (preg_match('/^[0-9]+$/', $_GET['id'])) {
         $template = './views/pages/profil.php';
 
         $usersManager = new usersManager();
@@ -17,16 +25,15 @@ if (isset($_GET['id'])) {
                 $currentUser = true;
             else
                 $currentUser = false;
-    
+
             if (!$currentUser)
                 $userPrivileges = getPrivileges($user['id']);
-    
+
             $annonces = $annoncesManager->getAnnoncesUser($user['id']);
         } else {
             $user = $usersManager->getUserWithId(5);
         }
-    }
-    else{
+    } else {
         header("Location: index.php?page=home");
     }
 } else {
@@ -37,7 +44,7 @@ if (isset($_GET['id'])) {
 
 if (isset($_GET['action'])) {
     $adminsManager = new adminsManager();
-    if(isset($_SESSION['privileges']) && $_SESSION['privileges'] == "admin"){
+    if (isset($_SESSION['privileges']) && $_SESSION['privileges'] == "admin") {
         switch ($_GET['action']) {
             case "grantModo":
                 $adminsManager->give_modo_rights($user['id']);
@@ -71,7 +78,7 @@ function getPrivileges($id)
     $moderateursManager = new modérateursManager();
     $modo = $moderateursManager->getUniqueModo($id);
 
-    if($admin)
+    if ($admin)
         return "admin";
     elseif ($modo)
         return "modo";

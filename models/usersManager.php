@@ -76,4 +76,17 @@ class usersManager extends AbstractManager {
         $query2 = $this->db->query($sql2);
         return $query->fetchAll();
     }
+
+    function setUser($id, string $username, string $password, string $email, string $profile_picture, string $activites){
+        $sql = "UPDATE " . usersManager::TABLE_NAME . " SET username=:username, password=:password, email=:email, profile_picture=:profile_picture, activites=:activites WHERE id=:id";
+        $query = $this->db->prepare($sql);
+        $query->execute([
+            ':username' => $username,
+            ':password' => $password,
+            ':email' => $email,
+            ':profile_picture' => $profile_picture,
+            ':activites' => $activites,
+            ':id' => $id
+        ]);
+    }
 }
