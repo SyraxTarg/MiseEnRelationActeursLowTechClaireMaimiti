@@ -16,7 +16,7 @@ if ($user['id'] == 5 && $user['username'] == "utilisateur introuvable") {
     <?php
     if ($currentUser) {
         echo "<a href='index.php?page=deconnexion'>Me déconnecter</a>";
-        echo "<a href='index.php?page=modifierProfil&id=" . $user['id'] . "'>Modifier mon profil</a>";
+        echo "<a href='index.php?page=modifierProfil'>Modifier mon profil</a>";
     } else {
         if ($_SESSION['privileges'] == "admin") {
             if ($userPrivileges != "admin")

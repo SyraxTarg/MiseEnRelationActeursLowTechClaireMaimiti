@@ -1,7 +1,9 @@
-<h1>Modifier le profil de <?= $user['username'] ?></h1>
+<h1>Modifier le profil de
+    <?= $user['username'] ?>
+</h1>
 
 <?php
-if(isset($msg))
+if (isset($msg))
     echo $msg;
 ?>
 
@@ -33,4 +35,5 @@ if(isset($msg))
 <a href="#">Supprimer mon profil</a>
 <!-- afficher en rouge, tout en bas -->
 <!-- demander confirmation avant d'appeler la méthode -->
-<!-- faire une méthode pour supprimer l'utilisateur -->
+<!-- utiliser la même méthode que le ban -->
+<!-- déconnecter l'utilisateur -->

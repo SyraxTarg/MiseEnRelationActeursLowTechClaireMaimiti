@@ -25,36 +25,17 @@ if (isset($_GET['msg'])) {
     }
 }
 
-if (isset($_GET['id'])) {
-    //vérifier que l'id ne contient que des chiffres
-    if(preg_match('/^[0-9]+$/', $_GET['id'])) {
-        $template = './views/pages/profil.php';
-
-        $usersManager = new usersManager();
-        $annoncesManager = new annoncesManager();
-        $user = $usersManager->getUserWithId($_GET['id']);
-        if ($user && $user['id'] == $_SESSION['idUser']) {
-            $template = './views/pages/modifierProfil.php';
-        } else {
-            header("Location: index.php?page=home");
-        }
-    }
-    else{
-        header("Location: index.php?page=home");
-    }
-} else {
-    header("Location: index.php?page=home");
-}
+$usersManager = new usersManager();
+$annoncesManager = new annoncesManager();
+$user = $usersManager->getUserWithId($_SESSION['idUser']);
+$template = './views/pages/modifierProfil.php';
 
 
-
-
-if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEnterPassword']) && isset($_POST['email']) && isset($_POST['activites'])){
+if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEnterPassword']) && isset($_POST['email']) && isset($_POST['activites'])) {
     $formValidity = checkFormValidity($_POST['username'], $_POST['password'], $_POST['reEnterPassword'], $_POST['email']);
-    if(gettype($formValidity) == "string"){
+    if (gettype($formValidity) == "string") {
         header("Location: index.php?page=modifierProfil&id=" . $_SESSION['idUser'] . "&msg=" . $formValidity);
-    }
-    else{
+    } else {
         //maj le user
         $usersManager = new usersManager();
         $usersManager->setUser($_SESSION['idUser'], $_POST['username'], $_POST['password'], $_POST['email'], './public/images/defaultPfp.png', $_POST['activites']);
@@ -64,29 +45,29 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEnt
     }
 }
 
-function checkFormValidity($username, $password, $reEnterPassword, $email){
+function checkFormValidity($username, $password, $reEnterPassword, $email)
+{
 
     //check correspondance entre les 2 champs password
-    if($password != $reEnterPassword){
+    if ($password != $reEnterPassword) {
         return "NP";
         //NP : Not Matching Passwords
     }
 
     //check username validity
     $pattern = '/[!@#$%^&*(),.?":{}|<>]/';
-    if(preg_match($pattern, $username, $matches)) {
+    if (preg_match($pattern, $username, $matches)) {
         return "IU";
         //IE : Invalid Username
     }
 
     //check password validity
     $pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/";
-    if(!preg_match($pattern, $password, $matches)) {
-        if(strlen($password) < 8){
+    if (!preg_match($pattern, $password, $matches)) {
+        if (strlen($password) < 8) {
             return "PS";
             //PS : Password Short
-        }
-        else{
+        } else {
             return "IP";
             //IP : Invalid Password
         }
@@ -94,7 +75,7 @@ function checkFormValidity($username, $password, $reEnterPassword, $email){
 
     //check email validity
     $pattern = "/^([^@\s<&>]+)@(?:([-a-z0-9]+)\.)+([a-z]{2,})$/iD";
-    if(!preg_match($pattern, $email, $matches)) {
+    if (!preg_match($pattern, $email, $matches)) {
         return "IE";
         //IE : Invalid Email
     }
@@ -103,11 +84,10 @@ function checkFormValidity($username, $password, $reEnterPassword, $email){
     $usersManager = new usersManager();
     $user = $usersManager->getUniqueUser($_POST['email'], null);
 
-    if($user && $user['id'] != $_SESSION['idUser']){
+    if ($user && $user['id'] != $_SESSION['idUser']) {
         return "EU";
         //EU : Email Uniqueness
-    }
-    else{
+    } else {
         return true;
     }
 }
