@@ -89,12 +89,21 @@ function getPrivileges($id)
 ?>
 
 <script>
-    //appelé au click sur le bouton "Ban"
-    function confirmDelete(userId) {
-        var confirmation = confirm("Êtes-vous sûr de vouloir bannir cet utilisateur ? Il ne sera pas prévenu.");
+    //appelé au click sur le bouton "Ban" ou "Nommer admin"
+    function confirmDelete(userId, msg, action) {
+        var confirmation = confirm(msg);
 
         if (confirmation) {
-            window.location.href = "index.php?page=profil&id=" + userId + "&action=ban";
+            switch (action) {
+                case "ban":
+                    window.location.href = "index.php?page=profil&id=" + userId + "&action=ban";
+                    break;
+                case "grantAdmin":
+                    window.location.href = "index.php?page=profil&id=" + userId + "&action=grantAdmin";
+                    break;
+                default:
+                    break;
+            }
         }
     }
 </script>
