@@ -10,7 +10,7 @@ if (!$annonceId) {
     <?php $annoncesManager->getAnnonceType($annonceId, $avancees, $dispos, $recherches); ?>
         <h1><?php echo $annonce['titre']; ?></h1>
         <?php
-        if ($annonce['image']) {
+        if ($annonce['image'] && $annonce['image'] != "null") {
             ?><img class="imageAnnonce" src="<?php echo $annonce['image']; ?>" alt="image"><?php
         } ?>
         <p><?php echo $annonce['description']; ?></p>

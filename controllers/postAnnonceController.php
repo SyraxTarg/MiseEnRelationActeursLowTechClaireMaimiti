@@ -31,6 +31,7 @@ if (isset($_SESSION['username'])) {
     if (isset($_POST['postAnnonce'])) {
         $pinned = isset($_POST['pinned']);
         $lastAnnonce = $annoncesManager->getlastAnnonce();
+        $imagePath = "null";
         if(isset($_FILES['file'])){
             $tmpName = $_FILES['file']['tmp_name'];
             $name = $_FILES['file']['name'];
@@ -46,12 +47,9 @@ if (isset($_SESSION['username'])) {
                 move_uploaded_file($tmpName, './upload/'.$file);
                 $imagePath = './upload/'.$file;
             }
-            else{
-                echo "Une erreur est survenue";
-            }
-        }
+        } 
         $annoncesManager->postAnnonce($pinned, $imagePath);
-
+        unset($_FILES['file']);
         if (isset($_POST['Avancées'])) {
             $avanceesManager->postAvancees($lastAnnonce[0]['id']);
         }

@@ -34,7 +34,7 @@ foreach ($annoncesPinned as $index => $annoncePinned) {
         <i class="fas fa-thumbtack"></i>
         <h3><?php echo $annoncePinned['titre']; ?></h3>
         <?php
-        if ($annoncePinned['image']) {
+        if ($annoncePinned['image'] && $annoncePinned['image'] != "null") {
             ?> <img class="imageAnnonce" src="<?php echo $annoncePinned['image']; ?>" alt="image"><?php
         } ?>
         <p><?php echo $annoncePinned['description']; ?></p>
@@ -113,7 +113,7 @@ foreach ($annoncesNonPinned as $index => $annonceNonPinned) {
         <?php $annoncesManager->getAnnonceType($annonceId, $avancees, $dispos, $recherches); ?>
         <h3><?php echo $annonceNonPinned['titre']; ?></h3>
         <?php
-        if ($annonceNonPinned['image']) {
+        if ($annonceNonPinned['image'] && $annonceNonPinned['image'] != "null") {
             ?> <img class="imageAnnonce" src="<?php echo $annonceNonPinned['image']; ?>" alt="image"><?php
         } ?>
         <p><?php echo $annonceNonPinned['description']; ?></p>

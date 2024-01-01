@@ -65,6 +65,7 @@
         padding-top: 2vw;
         margin-top: 5%;
         padding-bottom: 2vw;
+        bottom: 0;
     }
 
     #liensReseaux{
