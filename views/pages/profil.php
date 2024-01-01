@@ -14,20 +14,23 @@ if ($user['id'] == 5 && $user['username'] == "utilisateur introuvable") {
     ?>
 
     <?php
-    if ($currentUser) {
-        echo "<a href='index.php?page=deconnexion'>Me déconnecter</a>";
-        echo "<a href='index.php?page=modifierProfil'>Modifier mon profil</a>";
+    if ($currentUser) { ?>
+        <a href='index.php?page=deconnexion'>Me déconnecter</a>
+        <a href='index.php?page=modifierProfil'>Modifier mon profil</a>
+        <?php
     } else {
         if ($_SESSION['privileges'] == "admin") {
-            if ($userPrivileges != "admin")
-                echo "<a href='#' onclick='confirmDelete(" . $user['id'] . ")'>Ban</a>";
-
-            if ($userPrivileges == "particulier")
-                echo "<a href='index.php?page=profil&id=" . $user['id'] . "&action=grantModo'>Nommer modérateur</a>";
-            elseif ($userPrivileges == "modo") {
-                echo "<a href='index.php?page=profil&id=" . $user['id'] . "&action=grantAdmin'>Nommer administrateur</a>";
-                echo "<a href='index.php?page=profil&id=" . $user['id'] . "&action=removeModo'>Supprimer les privilèges de modérateur</a>";
-            }
+            if ($userPrivileges != "admin") { ?>
+                <a href="#"
+                    onclick="confirmDelete(<?= $user['id'] ?>, 'Êtes-vous sûr de vouloir bannir cet utilisateur ? Il ne sera pas prévenu.', 'ban')">Ban</a>
+            <?php }
+            if ($userPrivileges == "particulier") { ?>
+                <a href="index.php?page=profil&id=<?= $user['id'] ?>&action=grantModo">Nommer modérateur</a>
+            <?php } elseif ($userPrivileges == "modo") { ?>
+                <a href="#"
+                    onclick="confirmDelete(<?= $user['id'] ?>, 'Êtes-vous sûr de vouloir nommer cet utilisateur administrateur ? Cette action est irréversible.', 'grantAdmin')">Nommer administrateur</a>
+                <a href="index.php?page=profil&id=<?= $user['id'] ?>&action=removeModo">Supprimer les privilèges de modérateur</a>
+            <?php }
         }
     }
     ?>
