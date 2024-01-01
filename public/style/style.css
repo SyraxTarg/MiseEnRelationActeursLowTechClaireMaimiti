@@ -14,7 +14,6 @@ td{
 
 .annonce{
     border: 1px solid black;
-    background-color: blue;
 }
 
 .commentaires{
@@ -30,4 +29,8 @@ td{
 .smallPfp{
     width: 5%;
     height: 5%;
+}
+
+#menu{
+    background-color:blueviolet;
 }
