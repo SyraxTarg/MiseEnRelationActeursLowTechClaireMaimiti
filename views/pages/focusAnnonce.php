@@ -1,5 +1,5 @@
 <?php
-?><a href="index.php?page=mur">Retour En arrière</a><?php
+?><a href="index.php?page=mur">Retour au mur d'annonces</a><?php
 if (!$annonceId) {
     echo "Oups :/ une erreur est survenue.";
 } else {
@@ -14,7 +14,9 @@ if (!$annonceId) {
             ?><img class="imageAnnonce" src="<?php echo $annonce['image']; ?>" alt="image"><?php
         } ?>
         <p><?php echo $annonce['description']; ?></p>
-        <p><?php echo $annonce['date']; ?></p>
+        <p><?php 
+                    $date = explode('.', $annonce['date']);
+                    echo $date[0]; ?></p>
         <form method="post" action="">
             <input type="hidden" name="annonce_id" value="<?php echo $annonceId; ?>">
             <p>
@@ -40,9 +42,9 @@ if (!$annonceId) {
                 <div class="commentaires" style="overflow: hidden; word-wrap:break-word;">
                     <p><?php echo $comm['description']; ?></p>
                     <p><?php echo $comm['username']; ?></p>
-                    <!-- <?php if($comm['profile_picture']){
+                    <?php if($comm['profile_picture']){
                         ?><img class="smallPfp" src="<?php echo $comm['profile_picture']; ?>" alt="profilePicture"><?php
-                    }?> -->
+                    }?>
                     <p><?php 
                     $date = explode('.', $comm['date']);
                     echo $date[0]; ?></p>

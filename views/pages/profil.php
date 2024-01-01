@@ -53,9 +53,9 @@ if ($user['id'] == 5 && $user['username'] == "utilisateur introuvable") {
                         <?= $annonce['titre'] ?>
                     </h4>
                 </a>
-                <p>
-                    <?= $annonce['date'] ?>
-                </p>
+                <p><?php 
+                    $date = explode('.', $annonce['date']);
+                    echo $date[0]; ?></p>
                 <p>
                     <?= $annonce['description'] ?>
                 </p>

@@ -1,4 +1,11 @@
-<h1>Poster une annonce</h1>
+
+<?php
+    if($_SESSION['privileges'] == 'modo'){
+        echo "<h1>Poster une annonce</h1>";
+    } else{
+        echo "<h1>Poster une disponibilité</h1>";
+    }
+?>
 
 <form method="post" enctype="multipart/form-data">
     <input type="text" name="titre" id="titre" placeholder="Votre titre ici">
