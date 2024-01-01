@@ -16,15 +16,15 @@
         if($_SESSION['privileges'] == "modo")
         {
         ?>
-            <fieldset>
+            <fieldset >
                 <legend>Quel est le type de votre annonce ?</legend>
         
                     <div>
-                        <input type="radio" id="Recherche" name="Recherche" value="Recherche" />
+                        <input type="radio" id="Recherche" name="type" value="Recherche" />
                         <label for="Recherche">Recherche</label>
                     </div>
                     <div>
-                        <input type="radio" id="Avancées" name="Avancées" value="Avancées" />
+                        <input type="radio" id="Avancées" name="type" value="Avancées" />
                         <label for="Avancées">Avancées</label>
                     </div>
             </fieldset>            

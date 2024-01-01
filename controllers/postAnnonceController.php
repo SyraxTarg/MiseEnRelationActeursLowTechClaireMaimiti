@@ -30,7 +30,6 @@ $rechercheManager->dbConnect();
 if (isset($_SESSION['username'])) {
     if (isset($_POST['postAnnonce'])) {
         $pinned = isset($_POST['pinned']);
-        $lastAnnonce = $annoncesManager->getlastAnnonce();
         $imagePath = "null";
         if(isset($_FILES['file'])){
             $tmpName = $_FILES['file']['tmp_name'];
@@ -49,15 +48,18 @@ if (isset($_SESSION['username'])) {
             }
         } 
         $annoncesManager->postAnnonce($pinned, $imagePath);
+        $lastAnnonce = $annoncesManager->getlastAnnonce();
         unset($_FILES['file']);
-        if (isset($_POST['Avancées'])) {
-            $avanceesManager->postAvancees($lastAnnonce[0]['id']);
+        if(isset($_POST['type'])){
+            if ($_POST['type'] == 'Avancées') {
+                $avanceesManager->postAvancees($lastAnnonce[0]['id']);
+            } else{
+                $rechercheManager->postRecherche($lastAnnonce[0]['id']);
+            }
         }
+        
         if ($_SESSION['privileges'] == "particulier") {
             $disposManager->postDispos($lastAnnonce[0]['id']);
-        }
-        if (isset($_POST['Recherche'])) {
-            $rechercheManager->postRecherche($lastAnnonce[0]['id']);
         }
     }
 }

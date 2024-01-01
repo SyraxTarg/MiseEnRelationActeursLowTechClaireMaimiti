@@ -132,19 +132,6 @@ class annoncesManager extends AbstractManager {
         return $query->fetchAll();
     }
 
-    function postAnnonceNoImage(bool $pinned) {
-        $sql = "INSERT INTO ".annoncesManager::TABLE_NAME."(titre, description, id_user, pinned, date, nb_likes) VALUES (:titre, :description, :id_user, :pinned, (SELECT NOW()), 0);";
-        $query = $this->db->prepare($sql);
-        
-        $query->execute([
-            ':titre' => $_POST['titre'],
-            ':description' => $_POST['description'],
-            ':id_user' => $_SESSION['idUser'],
-            ':pinned' => $pinned ? 1 : 0, 
-        ]);
-    
-        return $query->fetchAll();
-    }
     
 
     function getlastAnnonce(){
