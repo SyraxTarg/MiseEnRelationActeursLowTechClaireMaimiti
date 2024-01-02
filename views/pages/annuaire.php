@@ -16,11 +16,14 @@
 </form>
 
 <table id="annuaire">
-    <tr>
-        <td>Nom</td>
-        <td>Activités</td>
-        <td>Contact</td>
-    </tr>
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Activités</th>
+            <th>Contact</th>
+        </tr>
+    </thead>
+    
 
     <?php foreach ($particuliers as $particulier) {
         if ($particulier['username'] != 'utilisateur introuvable') {
@@ -44,3 +47,9 @@
         }
     } ?>
 </table>
+
+<script>
+    $(document).ready(function() {
+        $('#annuaire').DataTable();
+    });
+</script>

@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
     <link rel="icon" type="image/x-icon" href="public/images/favicon.ico">
     <script src="public/script/script.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     
 </head>
 <body>
@@ -19,3 +21,5 @@
     <?php require('./views/partials/__footer.php'); ?>
 </body>
 </html>
+
+

@@ -28,8 +28,14 @@ class annoncesManager extends AbstractManager {
         return $query->fetchAll();
     }
 
+    public function getLastCommentaires($id_annonce){
+        $sql = "SELECT titre, description, username, date, profile_picture FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere = ".$id_annonce." ORDER BY date DESC LIMIT 3;";
+        $query = $this->dbConnect()->query($sql);
+        return $query->fetchAll();
+    }
+
     function getPinnedAnnonces(){
-        $sql = "SELECT Annonces.id, titre, description, username, date, nb_likes, image FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere is null AND pinned = 't' ORDER BY date DESC;";
+        $sql = "SELECT Annonces.id, titre, description, username, date, nb_likes, image, Users.id AS usersId FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere is null AND pinned = 't' ORDER BY date DESC;";
         $query = $this->dbConnect()->query($sql);
         return $query->fetchAll();
     }
@@ -105,6 +111,8 @@ class annoncesManager extends AbstractManager {
         return $query->fetch();
     }
 
+    
+
     function getAnnoncesUser(string $id){
         if($id){
             $sql = "SELECT id, titre, description, date FROM ".annoncesManager::TABLE_NAME." WHERE id_user=(:id) AND id_annonce_mere IS NULL ORDER BY date DESC";
@@ -146,5 +154,9 @@ class annoncesManager extends AbstractManager {
         return $query->fetchAll();
     }
 
+
+
+    
+    
 }
 

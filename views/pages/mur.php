@@ -1,3 +1,4 @@
+
 <?php
 if (!isset($_SESSION['idUser'])) {
     $userId = null;
@@ -12,7 +13,6 @@ foreach ($annoncesPinned as $index => $annoncePinned) {
     $annonceId = $annoncePinned['id'];
     $etatBoutonKey = 'etat_bouton_' . $annonceId . '_' . $userId;
 
-    echo "<a href='index.php?page=mur&id=$annonceId'>Annonce spécifique</a>";
 
     $etatBouton = isset($_SESSION[$etatBoutonKey]) ? $_SESSION[$etatBoutonKey] : 0;
 
@@ -60,14 +60,15 @@ foreach ($annoncesPinned as $index => $annoncePinned) {
                     ?>
                     <i class="fas fa-heart" style="color: red"></i><?php
                 } ?>
-
             </p>
         </form>
         <?php
-        $comms = $annoncesManager->getCommentaires($annonceId);
-        if (!empty($comms)) {
-            echo "<p>Derniers commentaires:</p>";
+        if(isset($_SESSION['username'])){
+            if($_SESSION['username'] == $annoncePinned['username']){
+            $i=0;
+            $comms = $annoncesManager->getCommentaires($annonceId);
             foreach ($comms as $comm) {
+                $i+=1;
                 ?>
                 <div class="commentaires" style="overflow: hidden; word-wrap:break-word;">
                     <p><?php echo $comm['description']; ?></p>
@@ -79,20 +80,25 @@ foreach ($annoncesPinned as $index => $annoncePinned) {
 
                 </div>
             <?php
+            // if($i == 3){
+            //     return;
+            // }
             }
         }
 
         ?>
     </div>
-    <br>
+    
 <?php
+echo "<a href='index.php?page=mur&id=$annonceId'>Voir plus</a>";
+echo "</br>";
+echo "</br>";
 }
 
 foreach ($annoncesNonPinned as $index => $annonceNonPinned) {
     $annonceId = $annonceNonPinned['id'];
     $etatBoutonKey = 'etat_bouton_' . $annonceId . '_' . $userId;
 
-    echo "<a href='index.php?page=mur&id=$annonceId'>Annonce spécifique</a>";
 
     $etatBouton = isset($_SESSION[$etatBoutonKey]) ? $_SESSION[$etatBoutonKey] : 0;
 
@@ -143,7 +149,7 @@ foreach ($annoncesNonPinned as $index => $annonceNonPinned) {
             </p>
         </form>
         <?php
-        $comms = $annoncesManager->getCommentaires($annonceId);
+        $comms = $annoncesManager->getLastCommentaires($annonceId);
         if (!empty($comms)) {
             echo "<p>Derniers commentaires:</p>";
             foreach ($comms as $comm) {
@@ -163,7 +169,10 @@ foreach ($annoncesNonPinned as $index => $annonceNonPinned) {
 
         ?>
     </div>
-    <br>
 <?php
+echo "<a href='index.php?page=mur&id=$annonceId'>Voir plus</a>";
+echo "</br>";
+echo "</br>";
 }
-?>
+
+}
