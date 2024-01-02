@@ -26,7 +26,7 @@ class usersManager extends AbstractManager {
 
     function getUserWithId(string $id){
         if($id){
-            $sql = "SELECT id, username, password, email, activites FROM ".usersManager::TABLE_NAME." WHERE id=(:id);";
+            $sql = "SELECT id, username, password, email, activites, bio FROM ".usersManager::TABLE_NAME." WHERE id=(:id);";
             $query = $this->db->prepare($sql);
             $query->execute([
                 ':id' => $id
@@ -77,8 +77,8 @@ class usersManager extends AbstractManager {
         return $query->fetchAll();
     }
 
-    function setUser($id, string $username, string $password, string $email, string $profile_picture, string $activites){
-        $sql = "UPDATE " . usersManager::TABLE_NAME . " SET username=:username, password=:password, email=:email, profile_picture=:profile_picture, activites=:activites WHERE id=:id";
+    function setUser($id, string $username, string $password, string $email, string $profile_picture, string $activites, string $bio){
+        $sql = "UPDATE " . usersManager::TABLE_NAME . " SET username=:username, password=:password, email=:email, profile_picture=:profile_picture, activites=:activites, bio=:bio WHERE id=:id";
         $query = $this->db->prepare($sql);
         $query->execute([
             ':username' => $username,
@@ -86,6 +86,7 @@ class usersManager extends AbstractManager {
             ':email' => $email,
             ':profile_picture' => $profile_picture,
             ':activites' => $activites,
+            ':bio' => $bio,
             ':id' => $id
         ]);
     }

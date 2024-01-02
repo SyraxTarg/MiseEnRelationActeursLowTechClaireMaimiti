@@ -21,6 +21,10 @@ if (isset($msg))
     <label for="reEnterPassword">Entrez à nouveau votre mot de passe </label>
     <input type="password" name="reEnterPassword" id="reEnterPassword" required>
 
+    <label for="bio">Bio </label>
+    <!-- <input type="text" name="bio" id="bio" value="<?= $user['bio'] ?>"> -->
+    <textarea name="bio" id="bio" cols="30" rows="10"><?= $user['bio'] ?></textarea>
+
     <label for="activites">Activités </label>
     <input type="text" name="activites" id="activites" value="<?= $user['activites'] ?>">
 
