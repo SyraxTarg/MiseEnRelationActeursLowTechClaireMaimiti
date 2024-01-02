@@ -2,6 +2,8 @@
 
 <h1>Inscription</h1>
 
+<p>Les informations que vous entrez seront visibles publiquement sur la plateforme.</p>
+
 <?php
 if(isset($msg))
     echo $msg;

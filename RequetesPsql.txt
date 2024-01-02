@@ -171,3 +171,6 @@ UPDATE Annonces SET date = NOW() WHERE id = 25;
 UPDATE Annonces SET date = NOW() WHERE id = 26;
 UPDATE Annonces SET date = NOW() WHERE id = 27;
 UPDATE Annonces SET date = NOW() WHERE id = 28;
+
+
+ALTER TABLE Users ADD bio VARCHAR(510);

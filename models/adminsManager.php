@@ -1,6 +1,7 @@
 <?php
 
 require_once 'models/abstactManager.php';
+require_once 'models/annoncesManager.php';
 
 class adminsManager extends AbstractManager {
 
@@ -27,6 +28,9 @@ class adminsManager extends AbstractManager {
     }
 
     function remove_user($id){
+        $annoncesManager = new annoncesManager();
+        $annoncesManager->changerUserAnnonces($id);
+
         $sqlPrivileges = "DELETE FROM Particuliers WHERE id_user=".$id.";";
         $query = $this->db->query($sqlPrivileges);
         $sqlPrivileges = "DELETE FROM Mod‚rateurs WHERE id_user=".$id.";";
@@ -36,25 +40,21 @@ class adminsManager extends AbstractManager {
 
         $sql = "DELETE FROM Users WHERE id = ".$id.";";
         $query = $this->db->query($sql);
-        return $query->fetchAll();
     }
 
     function give_modo_rights($id){
         $sql = "INSERT INTO Mod‚rateurs(id_user) VALUES(".$id.");";
         $query = $this->db->query($sql);
-        return $query->fetchAll();
     }
 
     function remove_modo_rights($id){
         $sql = "DELETE FROM Mod‚rateurs WHERE id=". $id . ";";
         $query = $this->db->query($sql);
-        return $query->fetchAll();
     }
 
     function give_admin_rights($id){
         $sql = "INSERT INTO Admins(id_user) VALUES(".$id.");";
         $query = $this->db->query($sql);
-        return $query->fetchAll();
     }
 
 }
