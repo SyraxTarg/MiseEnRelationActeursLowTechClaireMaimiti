@@ -10,8 +10,7 @@ const AVAILABLE_ROUTES = [
     'modifierProfil' => '../controllers/modifierProfilController.php',
     'mur' => '../controllers/murAnnoncesController.php',
     'focusAnnonce' => '../controllers/focusAnnonceController.php',
-    'postAnnonce' => '../controllers/postAnnonceController.php',
-    'supprimerAnnonce' => '../controllers/supprimerAnnonceController.php'
+    'postAnnonce' => '../controllers/postAnnonceController.php'
   ];
   
   const DEFAULT_ROUTE = AVAILABLE_ROUTES['home'];
