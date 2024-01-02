@@ -1,3 +1,4 @@
+<h1 id="annoncesTitre">Annonces</h1>
 
 <?php
 if (!isset($_SESSION['idUser'])) {
@@ -60,13 +61,14 @@ foreach ($annoncesPinned as $index => $annoncePinned) {
                     ?>
                     <i class="fas fa-heart" style="color: red"></i><?php
                 } ?>
+
             </p>
         </form>
         <?php
-        if(isset($_SESSION['username'])){
-            if($_SESSION['username'] == $annoncePinned['username']){
+        $comms = $annoncesManager->getLastCommentaires($annonceId);
+        if (!empty($comms)) {
+            echo "<p>Derniers commentaires:</p>";
             $i=0;
-            $comms = $annoncesManager->getCommentaires($annonceId);
             foreach ($comms as $comm) {
                 $i+=1;
                 ?>
@@ -169,10 +171,22 @@ foreach ($annoncesNonPinned as $index => $annonceNonPinned) {
 
         ?>
     </div>
+    <br>
 <?php
 echo "<a href='index.php?page=mur&id=$annonceId'>Voir plus</a>";
 echo "</br>";
 echo "</br>";
 }
+?>
 
-}
+
+<style>
+    .imageAnnonce{
+        max-height: 20vw;
+    }
+
+    #annoncesTitre{
+        display: flex;
+        justify-content: center;
+    }
+</style>
