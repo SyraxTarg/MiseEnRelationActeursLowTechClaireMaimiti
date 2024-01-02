@@ -1,3 +1,17 @@
+:root {
+  --vert-fonce: #1A4749;
+  --vert-moyen: #3D8477;
+  --vert-logo: #07A19A;
+  --vert-eau: #54C3BA;
+  --vert-clair: #CBE3C0;
+  --bleu-marine: #0F3F6C;
+  --violet-fonce: #31356E;
+  --parme: #9B91C3;
+  --jaune-fonce: #FCDB1B;
+  --jaune-logo: #FEDF26;
+}
+
+
 table{
     border: 1px black solid;
 }
@@ -31,3 +45,92 @@ td{
     height: 5%;
 }
 
+
+
+/* HOME */
+#home{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.home_main_img{
+    width: 50vw;
+    margin: 5vh 0 8vh 0;
+    border-radius: 2.5vw;
+}
+
+.home_section_title{
+    margin: 2vh 0;
+}
+
+.section_with_icon{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2vw;
+    height: max-content;
+}
+
+.vert_moyen_bg{
+    background-color: var(--vert-moyen);
+    color: white;
+}
+
+.vert_clair_bg{
+    background-color: var(--vert-clair);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin: 12vh 0;
+    padding: 5vh 0;
+}
+
+.vert_clair_bg > div{
+    margin: 5vh 0;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon_right, .icon_left{
+    display: flex;
+    position: relative;
+    width: 75vw;
+    height: 15rem;
+    margin: 10px;
+    justify-content: center;
+}
+
+.home_text{
+    position: absolute;
+    width: 75vw;
+    justify-content: center;
+}
+
+
+.home_icon{
+    height: 140%;
+    margin-top: -10vh;
+    z-index: -1;
+}
+.icon_right .home_icon{
+    margin-left: auto;
+    margin-right: -10vh;
+}
+.icon_left .home_icon{
+    margin-right: auto;
+    margin-left: -10vh;
+}
+
+
+#tiny_lab_logo{
+    width: 45vh;
+}
+#la_planche_logo{
+    width: 50vw;
+}
