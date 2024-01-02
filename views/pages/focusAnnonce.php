@@ -33,7 +33,18 @@ if (!$annonceId) {
                 } ?>
 
             </p>
-        </form><?php
+        </form>
+        <?php
+        if(isset($_SESSION['username'])){
+            if($_SESSION['username'] == $annonce['username']){
+                ?>
+                <form method="post">
+                    <button type="submit" name="supprimerAnnonce">Supprimer mon annonce</button>
+                </form>
+                <?php
+            }
+        }
+        
         $comms = $annoncesManager->getCommentaires($annonceId);
         if (!empty($comms)) {
             echo "<p>Derniers commentaires:</p>";

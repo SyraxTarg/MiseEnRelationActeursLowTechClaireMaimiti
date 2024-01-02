@@ -49,7 +49,7 @@
 </table>
 
 <script>
-    $(document).ready(function() {
-        $('#annuaire').DataTable();
-    });
+    // $(document).ready(function() {
+    //     $('#annuaire').DataTable();
+    // });
 </script>

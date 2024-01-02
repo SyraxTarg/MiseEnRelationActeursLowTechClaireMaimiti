@@ -171,7 +171,6 @@ foreach ($annoncesNonPinned as $index => $annonceNonPinned) {
 
         ?>
     </div>
-    <br>
 <?php
 echo "<a href='index.php?page=mur&id=$annonceId'>Voir plus</a>";
 echo "</br>";

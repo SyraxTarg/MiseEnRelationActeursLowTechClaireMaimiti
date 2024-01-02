@@ -77,7 +77,7 @@ class annoncesManager extends AbstractManager {
     }
     
     function getSingleAnnonce($annonceId){
-        $sql = "SELECT Annonces.id, titre, description, username, date, nb_likes, image FROM " . annoncesManager::TABLE_NAME . " JOIN Users ON " . annoncesManager::TABLE_NAME . ".id_user = Users.id WHERE " . annoncesManager::TABLE_NAME . ".id=" . $annonceId . " ;";
+        $sql = "SELECT Annonces.id, titre, description, username, date, nb_likes, image  FROM " . annoncesManager::TABLE_NAME . " JOIN Users ON " . annoncesManager::TABLE_NAME . ".id_user = Users.id WHERE " . annoncesManager::TABLE_NAME . ".id=" . $annonceId . " ;";
         $query = $this->dbConnect()->query($sql);
         return $query->fetch(); // Utilisez fetch(PDO::FETCH_ASSOC) pour obtenir un tableau associatif
     }
@@ -155,7 +155,48 @@ class annoncesManager extends AbstractManager {
     }
 
 
+    function supprimerCommentaires($annonceId) {
+        try {
+            $sql = "DELETE FROM " . annoncesManager::TABLE_NAME . " WHERE id_annonce_mere = :annonceId";
+            $stmt = $this->dbConnect()->prepare($sql);
+            $stmt->bindParam(':annonceId', $annonceId, PDO::PARAM_INT);
+            $stmt->execute();
+            return true; 
+        } catch (PDOException $e) {
+            echo "Erreur : " . $e->getMessage();
+            return false; 
+        }
+    }
+    
+    
+    function supprimerAnnonce($annonceId, $typeAnnonce) {
+        try {
+            $sql1 = "DELETE FROM Recherche WHERE id_annonce = :annonceId1";
+            $stmt1 = $this->dbConnect()->prepare($sql1);
+            $stmt1->bindParam(':annonceId1', $annonceId, PDO::PARAM_INT);
+            $stmt1->execute();
 
+            $sql2 = "DELETE FROM Avancees WHERE id_annonce = :annonceId1";
+            $stmt2 = $this->dbConnect()->prepare($sql2);
+            $stmt2->bindParam(':annonceId1', $annonceId, PDO::PARAM_INT);
+            $stmt2->execute();
+
+            $sql3 = "DELETE FROM Dispos WHERE id_annonce = :annonceId1";
+            $stmt3 = $this->dbConnect()->prepare($sql3);
+            $stmt3->bindParam(':annonceId1', $annonceId, PDO::PARAM_INT);
+            $stmt3->execute();
+    
+            $sql4 = "DELETE FROM " . annoncesManager::TABLE_NAME . " WHERE id = :annonceId2";
+            $stmt4 = $this->dbConnect()->prepare($sql4);
+            $stmt4->bindParam(':annonceId2', $annonceId, PDO::PARAM_INT);
+            $stmt4->execute();
+    
+            return true; 
+        } catch (PDOException $e) {
+            echo "Erreur : " . $e->getMessage();
+            return false; 
+        }
+    }
     
     
 }

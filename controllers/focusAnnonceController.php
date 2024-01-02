@@ -39,6 +39,7 @@ $userId=$_SESSION['idUser'];
 $etatBoutonKey = 'etat_bouton_' . $annonceId . '_' . $userId;
 $etatBouton = isset($_SESSION[$etatBoutonKey]) ? $_SESSION[$etatBoutonKey] : 0;
 
+
 if (isset($_POST['posterComm'])) {
     $motsInterdits = [
         "trou du cul","sac à merde","sac à foutre","nique ta race","nique ta mère","ménage à trois","la putain de ta mère","grande folle","fils de pute","fille de pute","brouter le cresson","emmerdeuse","zizi","zigounette","turlute","troncher","trique","tringler","teuch","tanche","tapette","suce","salope","salaud","ramoner","pute","putain","pousse-crotte","pouffiasse","pisser","pipi","péter","pédé","pédale","palucher","negro","nègre","meuf","merdeux","merdeuse","MALPT","jouir","grogniasse","gouine","gerber","foutre","étron","enfoirée","enfoiré","enculeurs","enculeur","enculée","enculé","emmerdeur","emmerder","emmerdant","déconner","déconne","cul","cramouille","couilles","conne","connasse","connard","clitoris","clito","chiottes","chier","chiasse","caca","branleuse","branleur","branlette","branler","branlage","brackmard","bourrée","bourré","bordel","bloblos","bitte","bite","bigornette","merde"
@@ -70,4 +71,8 @@ if (isset($_POST['like'])) {
     }
 }
 
-
+if(isset($_POST['supprimerAnnonce'])) {
+    $annoncesManager->supprimerCommentaires($annonceId);
+    $annoncesManager->supprimerAnnonce($annonceId, $annoncesManager->getAnnonceType($annonceId, $avancees, $dispos, $recherches));
+    header('Location: index.php?page=mur');
+}
