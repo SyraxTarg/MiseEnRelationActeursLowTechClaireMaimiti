@@ -60,7 +60,7 @@ if (isset($_GET['action'])) {
                 break;
             case "ban":
                 $adminsManager->remove_user($user['id']);
-                header("Location: index.php?page=home&msg=SD");
+                header("Location: index.php?page=annuaire&msg=SD");
                 //SD : Successful Deletion
                 break;
             default:

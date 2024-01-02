@@ -1,4 +1,10 @@
 <h1>Annuaire public</h1>
+
+<?php
+if(isset($msg))
+    echo $msg;
+?>
+
 <form method="post" action="">
     <input type="hidden" name="triValue" value="<?php echo isset($triValue) ? $triValue : 'DESC'; ?>">
     <?php

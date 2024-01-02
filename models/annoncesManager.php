@@ -197,7 +197,14 @@ class annoncesManager extends AbstractManager {
             return false; 
         }
     }
-    
+
+    function changerUserAnnonces($idUser){
+        $sql = "UPDATE " . annoncesManager::TABLE_NAME . " SET id_user=5 WHERE id_user=:id_user;";
+        $query = $this->db->prepare($sql);
+        $query->execute([
+            ':id_user' => $idUser
+        ]);
+    }
     
 }
 
