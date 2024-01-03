@@ -130,7 +130,7 @@ td{
     font-size: 1.2rem;
 }
 
-#home h2, #home h3{
+#home h2, #home h3, .home_section_title{
     text-align: left;
     font-size: 2em;
     font-weight: 500;
