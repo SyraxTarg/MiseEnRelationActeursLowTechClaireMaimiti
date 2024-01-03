@@ -42,9 +42,26 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEn
     if (gettype($formValidity) == "string") {
         header("Location: index.php?page=modifierProfil&id=" . $_SESSION['idUser'] . "&msg=" . $formValidity);
     } else {
+        $photoPath = './public/images/defaultPfp.png';
+        if(isset($_FILES['photoProfil'])){
+            $tmpName = $_FILES['photoProfil']['tmp_name'];
+            $name = $_FILES['photoProfil']['name'];
+            $size = $_FILES['photoProfil']['size'];
+            $error = $_FILES['photoProfil']['error'];
+            $tabExtension = explode('.', $name);
+            $extension = strtolower(end($tabExtension));
+            $extensions = ['jpg', 'png', 'jpeg'];
+            $maxSize = 400000;
+            if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
+                $uniqueName = uniqid('', true);
+                $file = $uniqueName.".".$extension;
+                move_uploaded_file($tmpName, './upload/'.$file);
+                $photoPath = './upload/'.$file;
+            }
+        } 
         //maj le user
         $usersManager = new usersManager();
-        $usersManager->setUser($_SESSION['idUser'], $_POST['username'], $_POST['password'], $_POST['email'], './public/images/defaultPfp.png', $_POST['activites'], $_POST['bio']);
+        $usersManager->setUser($_SESSION['idUser'], $_POST['username'], $_POST['password'], $_POST['email'], $photoPath, $_POST['activites'], $_POST['bio']);
         $_SESSION['username'] = $_POST['username'];
         header("Location: index.php?page=profil&id=" . $_SESSION['idUser'] . "&msg=SM");
         //SI : Successful Modification

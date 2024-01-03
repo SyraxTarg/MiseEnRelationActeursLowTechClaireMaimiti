@@ -60,14 +60,17 @@ if(isset($msg))
             language: {
                 search: "Rechercher :",
                 show: "Montrer",
-                entries: "utilisateurs"
+                lengthMenu: 'Montrer <select>'+
+                            '<option value="10">10</option>'+
+                            '<option value="25">25</option>'+
+                            '<option value="50">50</option>'+
+                            '<option value="-1">Tous</option>'+
+                            '</select> utilisateurs'
             }
         });
     });
-
-    document.querySelector('#annuaire_length').querySelector('label').innerText='Monter';
-    
 </script>
+
 
 
 

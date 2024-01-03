@@ -9,7 +9,7 @@ if (isset($msg))
     echo $msg;
 ?>
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     <label for="username">Username </label>
     <input type="text" name="username" id="username" value="<?= $user['username'] ?>" required>
 
@@ -27,6 +27,8 @@ if (isset($msg))
 
     <label for="activites">Activités </label>
     <input type="text" name="activites" id="activites" value="<?= $user['activites'] ?>">
+    <label for="file">Modifier la photo de profil</label>
+    <input type="file" name ="photoProfil" id = "photoProfil">
 
     <input type="submit" value="Enregistrer">
 </form>
