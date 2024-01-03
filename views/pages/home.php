@@ -5,9 +5,10 @@
         <div class="icon_right">
             <div class="home_text">
                 <h2 class="home_section_title">Le projet</h2>
-                <p class="home_description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis perspiciatis delectus, dignissimos quo, voluptas alias enim voluptatum, reiciendis optio nulla soluta ullam sunt debitis. Quis, laboriosam asperiores. Assumenda, commodi vero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, fugiat veniam. Vitae architecto necessitatibus non repellat aspernatur aliquam, repudiandae possimus qui dolorem? Soluta quaerat deserunt labore eaque ipsa esse laboriosam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus aliquid debitis repudiandae libero, eligendi quibusdam? Eius omnis est delectus ut, quo dignissimos provident quisquam non sint. Odio vero doloribus consequuntur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, tempora dolor minus dignissimos soluta mollitia nemo quis, voluptate vero aliquam voluptatibus corporis tenetur consequatur dolorum voluptatem ullam, dolores quod in.</p>
+                <p class="home_description">Low Tech Lab Bordeaux va, au cours des deux prochaines années, entreprendre un projet de construction de Tiny House équipées de Low-Techs, tels qu’un poêle de masse, un garde manger, marmite norvégienne ou une jardinière autonome.</p>
+                <p class="home_description">Ce projet fera collaborer différentes associations, et la tiny sera exposée sur les quais de la Garonne à Bordeaux.</p>
             </div>
-            <img class="home_icon" src=".\public\images\elements\elements3_hammer.png" alt="Icone marteau">
+            <img class="home_icon" id="home_icon_hammer" src=".\public\images\elements\elements3_hammer.png" alt="Icone marteau">
         </div>
     </section>
 
@@ -15,19 +16,28 @@
         <div class="icon_left">
             <div class="home_text">
                 <h2 class="home_section_title">Les objectifs</h2>
-                <p class="home_description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis perspiciatis delectus, dignissimos quo, voluptas alias enim voluptatum, reiciendis optio nulla soluta ullam sunt debitis. Quis, laboriosam asperiores. Assumenda, commodi vero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, fugiat veniam. Vitae architecto necessitatibus non repellat aspernatur aliquam, repudiandae possimus qui dolorem? Soluta quaerat deserunt labore eaque ipsa esse laboriosam? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex unde, minima beatae corporis, cum libero magnam natus doloribus quod placeat non sunt? Ad dignissimos porro nemo repellendus, expedita modi ducimus! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi sequi minus hic praesentium quaerat dolore totam debitis explicabo suscipit? Neque fuga perspiciatis ducimus repellendus doloribus aliquid cumque, laborum tempora voluptas.</p>
+                <ul class="home_description">
+                    <li>Sensibiliser le grand public autour des enjeux écologiques, l'éco-construction, de la low tech et du réemploi.</li>
+                    <li>Proposer des chantiers participatifs où chacun peut venir contribuer ou apprendre à bricoler </li>
+                    <li>Produire une documentation, éventuellement sous forme d'un livre blanc open source pour attester du retour d'expérience et des performances du démonstrateur</li>
+                    <li>Experimentation d'une plateforme de mise en relation entre les différents acteurs, mécènes et bénévoles</li>
+                </ul>
+                <p class="home_description">En créant un maillage des acteurs Low Tech sur le territoire, l’association veut devenir la vitrine du réseau Low Tech de la région, développer des partenariats avec les autres acteurs et créer une dynamique sur le territoire de la Nouvelle-Aquitaine.</p>
             </div>
             <img class="home_icon" src=".\public\images\elements\elements5_recycle.png" alt="Icone tri selectif">
         </div>
     </section>
 
-    <section id="acteurs">
-        <div>
-            <div class="section_with_icon">
+    <section id="actors">
+        <div class="section_with_icon">
                 <div class="icon_right">
                     <div class="home_text">
                         <h2 class="home_section_title">Les acteurs</h2>
-                        <p class="home_description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis perspiciatis delectus, dignissimos quo, voluptas alias enim voluptatum, reiciendis optio nulla soluta ullam sunt debitis. Quis, laboriosam asperiores. Assumenda, commodi vero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, fugiat veniam. Vitae architecto necessitatibus non repellat aspernatur aliquam, repudiandae possimus qui dolorem? Soluta quaerat deserunt labore eaque ipsa esse laboriosam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga vitae dolorum nesciunt. Sunt amet dolorem, magnam odit repellendus quasi, doloribus dolores perferendis fugit itaque consequuntur nam consequatur pariatur sequi sed? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis temporibus ea sed, a praesentium autem architecto natus quidem aliquam fugit laudantium quisquam aut sapiente ipsam non similique ab eius. Ab!</p>
+                        <p class="home_description"><i>Low Tech Lab Bordeaux (LTLB)</i> est une association de Loi 1901 qui croit au pouvoir de l'innovation utile, accessible et durable pour répondre aux enjeux écologiques d'aujourd'hui et de demain.</p>
+                        <p class="home_description">Les basses technologies offrent à chacun et partout, les moyens de répondre à ses besoins dans le respect des Humains et de la Planète.</p>
+                        <p class="home_description"><i>Ses valeurs : Accessibilité, partage, sobriété, résilience, collaboration, autonomie, réemploi</i></p>
+                        <br>
+                        <p class="home_description">Ce projet est une collaboration avec deux autres structures, Tiny Lab et La Planche.</p>
                     </div>
                     <img class="home_icon" src=".\public\images\elements\elements6_earth.png" alt="Icone Terre">
                 </div>
@@ -36,22 +46,24 @@
             <div class="vert_clair_bg">
                 <div>
                     <img class="actor_logo" id="tiny_lab_logo" src=".\public\images\tiny_lab_logo.png" alt="Logo de Tiny Lab">
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis perspiciatis delectus, dignissimos quo, voluptas alias enim voluptatum, reiciendis optio nulla soluta ullam sunt debitis. Quis, laboriosam asperiores. Assumenda, commodi vero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, fugiat veniam. Vitae architecto necessitatibus non repellat aspernatur aliquam, repudiandae possimus qui dolorem? Soluta quaerat deserunt labore eaque ipsa esse laboriosam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit officiis ut quaerat incidunt magnam perspiciatis labore similique, rerum id dignissimos fugit omnis, at voluptate repellendus odio earum, illum fugiat maiores?</p>
+                    <p class="actors_description">Association créée par des professionnels de l'éco-construction, dont les activités se concentrent autour de la construction inclusive de tiny houses et habitats légers autonomes.</p>
                 </div>
 
                 <div>
                     <img class="actor_logo" id="la_planche_logo" src=".\public\images\la_planche_logo.png" alt="Logo de La Planche">
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis perspiciatis delectus, dignissimos quo, voluptas alias enim voluptatum, reiciendis optio nulla soluta ullam sunt debitis. Quis, laboriosam asperiores. Assumenda, commodi vero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, fugiat veniam. Vitae architecto necessitatibus non repellat aspernatur aliquam, repudiandae possimus qui dolorem? Soluta quaerat deserunt labore eaque ipsa esse laboriosam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque cumque tempora facilis optio doloribus explicabo rem nulla? Eum consectetur molestias recusandae quas, error, sapiente ut, eos beatae nemo assumenda consequatur.</p>
+                    <p class="actors_description">Atelier partagé situé dans le quartier Saint-Michel à Bordeaux entièrement dédié au matériau bois, dans lequel artisans·anes, concepteurs·trices et grand public viennent mutualiser des outils de travail, apprendre, fabriquer et partager leurs savoir-faire.</p>
                 </div>
             </div>
         </div>
     </section>
 
+
     <section id="enjeux">
         <div class="vert_moyen_bg">
-            <h2 class="home_section_title">Les enjeux</h2>
-            <h3>Titre 3 exemple : </h3>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis perspiciatis delectus, dignissimos quo, voluptas alias enim voluptatum, reiciendis optio nulla soluta ullam sunt debitis. Quis, laboriosam asperiores. Assumenda, commodi vero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, fugiat veniam. Vitae architecto necessitatibus non repellat aspernatur aliquam, repudiandae possimus qui dolorem? Soluta quaerat deserunt labore eaque ipsa esse laboriosam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, natus culpa. Odio repudiandae eos nam aliquid omnis ea totam quod, sunt suscipit, assumenda velit rem nobis id. Molestiae, nulla illo!</p>
+            <div>
+                <h2 class="home_section_title">Une maison totalement écologique et low-tech</h2>
+                <iframe class="ytb_player" src="https://www.youtube.com/embed/l8X9jxeYYmw"></iframe>
+            </div>
         </div>
     </section>
 </div>
