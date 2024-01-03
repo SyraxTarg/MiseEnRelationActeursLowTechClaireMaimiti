@@ -1,278 +1,295 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Nanum+Myeongjo&family=Permanent+Marker&family=Young+Serif&display=swap');
-
-/* @font-face {
-    font-family: 'GothamMediumItalic';
-    src: url('./public/fonts/Gotham-MediumItalic.otf') format('opentype');
-    font-weight: normal;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'GothamThin';
-    src: url('./public/fonts/Gotham-Thin.otf') format('opentype');
-    font-weight: thin;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'GothamThinItalic';
-    src: url('./public/fonts/Gotham-ThinItalic.otf') format('opentype');
-    font-weight: thin;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'GothamUltra';
-    src: url('./public/fonts/Gotham-Ultra.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'GothamUltraItalic';
-    src: url('./public/fonts/Gotham-UltraItalic.otf') format('opentype');
-    font-weight: normal;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'GothamXLight';
-    src: url('./public/fonts/Gotham-XLight.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'GothamXLightItalic';
-    src: url('./public/fonts/Gotham-XLightItalic.otf') format('opentype');
-    font-weight: normal;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'GothamXLightItalic';
-    src: url('./public/fonts/Gotham-XLightItalic.otf') format('opentype');
-    font-weight: normal;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'MontserratBold';
-    src: url('./public/fonts/Montserrat-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'MontserratRegular';
-    src: url('./public/fonts/Montserrat-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-} */
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Nanum+Myeongjo&family=Permanent+Marker&family=Young+Serif&display=swap");
 
 :root {
-  --vert-fonce: #1A4749;
-  --vert-moyen: #3D8477;
-  --vert-logo: #07A19A;
-  --vert-eau: #54C3BA;
-  --vert-clair: #CBE3C0;
-  --bleu-marine: #0F3F6C;
-  --violet-fonce: #31356E;
-  --parme: #9B91C3;
-  --jaune-fonce: #FCDB1B;
-  --jaune-logo: #FEDF26;
+  --vert-fonce: #1a4749;
+  --vert-moyen: #3d8477;
+  --vert-logo: #07a19a;
+  --vert-eau: #54c3ba;
+  --vert-clair: #cbe3c0;
+  --bleu-marine: #0f3f6c;
+  --violet-fonce: #31356e;
+  --parme: #9b91c3;
+  --jaune-fonce: #fcdb1b;
+  --jaune-logo: #fedf26;
 }
 
-
-table{
-    border: 1px black solid;
+table {
+  border: 1px black solid;
 }
 
-td{
-    border: 1px black solid; 
+td {
+  border: 1px black solid;
 }
 
-
-.pfp{
-    height: 100px;
-    width: 100px;
+.pfp {
+  height: 100px;
+  width: 100px;
 }
 
-.annonce{
-    border: 1px solid black;
+.annonce {
+  border: 1px solid black;
 }
 
-.commentaires{
-    border: 1px solid black;
- 
+.commentaires {
+  border: 1px solid black;
 }
 
-.annonceType{
-    background-color: aliceblue;
-}
-  
-
-.smallPfp{
-    width: 5%;
-    height: 5%;
+.annonceType {
+  background-color: aliceblue;
 }
 
+.smallPfp {
+  width: 5%;
+  height: 5%;
+}
 
+.link_action {
+  text-decoration: none;
+  color: var(--vert-moyen);
+  transition: 0.5s;
+}
+.link_action:hover {
+  color: var(--vert-logo);
+}
+
+.user_dangerous_button {
+  text-decoration: none;
+  color: red;
+}
 
 /* ---------------------------------- HOME ---------------------------------- */
-#home{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: left;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.2rem;
+#home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
 }
 
-#home h2, #home h3, .home_section_title{
-    text-align: left;
-    font-size: 2em;
-    font-weight: 500;
-    font-family: 'Permanent Marker', cursive;
+#home h2,
+#home h3,
+.home_section_title {
+  text-align: left;
+  font-size: 2em;
+  font-weight: 500;
+  font-family: "Permanent Marker", cursive;
 }
-#home h3{
-    margin: 2vh 0 4vh 5vw;
-    font-size: 1.5em;
-    margin-left: 7vw;
-}
-
-.home_text{
-    position: absolute;
-    width: 75vw;
-    justify-content: center;
+#home h3 {
+  margin: 2vh 0 4vh 5vw;
+  font-size: 1.5em;
+  margin-left: 7vw;
 }
 
-.home_description{
-    margin: 3vh 0;
+.home_text {
+  position: absolute;
+  width: 75vw;
+  justify-content: center;
 }
 
-.home_main_img{
-    width: 50vw;
-    margin: 5vh 0 8vh 0;
-    border-radius: 2.5vw;
+.home_description {
+  margin: 3vh 0;
 }
 
-section{
-    width: 100%;
+.home_main_img {
+  width: 50vw;
+  margin: 5vh 0 8vh 0;
+  border-radius: 2.5vw;
 }
 
-.row_align{
-    display: flex;
-    flex-direction: row;
-}
-.column_align{
-    display: flex;
-    flex-direction: column;
+section {
+  width: 100%;
 }
 
+.row_align {
+  display: flex;
+  flex-direction: row;
+}
+.row_align * {
+  margin: 0.25vw;
+}
+.column_align {
+  display: flex;
+  flex-direction: column;
+}
 
 /* 3 PREMIERES SECTIONS */
 
-.section_with_icon{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 2vw;
-    height: max-content;
+.section_with_icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2vw;
+  height: max-content;
 }
 
-.section_with_icon .home_section_title{
-    margin: 2vh 0 4vh 5vw;
+.section_with_icon .home_section_title {
+  margin: 2vh 0 4vh 5vw;
 }
 
-.icon_right, .icon_left{
-    display: flex;
-    position: relative;
-    width: 95vw;
-    height: 20vw;
-    margin: 2vh;
-    justify-content: center;
+.icon_right,
+.icon_left {
+  display: flex;
+  position: relative;
+  width: 95vw;
+  height: 20vw;
+  margin: 2vh;
+  justify-content: center;
 }
 
-.home_icon{
-    height: 140%;
-    margin-top: -10vh;
-    z-index: -1;
+.home_icon {
+  height: 140%;
+  margin-top: -10vh;
+  z-index: -1;
 }
-.icon_right .home_icon{
-    margin-left: auto;
+.icon_right .home_icon {
+  margin-left: auto;
 }
-.icon_left .home_icon{
-    margin-right: auto;
-}
-
-#home_icon_hammer{
-    transform: rotate(90deg);
+.icon_left .home_icon {
+  margin-right: auto;
 }
 
+#home_icon_hammer {
+  transform: rotate(90deg);
+}
 
 /* AUTRES SECTIONS */
 
-.vert_clair_bg{
-    background-color: var(--vert-clair);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.vert_clair_bg {
+  background-color: var(--vert-clair);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-    margin: 8vh 0;
-    padding: 0 0 5vh 0;
-}
-
-.vert_clair_bg > div{
-    margin: 5vh 0;
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  margin: 8vh 0;
+  padding: 0 0 5vh 0;
 }
 
-.actor_logo{
-    margin: 1vh 0;
-}
-#tiny_lab_logo{
-    width: 45vh;
-}
-#la_planche_logo{
-    width: 50vw;
-}
-
-#low_tech_logo{
-    width: 15vw;
+.vert_clair_bg > div {
+  margin: 5vh 0;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.actors_description{
-    text-align: center;
+.actor_logo {
+  margin: 1vh 0;
+}
+#tiny_lab_logo {
+  width: 45vh;
+}
+#la_planche_logo {
+  width: 50vw;
 }
 
-.vert_moyen_bg{
-    background-color: var(--vert-moyen);
-    color: white;
-    padding: 4vh 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#low_tech_logo {
+  width: 15vw;
 }
 
-.vert_moyen_bg > div{
-    width: 75vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.actors_description {
+  text-align: center;
 }
 
-.vert_moyen_bg .home_section_title{
-    margin: 2vh 0 4vh 0;
+.vert_moyen_bg {
+  background-color: var(--vert-moyen);
+  color: white;
+  padding: 4vh 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.ytb_player{
-    width: 60vw;
-    height: 34vw;
+.vert_moyen_bg > div {
+  width: 75vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.vert_moyen_bg .home_section_title {
+  margin: 2vh 0 4vh 0;
+}
+
+.ytb_player {
+  width: 60vw;
+  height: 34vw;
+}
+
+/* ---------------------------------- USER FORMS (CONNEXION, INSCRIPTION & MODIF PROFIL) ---------------------------------- */
+
+.user {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user h1 {
+  margin: 4vh 0;
+}
+.user p {
+  margin: 0 0 2vh 0;
+}
+
+.user_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 75vw;
+}
+
+.user_form_group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  margin: 2vh 0;
+}
+.user_form_group label {
+  width: 30vw;
+  padding: 0 2vw;
+
+  text-align: right;
+}
+.user_form_group input,
+.user_form_group textarea {
+  width: 40vw;
+  height: 5vh;
+
+  font-family: "Montserrat", sans-serif;
+}
+.user_form_group textarea {
+  height: 15vh;
+  padding: 0.75vw;
+}
+
+.user_submit_button {
+  width: 15vw;
+  height: 5vh;
+  border: none;
+  border-radius: 0.5vw;
+  cursor: pointer;
+
+  background-color: var(--bleu-marine);
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1em;
+}
+
+#user_add_pfp::file-selector-button {
+  width: 10vw;
+  height: 5vh;
+  border: none;
+  border-radius: 0.5vw;
+  cursor: pointer;
+
+  background-color: var(--bleu-marine);
+  color: white;
+  font-family: "Montserrat", sans-serif;
 }
