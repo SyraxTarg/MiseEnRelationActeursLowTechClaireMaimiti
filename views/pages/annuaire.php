@@ -5,7 +5,7 @@ if(isset($msg))
     echo $msg;
 ?>
 
-<form method="post" action="">
+<!-- <form method="post" action="">
     <input type="hidden" name="triValue" value="<?php echo isset($triValue) ? $triValue : 'DESC'; ?>">
     <?php
         if(isset($_POST['triValue']) && $_POST['triValue'] == "DESC") {
@@ -19,14 +19,14 @@ if(isset($msg))
 <form action="" method="post">
     <input type="text" name="recherche" id="recherche">
     <input type="submit" value="rechercher" name='rechercher'>
-</form>
+</form> -->
 
 <table id="annuaire">
     <thead>
         <tr>
-            <th>Nom</th>
-            <th>Activités</th>
-            <th>Contact</th>
+            <th>Nom  <i class="fas fa-sort"></i></th>
+            <th>Activités et compétences  <i class="fas fa-sort"></i></th>
+            <th>Contact  <i class="fas fa-sort"></i></th>
         </tr>
     </thead>
     
@@ -55,7 +55,29 @@ if(isset($msg))
 </table>
 
 <script>
-    // $(document).ready(function() {
-    //     $('#annuaire').DataTable();
-    // });
+    $(document).ready(function() {
+        $('#annuaire').DataTable({
+            language: {
+                search: "Rechercher :",
+                show: "Montrer",
+                entries: "utilisateurs"
+            }
+        });
+    });
+
+    document.querySelector('#annuaire_length').querySelector('label').innerText='Monter';
+    
 </script>
+
+
+
+<style>
+    th{
+        border: 1px black solid;
+        padding: 2vw;
+        width: 20vw;
+        background-color: #9B91C3;
+    }
+
+    
+</style>
