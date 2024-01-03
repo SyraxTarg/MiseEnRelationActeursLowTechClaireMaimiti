@@ -1,8 +1,8 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 
-if(isset($_SESSION['privileges'])){
-    if($_SESSION['privileges'] != 'admin'){
+// if(isset($_SESSION['privileges'])){
+//     if($_SESSION['privileges'] != 'admin'){
         $template = './views/pages/focusAnnonce.php';
 
 require_once('models/annoncesManager.php');
@@ -35,9 +35,12 @@ $recherches = $rechercheManager->getRecherche();
 
 $annonceId = isset($_GET['id']) ? $_GET['id'] : null;
 $annonce = $annoncesManager->getSingleAnnonce($annonceId);
-$userId=$_SESSION['idUser'];
-$etatBoutonKey = 'etat_bouton_' . $annonceId . '_' . $userId;
-$etatBouton = isset($_SESSION[$etatBoutonKey]) ? $_SESSION[$etatBoutonKey] : 0;
+if(isset($_SESSION['idUser'])){
+    $userId=$_SESSION['idUser'];
+    $etatBoutonKey = 'etat_bouton_' . $annonceId . '_' . $userId;
+    $etatBouton = isset($_SESSION[$etatBoutonKey]) ? $_SESSION[$etatBoutonKey] : 0;
+}
+
 
 
 if (isset($_POST['posterComm'])) {
@@ -68,8 +71,8 @@ if (isset($_POST['like'])) {
     $_SESSION[$etatBoutonKey] = $etatBouton;
 }
 
-    }
-}
+    // }
+// }
 
 if(isset($_POST['supprimerAnnonce'])) {
     $annoncesManager->supprimerCommentaires($annonceId);

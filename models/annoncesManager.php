@@ -77,7 +77,7 @@ class annoncesManager extends AbstractManager {
     }
     
     function getSingleAnnonce($annonceId){
-        $sql = "SELECT Annonces.id, titre, description, username, profile_picture date, nb_likes, image  FROM " . annoncesManager::TABLE_NAME . " JOIN Users ON " . annoncesManager::TABLE_NAME . ".id_user = Users.id WHERE " . annoncesManager::TABLE_NAME . ".id=" . $annonceId . " ;";
+        $sql = "SELECT Annonces.id, titre, description, username, profile_picture, date, nb_likes, image  FROM " . annoncesManager::TABLE_NAME . " JOIN Users ON " . annoncesManager::TABLE_NAME . ".id_user = Users.id WHERE " . annoncesManager::TABLE_NAME . ".id=" . $annonceId . " ;";
         $query = $this->dbConnect()->query($sql);
         return $query->fetch(); 
     }
