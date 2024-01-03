@@ -106,6 +106,7 @@
         position: sticky;
         top: 0px;
         margin-bottom: 2vw;
+        z-index: 2;
     }
 
     nav ul{

@@ -35,6 +35,8 @@ if ($user['id'] == 5 && $user['username'] == "utilisateur introuvable") {
     }
     ?>
 
+    <p><?= $user['bio'] ?></p>
+
     <p>Contact :
         <?= $user['email'] ?>
     </p>

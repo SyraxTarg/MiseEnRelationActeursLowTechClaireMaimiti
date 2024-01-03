@@ -37,14 +37,14 @@ $user = $usersManager->getUserWithId($_SESSION['idUser']);
 $template = './views/pages/modifierProfil.php';
 
 
-if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEnterPassword']) && isset($_POST['email']) && isset($_POST['activites'])) {
+if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEnterPassword']) && isset($_POST['email']) && isset($_POST['activites']) && isset($_POST['bio'])) {
     $formValidity = checkFormValidity($_POST['username'], $_POST['password'], $_POST['reEnterPassword'], $_POST['email']);
     if (gettype($formValidity) == "string") {
         header("Location: index.php?page=modifierProfil&id=" . $_SESSION['idUser'] . "&msg=" . $formValidity);
     } else {
         //maj le user
         $usersManager = new usersManager();
-        $usersManager->setUser($_SESSION['idUser'], $_POST['username'], $_POST['password'], $_POST['email'], './public/images/defaultPfp.png', $_POST['activites']);
+        $usersManager->setUser($_SESSION['idUser'], $_POST['username'], $_POST['password'], $_POST['email'], './public/images/defaultPfp.png', $_POST['activites'], $_POST['bio']);
         $_SESSION['username'] = $_POST['username'];
         header("Location: index.php?page=profil&id=" . $_SESSION['idUser'] . "&msg=SM");
         //SI : Successful Modification
