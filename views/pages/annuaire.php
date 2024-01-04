@@ -41,7 +41,32 @@ if(isset($msg))
                 echo "<td>" . $particulier['email'] . "</td>";
                 echo "</tr>";
             }
-        } ?>
+        } 
+        if(isset($_SESSION['privileges'])){
+            if($_SESSION['privileges'] == "admin"){
+                foreach ($modos as $modo) {
+                    if ($modo['username'] != 'utilisateur introuvable') {
+                        echo "<tr>";
+                        echo "<td class='nomImage'><a href='index.php?page=profil&id=".$modo['id_user']."'>";
+                        $image = "./public/images/defaultPfp.png";
+                        if ($modo['profile_picture'] == null) {
+                            echo "<img src =" . $image . " alt='default pfp' class='pfpAnnuaire'/>";
+                        } else {
+                            echo "<img src ='" . $modo['profile_picture'] . "' alt='pfp' class='pfpAnnuaire'/>";
+                        }
+                        echo $modo['username']."</a></td>";
+                        $activites = explode(';', $modo['activites']);
+                        echo "<td>";
+                        foreach ($activites as $activite) {
+                            echo $activite . "<br>";
+                        }
+                        echo "</td>";
+                        echo "<td>" . $modo['email'] . "</td>";
+                        echo "</tr>";
+                    }
+                } 
+            }
+        }?>
     </table>
     <img class="annuaireIconMap" src="./public/images/elements/elements2_map2.png" alt="map">
 </div>

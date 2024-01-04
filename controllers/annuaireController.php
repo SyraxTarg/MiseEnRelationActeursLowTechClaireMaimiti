@@ -3,9 +3,13 @@
 $template = './views/pages/annuaire.php';
 
 require_once('models/particuliersManager.php');
+require_once('models/modérateursManager.php');
 
 $particuliersManager= new particuliersManager();
 $particuliersManager->dbConnect();
+
+$modérateursManager = new modérateursManager();
+$modérateursManager->dbConnect();
 
 if (isset($_GET['msg'])) {
     switch ($_GET['msg']) {
@@ -18,3 +22,4 @@ if (isset($_GET['msg'])) {
 
 
 $particuliers = $particuliersManager->getParticuliers("DESC");
+$modos = $modérateursManager->getModérateurs();

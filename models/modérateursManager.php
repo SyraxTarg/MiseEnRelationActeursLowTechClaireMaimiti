@@ -7,7 +7,7 @@ class modérateursManager extends AbstractManager {
     const TABLE_NAME="mod‚rateurs";
 
     function getModérateurs(){
-        $sql = "SELECT id, username, password, email , activites  FROM ".modérateursManager::TABLE_NAME." JOIN Users ON ".modérateursManager::TABLE_NAME.".id_user = Users.id;";
+        $sql = "SELECT DISTINCT id_user, username, password, email , activites, profile_picture  FROM ".modérateursManager::TABLE_NAME." JOIN Users ON ".modérateursManager::TABLE_NAME.".id_user = Users.id;";
         $query = $this->dbConnect()->query($sql);
         return $query->fetchAll();
     }
