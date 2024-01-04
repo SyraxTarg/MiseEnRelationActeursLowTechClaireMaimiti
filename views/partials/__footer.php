@@ -66,6 +66,8 @@
         margin-top: 5%;
         padding-bottom: 2vw;
         bottom: 0;
+        font-family: "Montserrat", sans-serif;
+        
     }
 
     #liensReseaux{
@@ -91,7 +93,5 @@
         display: flex;
         gap: 3%;
     }
-
-
 
 </style>

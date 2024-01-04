@@ -79,7 +79,7 @@
         justify-content: space-around;
         background-color: #0F3F6C;
         color: white;
-        /* font-family:Mont */
+        font-family: "Montserrat", sans-serif;
         position: sticky;
         list-style-type: none;
     }
