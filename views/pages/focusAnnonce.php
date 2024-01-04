@@ -65,7 +65,7 @@ if (!$annonceId) {
                 if($_SESSION['username'] == $annonce['username']){
                     ?>
                     <form method="post" name="supprimer">
-                        <button type="submit" class="supprimerAnnonce">Supprimer mon annonce</button>
+                        <button type="submit" name="supprimerAnnonce" class="supprimerAnnonce">Supprimer mon annonce</button>
                     </form>
                     <?php
                 }
