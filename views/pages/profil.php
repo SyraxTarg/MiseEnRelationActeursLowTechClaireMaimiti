@@ -2,7 +2,7 @@
     <?php
 
     if ($user['id'] == 5 && $user['username'] == "utilisateur introuvable") { ?>
-        <h1>Cet utilisateur n'existe pas.</h1>
+        <h1 class="user_infos">Cet utilisateur n'existe pas.</h1>
         <?php
     } else {
         if (isset($msg))

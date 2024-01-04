@@ -43,16 +43,22 @@ class adminsManager extends AbstractManager {
     }
 
     function give_modo_rights($id){
+        $sql = "DELETE FROM Particuliers WHERE id_user=".$id.";";
+        $query = $this->db->query($sql);
         $sql = "INSERT INTO Mod‚rateurs(id_user) VALUES(".$id.");";
         $query = $this->db->query($sql);
     }
 
     function remove_modo_rights($id){
-        $sql = "DELETE FROM Mod‚rateurs WHERE id_user=". $id . ";";
+        $sql = "DELETE FROM Mod‚rateurs WHERE id_user=".$id.";";
+        $query = $this->db->query($sql);
+        $sql = "INSERT INTO Particuliers(id_user) VALUES(".$id.");";
         $query = $this->db->query($sql);
     }
 
     function give_admin_rights($id){
+        $sql = "DELETE FROM Mod‚rateurs WHERE id_user=".$id.";";
+        $query = $this->db->query($sql);
         $sql = "INSERT INTO Admins(id_user) VALUES(".$id.");";
         $query = $this->db->query($sql);
     }
