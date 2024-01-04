@@ -57,6 +57,18 @@ td {
   color: red;
 }
 
+.row_align {
+  display: flex;
+  flex-direction: row;
+}
+.row_align * {
+  margin: 0.25vw;
+}
+.column_align {
+  display: flex;
+  flex-direction: column;
+}
+
 /* ---------------------------------- HOME ---------------------------------- */
 #home {
   display: flex;
@@ -99,18 +111,6 @@ td {
 
 section {
   width: 100%;
-}
-
-.row_align {
-  display: flex;
-  flex-direction: row;
-}
-.row_align * {
-  margin: 0.25vw;
-}
-.column_align {
-  display: flex;
-  flex-direction: column;
 }
 
 /* 3 PREMIERES SECTIONS */

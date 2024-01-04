@@ -8,14 +8,14 @@ class usersManager extends AbstractManager {
     const TABLE_NAME="Users";
 
     function getUsers(){
-        $sql = "SELECT id, username, password, email, activites FROM ".usersManager::TABLE_NAME.";";
+        $sql = "SELECT id, username, password, email, profile_picture, bio, activites FROM ".usersManager::TABLE_NAME.";";
         $query = $this->db->query($sql);
         return $query->fetchAll();
     }
 
     function getCurrentUser(){
         if(!empty($_SESSION)){
-            $sql = "SELECT id, username, password, email, activites FROM ".usersManager::TABLE_NAME." WHERE id=(:id);";
+            $sql = "SELECT id, username, password, email, profile_picture, bio, activites FROM ".usersManager::TABLE_NAME." WHERE id=(:id);";
             $query = $this->db->prepare($sql);
             $query->execute([
                 ':id' => $_SESSION['idUser']
@@ -24,9 +24,9 @@ class usersManager extends AbstractManager {
         }
     }
 
-    function getUserWithId(string $id){
+    function getUniqueUser(string $id){
         if($id){
-            $sql = "SELECT id, username, password, email, activites, bio FROM ".usersManager::TABLE_NAME." WHERE id=(:id);";
+            $sql = "SELECT id, username, password, email, profile_picture, activites, bio FROM ".usersManager::TABLE_NAME." WHERE id=(:id);";
             $query = $this->db->prepare($sql);
             $query->execute([
                 ':id' => $id
@@ -35,7 +35,7 @@ class usersManager extends AbstractManager {
         }
     }
 
-    function getUniqueUser(string $email, $password){
+    function getUniqueUserInfo(string $email, $password){
         if($password){
             $sql = "SELECT id, username, password, email FROM " . usersManager::TABLE_NAME . " WHERE email=(:email) AND password= (:password);";
         }

@@ -33,7 +33,7 @@ if(isset($_GET['action']) && $_GET['action'] == "delete"){
 }
 
 $usersManager = new usersManager();
-$user = $usersManager->getUserWithId($_SESSION['idUser']);
+$user = $usersManager->getUniqueUser($_SESSION['idUser']);
 $template = './views/pages/modifierProfil.php';
 
 
@@ -42,7 +42,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEn
     if (gettype($formValidity) == "string") {
         header("Location: index.php?page=modifierProfil&id=" . $_SESSION['idUser'] . "&msg=" . $formValidity);
     } else {
-        $photoPath = './public/images/defaultPfp.png';
+        $photoPath = $user['profile_picture'];
         if(isset($_FILES['photoProfil'])){
             $tmpName = $_FILES['photoProfil']['tmp_name'];
             $name = $_FILES['photoProfil']['name'];
@@ -105,7 +105,7 @@ function checkFormValidity($username, $password, $reEnterPassword, $email)
 
     //check email uniqueness
     $usersManager = new usersManager();
-    $user = $usersManager->getUniqueUser($_POST['email'], null);
+    $user = $usersManager->getUniqueUserInfo($_POST['email'], null);
 
     if ($user && $user['id'] != $_SESSION['idUser']) {
         return "EU";

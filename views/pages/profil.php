@@ -1,74 +1,171 @@
-<?php
-
-if ($user['id'] == 5 && $user['username'] == "utilisateur introuvable") {
-    echo "<h1>Cet utilisateur n'existe pas.</h1>";
-} else {
-    ?>
-    <h1>Profil de
-        <?= $user['username'] ?>
-    </h1>
-
+<div id="profil" class="column_align">
     <?php
-    if (isset($msg))
-        echo $msg;
-    ?>
 
-    <?php
-    if ($currentUser) { ?>
-        <a href='index.php?page=deconnexion'>Me déconnecter</a>
-        <a href='index.php?page=modifierProfil'>Modifier mon profil</a>
+    if ($user['id'] == 5 && $user['username'] == "utilisateur introuvable") { ?>
+        <h1>Cet utilisateur n'existe pas.</h1>
         <?php
     } else {
-        if ($_SESSION['privileges'] == "admin") {
-            if ($userPrivileges != "admin") { ?>
-                <a href="#"
-                    onclick="confirmDelete(<?= $user['id'] ?>, 'Êtes-vous sûr de vouloir bannir cet utilisateur ? Il ne sera pas prévenu.', 'ban')">Ban</a>
-            <?php }
-            if ($userPrivileges == "particulier") { ?>
-                <a href="index.php?page=profil&id=<?= $user['id'] ?>&action=grantModo">Nommer modérateur</a>
-            <?php } elseif ($userPrivileges == "modo") { ?>
-                <a href="#"
-                    onclick="confirmDelete(<?= $user['id'] ?>, 'Êtes-vous sûr de vouloir nommer cet utilisateur administrateur ? Cette action est irréversible.', 'grantAdmin')">Nommer administrateur</a>
-                <a href="index.php?page=profil&id=<?= $user['id'] ?>&action=removeModo">Supprimer les privilèges de modérateur</a>
-            <?php }
-        }
-    }
-    ?>
+        if (isset($msg))
+            echo $msg;
+        ?>
 
-    <p><?= $user['bio'] ?></p>
+        <section>
+            <div class="row_align user_infos">
+                <img class="profil_pfp" src="<?= $user['profile_picture'] ?>" alt="pfp">
 
-    <p>Contact :
-        <?= $user['email'] ?>
-    </p>
+                <div class="column_align">
+                    <h1 class="user_info">
+                        <?= $user['username'] ?>
+                    </h1>
+                    <p class="user_info">
+                        <?= $user['bio'] ?>
+                    </p>
 
-    <?php
-    if ($user['activites']) {
-        echo "<p>Activités : " . $user['activites'] . "</p>";
-    }
-    ?>
+                    <p class="user_info">Contact :
+                        <a class="link_action" href="mailto:<?= $user['email'] ?>">
+                            <?= $user['email'] ?>
+                        </a>
+                    </p>
 
-    <!-- afficher les annonces (sans les commentaires) -->
-    <?php
-    if ($annonces) {
-        foreach ($annonces as $annonce) {
-            ?>
-            <div class="annonce">
-                <a href="index.php?page=focusAnnonce&id=<?= $annonce['id'] ?>">
-                    <h4>
-                        <?= $annonce['titre'] ?>
-                    </h4>
-                </a>
-                <p><?php 
-                    $date = explode('.', $annonce['date']);
-                    echo $date[0]; ?></p>
-                <p>
-                    <?= $annonce['description'] ?>
-                </p>
+                    <?php
+                    if ($user['activites']) { ?>
+                        <p class="user_info">Activités :
+                            <?= $user['activites'] ?>
+                        </p>
+                        <?php
+                    }
+                    ?>
+                </div>
             </div>
-            <br>
+        </section>
+
+
+        <section>
+            <div class="row_align profil_links">
+                <?php
+                if ($currentUser) { ?>
+                    <a class="link_action" href='index.php?page=deconnexion'>Me déconnecter</a>
+                    <p> | </p>
+                    <a class="link_action" href='index.php?page=modifierProfil'>Modifier mon profil</a>
+                    <?php
+                } else {
+                    if ($_SESSION['privileges'] == "admin") {
+                        if ($userPrivileges != "admin") { ?>
+                            <a class="link_action" href="#"
+                                onclick="confirmDelete(<?= $user['id'] ?>, 'Êtes-vous sûr de vouloir bannir cet utilisateur ? Il ne sera pas prévenu.', 'ban')">Ban</a>
+                            <p> | </p>
+                        <?php }
+                        if ($userPrivileges == "particulier") { ?>
+                            <a class="link_action" href="index.php?page=profil&id=<?= $user['id'] ?>&action=grantModo">Nommer modérateur</a>
+                        <?php } elseif ($userPrivileges == "modo") { ?>
+                            <a class="link_action" href="index.php?page=profil&id=<?= $user['id'] ?>&action=removeModo">Supprimer les
+                                privilèges de modérateur</a>
+                            <p> | </p>
+                            <a class="link_action" href="#"
+                                onclick="confirmDelete(<?= $user['id'] ?>, 'Êtes-vous sûr de vouloir nommer cet utilisateur administrateur ? Cette action est irréversible.', 'grantAdmin')">Nommer
+                                administrateur</a>
+                        <?php }
+                    }
+                }
+                ?>
+            </div>
+        </section>
+
+
+        <!-- afficher les annonces (sans les commentaires) -->
+        <?php
+        if ($annonces) {
+            ?>
+            <section>
+                <h1 class="align_center">Annonces récentes</h1>
+                <div class="column_align profil_list_annonces">
+                    <?php
+                    foreach ($annonces as $annonce) {
+                        ?>
+                        <div class="annonce profil_annonce">
+                            <a class="link_action" href="index.php?page=focusAnnonce&id=<?= $annonce['id'] ?>">
+                                <h2 class="annonce_info">
+                                    <?= $annonce['titre'] ?>
+                                </h2>
+                            </a>
+                            <?php
+                            if ($annonce['image'] && $annonce['image'] != "null") { ?>
+                                <img class="annonce_info" src="<?= $annonce['image'] ?>" alt="visuel annonce">
+                                <?php
+                            }
+                            ?>
+                            <p class="annonce_info">
+                                <?= $annonce['description'] ?>
+                            </p>
+                            <p class="annonce_info">
+                                <?php
+                                $date = explode('.', $annonce['date']);
+                                echo $date[0];
+                                ?>
+                            </p>
+                        </div>
+                        <br>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </section>
+
             <?php
         }
     }
-?>
-<?php
-}
+    ?>
+</div>
+
+<style>
+    .align_center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #profil {
+        font-family: "Montserrat", sans-serif;
+    }
+
+    .profil_links {
+        margin: 0 6vw;
+    }
+
+    /* INFOS UTILISATEUR */
+    #profil .user_infos {
+        margin: 6vh 0 4vh 6vw;
+    }
+
+    #profil .user_infos>div {
+        margin: 0 0 0 6vw;
+    }
+
+    #profil .profil_pfp {
+        width: 20vw;
+        height: 20vw;
+        object-fit: cover;
+        border-radius: 100%;
+    }
+
+    #profil .user_info {
+        margin: 0.5vw 0;
+    }
+
+    /* ANNONCES */
+    #profil .profil_list_annonces {
+        margin: 2vw;
+    }
+
+    #profil .profil_annonce {
+        padding: 1.5vw;
+    }
+
+    #profil .profil_annonce img {
+        height: 20vw;
+    }
+
+    #profil .annonce_info {
+        margin: 1vh 0;
+    }
+</style>

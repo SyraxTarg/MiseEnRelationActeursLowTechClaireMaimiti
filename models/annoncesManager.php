@@ -115,7 +115,7 @@ class annoncesManager extends AbstractManager {
 
     function getAnnoncesUser(string $id){
         if($id){
-            $sql = "SELECT id, titre, description, date FROM ".annoncesManager::TABLE_NAME." WHERE id_user=(:id) AND id_annonce_mere IS NULL ORDER BY date DESC";
+            $sql = "SELECT id, titre, description, date, image FROM ".annoncesManager::TABLE_NAME." WHERE id_user=(:id) AND id_annonce_mere IS NULL ORDER BY date DESC";
             $query = $this->db->prepare($sql);
             $query->execute([
                 ':id' => $id

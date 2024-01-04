@@ -48,7 +48,7 @@ class adminsManager extends AbstractManager {
     }
 
     function remove_modo_rights($id){
-        $sql = "DELETE FROM Mod‚rateurs WHERE id=". $id . ";";
+        $sql = "DELETE FROM Mod‚rateurs WHERE id_user=". $id . ";";
         $query = $this->db->query($sql);
     }
 

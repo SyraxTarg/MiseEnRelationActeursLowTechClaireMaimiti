@@ -17,7 +17,7 @@ if (isset($_GET['msg'])) {
 // function connexion(){
 if (isset($_POST['email']) && isset($_POST['password'])) {
     $usersManager = new usersManager();
-    $user = $usersManager->getUniqueUser($_POST['email'], $_POST['password']);
+    $user = $usersManager->getUniqueUserInfo($_POST['email'], $_POST['password']);
 
     if ($user) {
         $_SESSION['username'] = $user['username'];

@@ -19,7 +19,7 @@ if (isset($_GET['id'])) {
 
         $usersManager = new usersManager();
         $annoncesManager = new annoncesManager();
-        $user = $usersManager->getUserWithId($_GET['id']);
+        $user = $usersManager->getUniqueUser($_GET['id']);
         if ($user) {
             if ($user['id'] == $_SESSION['idUser'])
                 $currentUser = true;
@@ -31,7 +31,7 @@ if (isset($_GET['id'])) {
 
             $annonces = $annoncesManager->getAnnoncesUser($user['id']);
         } else {
-            $user = $usersManager->getUserWithId(5);
+            $user = $usersManager->getUniqueUser(5);
         }
     } else {
         header("Location: index.php?page=home");
