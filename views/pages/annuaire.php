@@ -56,20 +56,32 @@ if(isset($msg))
 
 <script>
     $(document).ready(function() {
-        $('#annuaire').DataTable({
-            language: {
-                search: "Rechercher :",
-                show: "Montrer",
-                lengthMenu: 'Montrer <select>'+
-                            '<option value="10">10</option>'+
-                            '<option value="25">25</option>'+
-                            '<option value="50">50</option>'+
-                            '<option value="-1">Tous</option>'+
-                            '</select> utilisateurs'
-            }
-        });
+    $('#annuaire').DataTable({
+        language: {
+            search: "Rechercher :",
+            show: "Montrer",
+            lengthMenu: 'Montrer <select>'+
+                        '<option value="10">10</option>'+
+                        '<option value="25">25</option>'+
+                        '<option value="50">50</option>'+
+                        '<option value="-1">Tous</option>'+
+                        '</select> utilisateurs',
+            info: "Affichage de _START_ à _END_ sur _TOTAL_ utilisateurs",
+            infoEmpty: "Affichage de 0 à 0 sur 0 utilisateurs",
+            infoFiltered: "(filtré sur un total de _MAX_ utilisateurs)",
+            paginate: {
+                first: 'Premier ',
+                previous: 'Précédent ',
+                next: ' Suivant ',
+                last: ' Dernier '
+            },
+            zeroRecords: "Aucun enregistrement trouvé"
+        }
     });
+});
+
 </script>
+
 
 
 
@@ -81,6 +93,21 @@ if(isset($msg))
         width: 20vw;
         background-color: #9B91C3;
     }
+
+    .dataTables_info {
+        white-space: normal;
+    }
+
+    .dataTables_paginate {
+        white-space: normal;
+    }
+
+    .dataTables_paginate .paginate_button {
+        margin-right: 5px; 
+        color: red;
+    }
+
+
 
     
 </style>
