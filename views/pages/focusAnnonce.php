@@ -113,7 +113,8 @@ if (!$annonceId) {
         if(isset($_SESSION['username'])){
             ?>
             <form method="post" class="postComment">
-                <h3>Ajouter un commentaire</h3>
+                <h2>Ajouter un commentaire</h2>
+                <br>
                 <textarea placeholder="votre commentaire ici" name="description" id="description" required></textarea>
 
                 <input type="submit" value="Envoyer" name="posterComm" id="posterComm">
@@ -140,11 +141,13 @@ if (!$annonceId) {
         display: flex;
         gap: 8vw;
         margin-left: 5vw;
+        font-family: "Montserrat", sans-serif;
     }
 
     .annonce {
     margin-left: 1vw;
     margin-right: 1vw;
+    font-family: "Montserrat", sans-serif;
 }
 
 
@@ -177,6 +180,7 @@ if (!$annonceId) {
         margin-left: 6vw;
         text-decoration: none;
         font-size: 2vh;
+        font-family: "Montserrat", sans-serif;
     }
 
     .forms button{
@@ -211,6 +215,7 @@ if (!$annonceId) {
         color: white;
         padding: 2vh;
         cursor: pointer;
+        font-family: "Montserrat", sans-serif;
     }
 
     .formLike{
@@ -232,6 +237,7 @@ if (!$annonceId) {
         width: fit-content;
         font-size: 3vh;
         border-radius: 1vh;
+        font-family: "Montserrat", sans-serif;
     }
 
     .commentaires{
@@ -240,6 +246,7 @@ if (!$annonceId) {
         border: none;
         display: flex;
         gap: 8%;
+        font-family: "Montserrat", sans-serif;
     }
 
     .commentSeparator{
@@ -285,6 +292,7 @@ if (!$annonceId) {
         padding-left: 5vw;
         display: flex;
         flex-direction: column;
+        font-family: "Montserrat", sans-serif;
     }
 
     .postComment #description{
@@ -298,12 +306,22 @@ if (!$annonceId) {
         color: #9B91C3;
     }
 
+    .postComment h2{
+        margin: auto;
+    }
+
     .postComment #posterComm{
-        width:fit-content;
-        background-color: #0F3F6C;
-        color: white;
-        padding: 1vh;
+        width: 15vw;
+        height: 5vh;
+        border: none;
+        border-radius: 0.5vw;
         cursor: pointer;
+        background-color: var(--bleu-marine);
+        color: white;
+        font-family: "Montserrat", sans-serif;
+        font-size: 1em;
+        margin: auto;
+        margin-top: 3vh;
 
     }
 
