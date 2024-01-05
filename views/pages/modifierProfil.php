@@ -42,9 +42,17 @@
             <textarea name="bio" id="bio" cols="30" rows="10"><?= $user['bio'] ?></textarea>
         </div>
 
-        <div class="user_form_group">
-            <label for="activites">Activités </label>
-            <input type="text" name="activites" id="activites" value="<?= $user['activites'] ?>">
+        <div>
+            <label for="activites">Quelles sont vos compétences ? </label>
+
+            <?php
+            foreach($activitesPossibles as $act){ ?>
+                <input type="checkbox" name="activites[]" id="<?=$act?>" value="<?=$act?>" <?= estActiviteSelectionnee($act, $activitesUser) ? 'checked' : '' ?> hidden>
+                <label for="<?=$act?>"><?=$act?></label>
+                <?php
+            }
+            ?>
+
         </div>
 
         <input class="user_submit_button" type="submit" value="Enregistrer">
@@ -54,3 +62,9 @@
     <br>
     <a class="user_dangerous_button" href='#' onclick='confirmDelete()'>Supprimer mon profil</a>
 </div>
+
+<style>
+    input[type="checkbox"]:checked + label {
+        color: green;
+    }
+</style>

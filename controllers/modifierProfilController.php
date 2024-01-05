@@ -34,6 +34,10 @@ if(isset($_GET['action']) && $_GET['action'] == "delete"){
 
 $usersManager = new usersManager();
 $user = $usersManager->getUniqueUser($_SESSION['idUser']);
+
+$activitesUser = explode(";", $user['activites']);
+$activitesPossibles = ["Soudure", "Electricité", "Charpenterie", "Plomberie", "Chauffage", "Maçonnerie"];
+
 $template = './views/pages/modifierProfil.php';
 
 
@@ -58,10 +62,10 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEn
                 move_uploaded_file($tmpName, './upload/'.$file);
                 $photoPath = './upload/'.$file;
             }
-        } 
+        }
+        $activites = implode(";", $_POST['activites']);
         //maj le user
-        $usersManager = new usersManager();
-        $usersManager->setUser($_SESSION['idUser'], $_POST['username'], $_POST['password'], $_POST['email'], $photoPath, $_POST['activites'], $_POST['bio']);
+        $usersManager->setUser($_SESSION['idUser'], $_POST['username'], $_POST['password'], $_POST['email'], $photoPath, $activites, $_POST['bio']);
         $_SESSION['username'] = $_POST['username'];
         header("Location: index.php?page=profil&id=" . $_SESSION['idUser'] . "&msg=SM");
         //SI : Successful Modification
@@ -113,6 +117,10 @@ function checkFormValidity($username, $password, $reEnterPassword, $email)
     } else {
         return true;
     }
+}
+
+function estActiviteSelectionnee($activite, $activitesUser){
+    return in_array($activite, $activitesUser);
 }
 
 ?>
