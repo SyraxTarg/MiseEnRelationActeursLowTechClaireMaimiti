@@ -49,7 +49,7 @@
                     <a class="link_action" href='index.php?page=modifierProfil'>Modifier mon profil</a>
                     <?php
                 } else {
-                    if ($_SESSION['privileges'] == "admin") {
+                    if (isset($_SESSION['privileges']) && $_SESSION['privileges'] == "admin") {
                         if ($userPrivileges != "admin") { ?>
                             <a class="link_action" href="#"
                                 onclick="confirmDelete(<?= $user['id'] ?>, 'Êtes-vous sûr de vouloir bannir cet utilisateur ? Il ne sera pas prévenu.', 'ban')">Ban</a>

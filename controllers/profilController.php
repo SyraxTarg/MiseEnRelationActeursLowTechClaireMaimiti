@@ -8,7 +8,7 @@ if (isset($_GET['id'])) {
     if (isset($_GET['msg'])) {
         switch ($_GET['msg']) {
             case "SM":
-                if ($_GET['id'] == $_SESSION['idUser'])
+                if (isset($_SESSION['idUser']) && $_GET['id'] == $_SESSION['idUser'])
                     $msg = "<p>Le profil a bien été mis à jour.</p>";
                 break;
         }
@@ -21,7 +21,7 @@ if (isset($_GET['id'])) {
         $annoncesManager = new annoncesManager();
         $user = $usersManager->getUniqueUser($_GET['id']);
         if ($user) {
-            if ($user['id'] == $_SESSION['idUser'])
+            if (isset($_SESSION['idUser']) && $user['id'] == $_SESSION['idUser'])
                 $currentUser = true;
             else
                 $currentUser = false;
