@@ -20,6 +20,7 @@ if (isset($_GET['id'])) {
         $usersManager = new usersManager();
         $annoncesManager = new annoncesManager();
         $user = $usersManager->getUniqueUser($_GET['id']);
+        $activites = implode(" | ", explode(";", $user['activites']));
         if ($user) {
             if (isset($_SESSION['idUser']) && $user['id'] == $_SESSION['idUser'])
                 $currentUser = true;

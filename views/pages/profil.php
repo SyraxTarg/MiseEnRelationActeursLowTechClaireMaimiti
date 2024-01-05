@@ -30,7 +30,7 @@
                     <?php
                     if ($user['activites']) { ?>
                         <p class="user_info">Activités :
-                            <?= $user['activites'] ?>
+                            <?= $activites ?>
                         </p>
                         <?php
                     }
