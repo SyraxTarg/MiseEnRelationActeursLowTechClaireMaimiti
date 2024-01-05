@@ -35,23 +35,15 @@
         <div>
             <label for="activites">Quelles sont vos compétences ? </label>
 
-            <input type="checkbox" name="activites[]" id="Soudure" value="Soudure" hidden>
-            <label for="Soudure">Soudure</label>
-
-            <input type="checkbox" name="activites[]" id="Electricité" value="Electricité" hidden>
-            <label for="Electricité">Electricité</label>
-
-            <input type="checkbox" name="activites[]" id="Charpenterie" value="Charpenterie" hidden>
-            <label for="Charpenterie">Charpenterie</label>
-
-            <input type="checkbox" name="activites[]" id="Plomberie" value="Plomberie" hidden>
-            <label for="Plomberie">Plomberie</label>
-
-            <input type="checkbox" name="activites[]" id="Chauffage" value="Chauffage" hidden>
-            <label for="Chauffage">Chauffage</label>
-
-            <input type="checkbox" name="activites[]" id="Maçonnerie" value="Maçonnerie" hidden>
-            <label for="Maçonnerie">Maçonnerie</label>
+            <?php
+            foreach ($activitesPossibles as $act) { ?>
+                <input type="checkbox" name="activites[]" id="<?= $act ?>" value="<?= $act ?>" hidden>
+                <label for="<?= $act ?>">
+                    <?= $act ?>
+                </label>
+                <?php
+            }
+            ?>
 
         </div>
 
@@ -66,7 +58,7 @@
 </div>
 
 <style>
-    input[type="checkbox"]:checked + label {
+    input[type="checkbox"]:checked+label {
         color: green;
     }
 </style>
