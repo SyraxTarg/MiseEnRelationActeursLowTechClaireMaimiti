@@ -25,7 +25,8 @@
         if($_SESSION['privileges'] == "modo")
         {
         ?>
-            <fieldset >
+        <div id="choixAnnonce">
+            <fieldset>
                 <legend>Quel est le type de votre annonce ?</legend>
         
                     <div>
@@ -36,9 +37,15 @@
                         <input type="radio" id="Avancées" name="type" value="Avancées" />
                         <label for="Avancées">Avancées</label>
                     </div>
-            </fieldset>            
-            <input type="checkbox" name="pinned" id="pinned">
-            <label for="pinned">Epingler</label>            
+            </fieldset> 
+            <div>
+                <input type="checkbox" name="pinned" id="pinned">
+                <label for="pinned">Epingler</label>
+            </div>
+            
+        </div>
+        
+                        
     <?php
     }
     ?>
@@ -123,6 +130,13 @@
 
     .submitPostAnnonce:hover{
         background-color: #31356E;
+    }
+
+    #choixAnnonce{
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        gap: 1vw;
     }
 
 </style>

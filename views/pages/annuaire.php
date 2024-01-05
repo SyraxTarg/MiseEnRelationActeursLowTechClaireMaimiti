@@ -103,9 +103,6 @@ $('#mySearch').keyup(function(){
     annuaire.search($(this).val()).draw();
 })
 
-    
-
-
 </script>
 
 
