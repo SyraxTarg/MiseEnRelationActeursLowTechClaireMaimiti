@@ -254,6 +254,7 @@ if (!$annonceId) {
         background-color: white;
         cursor: pointer;
         size: 3vh;
+        font-size: 2vh;
     }
 
     .supprimerAnnonce {
