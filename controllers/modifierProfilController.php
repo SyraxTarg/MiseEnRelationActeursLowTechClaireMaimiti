@@ -26,7 +26,7 @@ if (isset($_GET['msg'])) {
     }
 }
 
-if(isset($_GET['action']) && $_GET['action'] == "delete"){
+if (isset($_GET['action']) && $_GET['action'] == "delete") {
     $adminsManager = new adminsManager();
     $adminsManager->remove_user($_SESSION['idUser']);
     header("Location: index.php?page=profil&action=disconnect");
@@ -36,7 +36,6 @@ $usersManager = new usersManager();
 $user = $usersManager->getUniqueUser($_SESSION['idUser']);
 
 $activitesUser = explode(";", $user['activites']);
-$activitesPossibles = ["Soudure", "Electricité", "Charpenterie", "Plomberie", "Chauffage", "Maçonnerie"];
 
 $template = './views/pages/modifierProfil.php';
 
@@ -47,7 +46,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEn
         header("Location: index.php?page=modifierProfil&id=" . $_SESSION['idUser'] . "&msg=" . $formValidity);
     } else {
         $photoPath = $user['profile_picture'];
-        if(isset($_FILES['photoProfil'])){
+        if (isset($_FILES['photoProfil'])) {
             $tmpName = $_FILES['photoProfil']['tmp_name'];
             $name = $_FILES['photoProfil']['name'];
             $size = $_FILES['photoProfil']['size'];
@@ -56,11 +55,11 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEn
             $extension = strtolower(end($tabExtension));
             $extensions = ['jpg', 'png', 'jpeg'];
             $maxSize = 400000;
-            if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
+            if (in_array($extension, $extensions) && $size <= $maxSize && $error == 0) {
                 $uniqueName = uniqid('', true);
-                $file = $uniqueName.".".$extension;
-                move_uploaded_file($tmpName, './upload/'.$file);
-                $photoPath = './upload/'.$file;
+                $file = $uniqueName . "." . $extension;
+                move_uploaded_file($tmpName, './upload/' . $file);
+                $photoPath = './upload/' . $file;
             }
         }
         $activites = implode(";", $_POST['activites']);
@@ -119,7 +118,8 @@ function checkFormValidity($username, $password, $reEnterPassword, $email)
     }
 }
 
-function estActiviteSelectionnee($activite, $activitesUser){
+function estActiviteSelectionnee($activite, $activitesUser)
+{
     return in_array($activite, $activitesUser);
 }
 
