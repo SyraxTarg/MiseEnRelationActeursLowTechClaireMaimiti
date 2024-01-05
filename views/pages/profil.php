@@ -29,9 +29,17 @@
 
                     <?php
                     if ($user['activites']) { ?>
-                        <p class="user_info">Activités :
-                            <?= $activites ?>
-                        </p>
+                        <div class="user_info"><p>Activités :</p>
+                            <?php
+                            foreach ($activites as $act) { ?>
+                                <p class="unique_act">
+                                    <?= $act ?>
+                                </p>
+                                <?php
+                            }
+                            ?>
+                            <!-- <?= $activites ?> -->
+                        </div>
                         <?php
                     }
                     ?>
@@ -56,7 +64,8 @@
                             <p> | </p>
                         <?php }
                         if ($userPrivileges == "particulier") { ?>
-                            <a class="link_action" href="index.php?page=profil&id=<?= $user['id'] ?>&action=grantModo">Nommer modérateur</a>
+                            <a class="link_action" href="index.php?page=profil&id=<?= $user['id'] ?>&action=grantModo">Nommer
+                                modérateur</a>
                         <?php } elseif ($userPrivileges == "modo") { ?>
                             <a class="link_action" href="index.php?page=profil&id=<?= $user['id'] ?>&action=removeModo">Supprimer les
                                 privilèges de modérateur</a>
@@ -150,6 +159,8 @@
 
     #profil .user_info {
         margin: 0.5vw 0;
+        display: flex;
+        align-items: center;
     }
 
     /* ANNONCES */

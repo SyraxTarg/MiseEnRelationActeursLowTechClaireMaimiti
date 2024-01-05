@@ -32,13 +32,13 @@
             <input type="password" name="reEnterPassword" id="reEnterPassword" required>
         </div>
 
-        <div>
+        <div class="user_form_select">
             <label for="activites">Quelles sont vos compétences ? </label>
 
             <?php
             foreach ($activitesPossibles as $act) { ?>
                 <input type="checkbox" name="activites[]" id="<?= $act ?>" value="<?= $act ?>" hidden>
-                <label for="<?= $act ?>">
+                <label class="unique_act" for="<?= $act ?>">
                     <?= $act ?>
                 </label>
                 <?php
@@ -56,9 +56,3 @@
         <a class="link_action" href="index.php?page=connexion">Connexion</a>
     </div>
 </div>
-
-<style>
-    input[type="checkbox"]:checked+label {
-        color: green;
-    }
-</style>

@@ -43,31 +43,7 @@ td {
   height: 5%;
 }
 
-.link_action {
-  text-decoration: none;
-  color: var(--vert-moyen);
-  transition: 0.5s;
-}
-.link_action:hover {
-  color: var(--vert-logo);
-}
 
-.user_dangerous_button {
-  text-decoration: none;
-  color: red;
-}
-
-.row_align {
-  display: flex;
-  flex-direction: row;
-}
-.row_align * {
-  margin: 0.25vw;
-}
-.column_align {
-  display: flex;
-  flex-direction: column;
-}
 
 /* ---------------------------------- HOME ---------------------------------- */
 #home {
@@ -292,4 +268,59 @@ section {
   background-color: var(--bleu-marine);
   color: white;
   font-family: "Montserrat", sans-serif;
+}
+
+
+
+
+/* GLOBAL */
+
+.link_action {
+  text-decoration: none;
+  color: var(--vert-moyen);
+  transition: 0.5s;
+}
+.link_action:hover {
+  color: var(--vert-logo);
+}
+
+.user_dangerous_button {
+  text-decoration: none;
+  color: red;
+}
+
+.row_align {
+  display: flex;
+  flex-direction: row;
+}
+.row_align * {
+  margin: 0.25vw;
+}
+.column_align {
+  display: flex;
+  flex-direction: column;
+}
+
+.user_form_select{
+  display: flex;
+  align-items: center;
+  margin: 5vh 0;
+}
+
+.unique_act{
+  border: 1px solid black;
+  border-radius: 1vw;
+  padding: 0.5vh 0.5vw;
+  margin: 0.5vh;
+}
+
+input[type="checkbox"]+label {
+  background-color: none;
+  transition: 0.25s;
+}
+
+input[type="checkbox"]:hover+label, input[type="checkbox"]:checked+label {
+  border: 1px solid var(--bleu-marine);
+  background-color: var(--bleu-marine);
+  color: white;
 }

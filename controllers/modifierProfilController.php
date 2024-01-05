@@ -29,7 +29,7 @@ if (isset($_GET['msg'])) {
 if(isset($_GET['action']) && $_GET['action'] == "delete"){
     $adminsManager = new adminsManager();
     $adminsManager->remove_user($_SESSION['idUser']);
-    header("Location: index.php?page=deconnexion");
+    header("Location: index.php?page=profil&action=disconnect");
 }
 
 $usersManager = new usersManager();
