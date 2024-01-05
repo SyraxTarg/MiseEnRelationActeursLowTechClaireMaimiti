@@ -65,10 +65,11 @@ if (!$annonceId) {
                 if($_SESSION['email'] == $annonce['email'] || $_SESSION['privileges'] == "modo"){
                     ?>
                     <form method="post" name="supprimer">
-                        <button type="submit" name="supprimerAnnonce" class="supprimerAnnonce">Supprimer mon annonce</button>
+                        <button type="submit" name="supprimerAnnonce" class="supprimerAnnonce">Supprimer l'annonce</button>
                     </form>
                     <?php
                 }
+
             }
             ?>
         </div>
@@ -202,6 +203,7 @@ if (!$annonceId) {
     .userPicture .pfp{
         max-width: 5vw;
         max-height: 5vw;
+        border-radius: 0.5vw;
     }
 
     .like-btn{
@@ -217,6 +219,7 @@ if (!$annonceId) {
         cursor: pointer;
         font-family: "Montserrat", sans-serif;
     }
+
 
     .formLike{
         font-size: 2vh;

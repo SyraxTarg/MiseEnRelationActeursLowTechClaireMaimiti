@@ -79,3 +79,9 @@ if(isset($_POST['supprimerAnnonce'])) {
     $annoncesManager->supprimerAnnonce($annonceId, $annoncesManager->getAnnonceType($annonceId, $avancees, $dispos, $recherches));
     header('Location: index.php?page=mur');
 }
+
+
+if(isset($_POST['pinUnpinAnnonce'])) {
+    $annoncesManager->pinAnnonce($annonceId);
+    header('Location: index.php?page=mur');
+}
