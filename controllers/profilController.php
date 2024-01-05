@@ -63,9 +63,26 @@ if (isset($_GET['action'])) {
                 header("Location: index.php?page=annuaire&msg=SD");
                 //SD : Successful Deletion
                 break;
+            case "disconnect":
+                unset($_SESSION['idUser']);
+                unset($_SESSION['username']);
+                unset($_SESSION['email']);
+                unset($_SESSION['privileges']);
+
+                header('Location: index.php?page=home');
+                break;
             default:
                 header("Location: index.php?page=profil&id=" . $user['id']);
                 break;
+        }
+    } else {
+        if ($_GET['action'] == "disconnect") {
+            unset($_SESSION['idUser']);
+            unset($_SESSION['username']);
+            unset($_SESSION['email']);
+            unset($_SESSION['privileges']);
+
+            header('Location: index.php?page=home');
         }
     }
 }

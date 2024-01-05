@@ -44,7 +44,7 @@
             <div class="row_align profil_links">
                 <?php
                 if ($currentUser) { ?>
-                    <a class="link_action" href='index.php?page=deconnexion'>Me déconnecter</a>
+                    <a class="link_action" href='index.php?page=profil&action=disconnect'>Me déconnecter</a>
                     <p> | </p>
                     <a class="link_action" href='index.php?page=modifierProfil'>Modifier mon profil</a>
                     <?php
