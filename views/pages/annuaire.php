@@ -101,7 +101,14 @@ if(isset($msg))
 
 $('#mySearch').keyup(function(){
     annuaire.search($(this).val()).draw();
-})
+});
+
+    window.addEventListener('DOMContentLoaded', (event) => {
+        var fen = document.querySelector("#pageAnnuaire").offsetHeight;
+        var fenVH = (fen / window.innerHeight) * 100;
+        console.log(fen);
+        console.log(fenVH);
+    });
 
 </script>
 
