@@ -23,6 +23,9 @@ if (isset($_GET['msg'])) {
         case "EU":
             $msg = "<p>L'email que vous avez entré est déjà utilisé par un autre utilisateur.</p>";
             break;
+        case "IA":
+            $msg = "<p>Les activités ne peuvent pas contenir de caractère spécial.</p>";
+            break;
     }
 }
 
@@ -41,10 +44,16 @@ $template = './views/pages/modifierProfil.php';
 
 
 if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEnterPassword']) && isset($_POST['email']) && isset($_POST['activites']) && isset($_POST['bio'])) {
-    $formValidity = checkFormValidity($_POST['username'], $_POST['password'], $_POST['reEnterPassword'], $_POST['email']);
+    if (isset($_POST['autresActivites'])) {
+        $formValidity = checkFormValidity($_POST['username'], $_POST['password'], $_POST['reEnterPassword'], $_POST['email'], $_POST['autresActivites']);
+    } else {
+        $formValidity = checkFormValidity($_POST['username'], $_POST['password'], $_POST['reEnterPassword'], $_POST['email']);
+    }
+
     if (gettype($formValidity) == "string") {
         header("Location: index.php?page=modifierProfil&id=" . $_SESSION['idUser'] . "&msg=" . $formValidity);
     } else {
+
         $photoPath = $user['profile_picture'];
         if (isset($_FILES['photoProfil'])) {
             $tmpName = $_FILES['photoProfil']['tmp_name'];
@@ -62,16 +71,21 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEn
                 $photoPath = './upload/' . $file;
             }
         }
-        $activites = implode(";", $_POST['activites']);
-        //maj le user
-        $usersManager->setUser($_SESSION['idUser'], $_POST['username'], $_POST['password'], $_POST['email'], $photoPath, $activites, $_POST['bio']);
-        $_SESSION['username'] = $_POST['username'];
-        header("Location: index.php?page=profil&id=" . $_SESSION['idUser'] . "&msg=SM");
-        //SI : Successful Modification
+
+        $activites = $_POST['activites'];
+        if (isset($_POST['autresActivites'])) {
+            foreach ($_POST['autresActivites'] as $act) {
+                if ($act) {
+                    array_push($activites, $act);
+                }
+            }
+        }
+        $activites = implode(";", $activites);
+        setUser($_SESSION['idUser'], $_POST['username'], $_POST['password'], $_POST['email'], $photoPath, $activites, $_POST['bio']);
     }
 }
 
-function checkFormValidity($username, $password, $reEnterPassword, $email)
+function checkFormValidity($username, $password, $reEnterPassword, $email, $autresActivites = null)
 {
 
     //check correspondance entre les 2 champs password
@@ -106,6 +120,16 @@ function checkFormValidity($username, $password, $reEnterPassword, $email)
         //IE : Invalid Email
     }
 
+    //check activity validity
+    if ($autresActivites) {
+        foreach ($autresActivites as $act) {
+            if (!checkActivityValidity($act)) {
+                return "IA";
+                //IA : Invalid Activity
+            }
+        }
+    }
+
     //check email uniqueness
     $usersManager = new usersManager();
     $user = $usersManager->getUniqueUserInfo($_POST['email'], null);
@@ -121,6 +145,35 @@ function checkFormValidity($username, $password, $reEnterPassword, $email)
 function estActiviteSelectionnee($activite, $activitesUser)
 {
     return in_array($activite, $activitesUser);
+}
+
+
+function setUser($id, $username, $password, $email, $photoPath, $activites, $bio)
+{
+    $usersManager = new usersManager();
+    $usersManager->setUser($id, $username, $password, $email, $photoPath, $activites, $bio);
+    $_SESSION['username'] = $_POST['username'];
+    $_SESSION['email'] = $_POST['email'];
+    header("Location: index.php?page=profil&id=" . $_SESSION['idUser'] . "&msg=SM");
+    //SI : Successful Modification
+}
+
+function checkActivityValidity($activite)
+{
+    if ($activite) {
+        //vérifie si la chaine ne contient pas que des espaces
+        if (preg_match('/\S/', $activite)) {
+            if (preg_match('/[!@#$%^&*(),.?":{}|<>]/', $activite, $matches)) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    } else {
+        return true;
+    }
 }
 
 ?>

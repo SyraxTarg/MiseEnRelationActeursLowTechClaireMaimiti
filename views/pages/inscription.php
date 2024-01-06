@@ -46,8 +46,8 @@
             ?>
         </div>
         <div class="user_form_group column_align" id="user_form_group_act">
-            <div id="autresActivites" class="row_align"></div>
             <button type="button" id="buttonActivite">Ajouter une autre activité</button>
+            <div id="autresActivites" class="row_align"></div>
         </div>
 
         <input class="user_submit_button" type="submit" value="Continuer">
@@ -66,6 +66,9 @@
         var conteneurAutresActivites = document.querySelector("#autresActivites");
 
         boutonAjouter.addEventListener("click", function () {
+            let divNouvelInput = document.createElement("div");
+            divNouvelInput.className = "autreActiviteInput";
+
             var nouvelInput = document.createElement("input");
             nouvelInput.type = "text";
             nouvelInput.name = "autresActivites[]";
@@ -74,13 +77,14 @@
             croixSuppression.textContent = "X";
             croixSuppression.style.cursor = "pointer";
 
-            conteneurAutresActivites.appendChild(nouvelInput);
-            conteneurAutresActivites.appendChild(croixSuppression);
+            conteneurAutresActivites.appendChild(divNouvelInput);
+            divNouvelInput.appendChild(nouvelInput);
+            divNouvelInput.appendChild(croixSuppression);
 
-            // Ajoutez un écouteur d'événement pour supprimer le champ texte lorsqu'on clique sur la croix
             croixSuppression.addEventListener("click", function () {
-                conteneurAutresActivites.removeChild(nouvelInput);
-                conteneurAutresActivites.removeChild(croixSuppression);
+                divNouvelInput.removeChild(nouvelInput);
+                divNouvelInput.removeChild(croixSuppression);
+                conteneurAutresActivites.appendChild(divNouvelInput);
             });
         });
     });
@@ -90,5 +94,30 @@
 <style>
     #user_form_group_act input {
         width: 15vw;
+    }
+
+    .autreActiviteInput {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 1vh 1vw;
+    }
+
+    #autresActivites {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #buttonActivite {
+        width: 15vw;
+        height: 5vh;
+        border: none;
+        border-radius: 0.5vw;
+        cursor: pointer;
+
+        background-color: var(--bleu-marine);
+        color: white;
+        font-family: "Montserrat", sans-serif;
     }
 </style>
