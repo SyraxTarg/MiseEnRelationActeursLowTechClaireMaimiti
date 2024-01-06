@@ -44,7 +44,10 @@
                 <?php
             }
             ?>
-
+        </div>
+        <div class="user_form_group column_align" id="user_form_group_act">
+            <div id="autresActivites" class="row_align"></div>
+            <button type="button" id="buttonActivite">Ajouter une autre activité</button>
         </div>
 
         <input class="user_submit_button" type="submit" value="Continuer">
@@ -56,3 +59,36 @@
         <a class="link_action" href="index.php?page=connexion">Connexion</a>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var boutonAjouter = document.querySelector("#buttonActivite");
+        var conteneurAutresActivites = document.querySelector("#autresActivites");
+
+        boutonAjouter.addEventListener("click", function () {
+            var nouvelInput = document.createElement("input");
+            nouvelInput.type = "text";
+            nouvelInput.name = "autresActivites[]";
+
+            var croixSuppression = document.createElement("span");
+            croixSuppression.textContent = "X";
+            croixSuppression.style.cursor = "pointer";
+
+            conteneurAutresActivites.appendChild(nouvelInput);
+            conteneurAutresActivites.appendChild(croixSuppression);
+
+            // Ajoutez un écouteur d'événement pour supprimer le champ texte lorsqu'on clique sur la croix
+            croixSuppression.addEventListener("click", function () {
+                conteneurAutresActivites.removeChild(nouvelInput);
+                conteneurAutresActivites.removeChild(croixSuppression);
+            });
+        });
+    });
+
+</script>
+
+<style>
+    #user_form_group_act input {
+        width: 15vw;
+    }
+</style>
