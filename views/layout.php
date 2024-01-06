@@ -16,7 +16,7 @@
 
 <body>
 
-    <?php $activitesPossibles = ["Soudure", "Electricité", "Charpenterie", "Plomberie", "Chauffage", "Maçonnerie"]; ?>
+    <?php $activitesPossibles = ["Soudure", "Electricité", "Charpenterie", "Plomberie", "Chauffage", "Maçonnerie", "Isolation"]; ?>
 
     <?php require('./views/partials/__header.php'); ?>
     <main>
