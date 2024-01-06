@@ -1,7 +1,8 @@
-<h1 id="annoncesTitre">Annonces</h1>
-<br>
+
 <div id="pageMurAnnonces">
-    <div>
+    <h1 id="annoncesTitre">Annonces</h1>
+    <br>
+    <div id="fondMur">
         <img src="./public/images/elements/elements3_hammer.png" alt="hammer" id="hammer1">
         <img src="./public/images/elements/elements3_hammer.png" alt="hammer"id="hammer2">
         <img src="./public/images/elements/elements6_earth.png" alt="earth" id="earthMur">
@@ -202,71 +203,101 @@
     ?>
 </div>
 
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        var fen = document.querySelector("#pageMurAnnonces").offsetHeight;
+        var fenVH = (fen / window.innerHeight) * 100;
+
+        if (fenVH < 500) {
+            document.getElementById("earthMur").style.display = "none";
+            document.getElementById("recycleMur").style.display = "none";
+            document.getElementById("mapMur").style.display = "none";
+            document.getElementById("hammer3").style.display = "none";
+            document.getElementById("piggy").style.display = "none";
+        } else {
+            if(fenVH < 1000){
+                document.getElementById("earthMur").style.display = "block";
+                document.getElementById("recycleMur").style.display = "block";
+            } else{
+                document.getElementById("mapMur").style.display = "block";
+                document.getElementById("hammer3").style.display = "block";
+                document.getElementById("piggy").style.display = "block";
+            }
+        }
+    });
+</script>
+
+
+
 <style>
-
-
     #pageMurAnnonces{
         position: relative;
+        overflow-x: hidden;
+    }
+
+    #hammer1,
+    #hammer2,
+    #earthMur,
+    #recycleMur,
+    #mapMur,
+    #hammer3,
+    #piggy {
+        position: absolute;
     }
 
     #hammer1 {
         transform: rotate(-90deg) scaleX(-1);
         z-index: -1;
-        position: absolute;
-        height: 6%;
-        top: -13vw;
+        height: 60vw;
+        top: -10vh;
     }
 
-    #hammer2{
+    #hammer2 {
         transform: rotate(90deg);
         z-index: -1;
-        position: absolute;
-        height: 6%;
+        height: 60vw;
         right: -3vh;
-        top: -13vw;
+        top: -10vh;
     }
 
-    #earthMur{
-        position: absolute;
-        height: 6%;
+    #earthMur {
+        height: 50vw;
         left: -5vw;
-        bottom: 82%;
+        bottom: 55%;
         z-index: -1;
     }
 
-    #recycleMur{
+    #recycleMur {
         transform: rotate(20deg);
-        position: absolute;
-        height: 6%;
-        bottom: 63%;
+        height: 48vw;
+        bottom: 45%;
         z-index: -1;
         left: 65vw;
     }
 
-    #mapMur{
-        position: absolute;
-        right: 78%;
-        bottom: 48%;
+    #mapMur {
+        right: 78vw;
+        bottom: 33%;
         z-index: -1;
     }
 
-    #hammer3{
+    #hammer3 {
         transform: rotate(100deg);
-        position: absolute;
-        height: 5%;
-        bottom: 27%;
+        height: 30vw;
+        bottom: 20%;
         z-index: -1;
-        left: 70vw;
+        left: 75vw;
     }
 
-    #piggy{
+    #piggy {
         transform: scaleX(-1);
-        position: absolute;
-        height: 5%;
+        height: 30vw;
         bottom: 7%;
         z-index: -1;
-        right: 70vw;
+        right: 75vw;
     }
+
+
 
     .imageAnnonce {
         max-height: 20vw;
@@ -415,4 +446,6 @@
     .userPicture > a{
         text-decoration: none;
     }
+
+
 </style>
