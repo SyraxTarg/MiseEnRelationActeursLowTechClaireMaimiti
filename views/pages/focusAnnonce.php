@@ -5,6 +5,37 @@ if (!$annonceId) {
     echo "Oups :/ une erreur est survenue.";
 } else {
     ?>
+    <div class="pinSupp">
+        <?php
+            if(isset($_SESSION["privileges"])){
+            if($_SESSION["privileges"] == "modo"){
+                ?>
+            <form method="post" name="pinUnpinForm">
+                <?php
+                if($annonce['pinned'] == 'false' || $annonce['pinned'] == 'null'){
+                    ?><button type="submit" name="unPinAnnonce" class="pinUnpin">Unpin l'annonce</button><?php
+                } else{
+                    ?><button type="submit" name="pinAnnonce" class="pinUnpin">Pin l'annonce</button><?php
+                }
+                ?>
+                
+            </form>
+            <p>|</p>
+            <?php
+            }
+        }
+        if (isset($_SESSION['email'])) {
+            if ($_SESSION['email'] == $annonce['email'] || $_SESSION['privileges'] == "modo") {
+                ?>
+                <form method="post" name="supprimer">
+                    <button type="submit" name="supprimerAnnonce" class="supprimerAnnonce">Supprimer l'annonce</button>
+                </form>
+                <?php
+            }
+
+        }
+        ?>
+    </div>
 
     <div class="annonce" style="overflow: hidden; word-wrap:break-word;">
         <?php $annoncesManager->getAnnonceType($annonce['id'], $avancees, $dispos, $recherches); ?>
@@ -83,18 +114,6 @@ if (!$annonceId) {
 
                 </p>
             </form>
-            <?php
-            if (isset($_SESSION['email'])) {
-                if ($_SESSION['email'] == $annonce['email'] || $_SESSION['privileges'] == "modo") {
-                    ?>
-                    <form method="post" name="supprimer">
-                        <button type="submit" name="supprimerAnnonce" class="supprimerAnnonce">Supprimer l'annonce</button>
-                    </form>
-                    <?php
-                }
-
-            }
-            ?>
         </div>
     </div>
     <br>
@@ -104,6 +123,7 @@ if (!$annonceId) {
         echo "<h2 id='titreCommentaires'>Commentaires:</h2>";
         echo "</br>";
         foreach ($comms as $comm) {
+            $commId= $comm["id"];
             ?>
             <div class="commentaires" style="overflow: hidden; word-wrap:break-word;">
 
@@ -142,8 +162,22 @@ if (!$annonceId) {
                         <?php echo $comm['description']; ?>
                     </p>
                 </div>
-
             </div>
+            <div class="suppComm">
+                    <?php
+                    if (isset($_SESSION['email'])) {
+                        if ($_SESSION['email'] == $comm['email'] || $_SESSION['privileges'] == "modo") {
+                            ?>
+                            <form method="post" name="supprimerComm">
+                            <input type="hidden" name="commId" value="<?php echo $commId; ?>">
+                            <button type="submit" name="supprimerCommentaire" class="supprimerCommentaire">Supprimer le commentaire</button>
+                        </form>
+                            <?php
+                        }
+
+                    }
+                    ?>
+                </div>
             <hr class="commentSeparator">
             <?php
         }
@@ -163,7 +197,7 @@ if (!$annonceId) {
         </form>
         <?php
     } else {
-        echo "<h3><a href='index?page=connexion'>Connectez-vous</a> pour laisser un commentaire</h3>";
+        echo "<h3 class='connectezVous'><a href='index?page=connexion'>Connectez-vous</a> pour laisser un commentaire</h3>";
     }
     ?>
 
@@ -173,8 +207,67 @@ if (!$annonceId) {
 
 
 <style>
+
+    .suppComm{
+        display: flex;
+        justify-content: right;
+    }
+
+    .supprimerCommentaire{
+        border: none;
+        background-color: white;
+        font-family: "Montserrat", sans-serif;
+        color: #9B91C3;
+        font-size: 2vh;
+        margin-right: 1vw;
+        cursor: pointer;
+    }
+
+    .supprimerCommentaire:hover{
+        color: #31356E;
+    }
+
+    .pinUnpin{
+        border: none;
+        background-color: white;
+        font-family: "Montserrat", sans-serif;
+        color: #9B91C3;
+        cursor: pointer;
+        font-size: 2vh;
+    }
+
+    .pinSupp{
+        display: flex;
+        flex-direction: row;
+        justify-content: right;
+        margin-right: 1vw;
+        gap: 1vh;
+    }
+
+    .pinUnpin:hover{
+        color: #31356E;
+    }
+
+    .supprimerAnnonce {
+        color: #9B91C3;
+        cursor: pointer;
+        font-family: "Montserrat", sans-serif;
+        font-size: 2vh;
+        background-color: white;
+        border: none;
+    }
+
+    .supprimerAnnonce:hover{
+        color: #31356E;
+    }
+
     .imageAnnonce {
         max-height: 20vw;
+    }
+
+    .connectezVous{
+        font-family: "Montserrat", sans-serif;
+        margin: 1vw;
     }
 
     .mainAnnonce {
@@ -247,7 +340,7 @@ if (!$annonceId) {
     .userPicture .pfp {
         max-width: 5vw;
         max-height: 5vw;
-        border-radius: 0.5vw;
+        border-radius: 50px;
     }
 
     .like-btn {
@@ -255,14 +348,6 @@ if (!$annonceId) {
         cursor: pointer;
         size: 3vh;
         font-size: 2vh;
-    }
-
-    .supprimerAnnonce {
-        background-color: #0F3F6C;
-        color: white;
-        padding: 2vh;
-        cursor: pointer;
-        font-family: "Montserrat", sans-serif;
     }
 
 
@@ -336,6 +421,7 @@ if (!$annonceId) {
     .commentaires .commentUser .pfp {
         max-width: 3vw;
         max-height: 3vw;
+        border-radius: 4vh;
     }
 
     .postComment {

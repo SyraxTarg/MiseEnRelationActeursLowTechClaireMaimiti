@@ -61,5 +61,6 @@ if (isset($_SESSION['username'])) {
         if ($_SESSION['privileges'] == "particulier") {
             $disposManager->postDispos($lastAnnonce[0]['id']);
         }
+        header('Location: index.php?page=mur');
     }
 }

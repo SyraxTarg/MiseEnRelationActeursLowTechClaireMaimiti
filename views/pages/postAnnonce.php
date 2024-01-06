@@ -30,7 +30,7 @@
                 <legend>Quel est le type de votre annonce ?</legend>
         
                     <div>
-                        <input type="radio" id="Recherche" name="type" value="Recherche" />
+                        <input type="radio" id="Recherche" name="type" value="Recherche" required/>
                         <label for="Recherche">Recherche</label>
                     </div>
                     <div>

@@ -1,9 +1,8 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 
-// if(isset($_SESSION['privileges'])){
-//     if($_SESSION['privileges'] != 'admin'){
-        $template = './views/pages/focusAnnonce.php';
+
+$template = './views/pages/focusAnnonce.php';
 
 require_once('models/annoncesManager.php');
 require_once('models/avancéesManager.php');
@@ -14,6 +13,8 @@ require_once('models/rechercheManager.php');
 
 $annoncesManager = new annoncesManager();
 $annoncesManager->dbConnect();
+$annoncesPinned = $annoncesManager->getPinnedAnnonces();
+$annoncesNonPinned = $annoncesManager->getNonPinnedAnnonces();
 
 
 $avanceesManager = new avancéesManager();
@@ -81,7 +82,23 @@ if(isset($_POST['supprimerAnnonce'])) {
 }
 
 
-if(isset($_POST['pinUnpinAnnonce'])) {
+if(isset($_POST['pinAnnonce'])) {
     $annoncesManager->pinAnnonce($annonceId);
     header('Location: index.php?page=mur');
+}
+
+if(isset($_POST['unPinAnnonce'])){
+    $annoncesManager->unpinAnnonce($annonceId);
+    header('Location: index.php?page=mur');
+}
+
+
+if (isset($_POST['supprimerCommentaire'])) {
+    $commIdToDelete = $_POST['commId'];
+    $comm = $annoncesManager->getSingleAnnonce($commIdToDelete);
+    if ($_SESSION['email'] == $comm['email'] || $_SESSION['privileges'] == "modo") {
+        $annoncesManager->supprimerCommentaire($commIdToDelete);
+        header("Location: index.php?page=mur&id=$annonceId");
+        exit();
+    }
 }

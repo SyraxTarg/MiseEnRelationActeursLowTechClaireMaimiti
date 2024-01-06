@@ -74,41 +74,35 @@ if(isset($msg))
 
 
 <script>
-    $(document).ready(function() {
-    annuaire = $('#annuaire').DataTable({
-        language: {
-            search: "Rechercher : ",
-            show: "Montrer",
-            lengthMenu: 'Montrer <select>'+
-                        '<option value="10">10</option>'+
-                        '<option value="25">25</option>'+
-                        '<option value="50">50</option>'+
-                        '<option value="-1">Tous</option>'+
-                        '</select> utilisateurs',
-            info: "Affichage de _START_ à _END_ sur _TOTAL_ utilisateurs",
-            infoEmpty: "Affichage de 0 à 0 sur 0 utilisateurs",
-            infoFiltered: "(filtré sur un total de _MAX_ utilisateurs)",
-            paginate: {
-                first: 'Premier ',
-                previous: 'Précédent  ',
-                next: ' Suivant ',
-                last: ' Dernier '
-            },
-            zeroRecords: "Aucun enregistrement trouvé"
-        }
-    });
-});
+        $(document).ready(function() {
+            annuaire = $('#annuaire').DataTable({
+                language: {
+                    search: "Rechercher : ",
+                    show: "Montrer",
+                    lengthMenu: 'Montrer <select>'+
+                                '<option value="10">10</option>'+
+                                '<option value="25">25</option>'+
+                                '<option value="50">50</option>'+
+                                '<option value="-1">Tous</option>'+
+                                '</select> utilisateurs',
+                    info: "Affichage de _START_ à _END_ sur _TOTAL_ utilisateurs",
+                    infoEmpty: "Affichage de 0 à 0 sur 0 utilisateurs",
+                    infoFiltered: "(filtré sur un total de _MAX_ utilisateurs)",
+                    paginate: {
+                        first: 'Premier ',
+                        previous: 'Précédent  ',
+                        next: ' Suivant ',
+                        last: ' Dernier '
+                    },
+                    zeroRecords: "Aucun enregistrement trouvé"
+                }
+            });
+        });
 
-$('#mySearch').keyup(function(){
-    annuaire.search($(this).val()).draw();
-});
-
-    window.addEventListener('DOMContentLoaded', (event) => {
-        var fen = document.querySelector("#pageAnnuaire").offsetHeight;
-        var fenVH = (fen / window.innerHeight) * 100;
-        console.log(fen);
-        console.log(fenVH);
+    $('#mySearch').keyup(function(){
+        annuaire.search($(this).val()).draw();
     });
+
 
 </script>
 

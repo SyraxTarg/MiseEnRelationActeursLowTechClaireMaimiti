@@ -1,4 +1,3 @@
-
 <div id="pageMurAnnonces">
     <h1 id="annoncesTitre">Annonces</h1>
     <br>
@@ -17,7 +16,6 @@
     if (!isset($_SESSION['idUser'])) {
         $userId = null;
         $isLoggedIn = false;
-        echo "Connectez-vous";
     } else {
         $userId = $_SESSION['idUser'];
         $isLoggedIn = true;
@@ -225,6 +223,8 @@
             }
         }
     });
+
+
 </script>
 
 
@@ -340,7 +340,6 @@
 
     .fas.fa-thumbtack {
         color: #31356E;
-        /* float: right; */
         width: fit-content;
     }
 
@@ -446,6 +445,12 @@
     .userPicture > a{
         text-decoration: none;
     }
+
+    .userPicture .pfp{
+        border-radius: 50px;
+    }
+
+
 
 
 </style>

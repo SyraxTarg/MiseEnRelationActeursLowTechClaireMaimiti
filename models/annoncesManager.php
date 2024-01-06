@@ -23,10 +23,11 @@ class annoncesManager extends AbstractManager {
     }
 
     public function getCommentaires($id_annonce){
-        $sql = "SELECT titre, description, username, Users.id AS id_user, date, profile_picture FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere = ".$id_annonce." ORDER BY date DESC;";
+        $sql = "SELECT Annonces.id, titre, description, username, Users.id AS id_user, date, profile_picture, email FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere = ".$id_annonce." ORDER BY date DESC;";
         $query = $this->dbConnect()->query($sql);
         return $query->fetchAll();
     }
+    
 
     public function getLastCommentaires($id_annonce){
         $sql = "SELECT titre, description, username, Users.id AS id_user, date, profile_picture FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere = ".$id_annonce." ORDER BY date DESC LIMIT 3;";
@@ -77,7 +78,7 @@ class annoncesManager extends AbstractManager {
     }
     
     function getSingleAnnonce($annonceId) {
-        $sql = "SELECT Annonces.id, titre, description, username, Users.id AS id_user, profile_picture, date, nb_likes, image, email FROM " . annoncesManager::TABLE_NAME . " JOIN Users ON " . annoncesManager::TABLE_NAME . ".id_user = Users.id WHERE " . annoncesManager::TABLE_NAME . ".id = :annonceId;";
+        $sql = "SELECT Annonces.id, titre, description, username, Users.id AS id_user, profile_picture, date, nb_likes, image, email, pinned FROM " . annoncesManager::TABLE_NAME . " JOIN Users ON " . annoncesManager::TABLE_NAME . ".id_user = Users.id WHERE " . annoncesManager::TABLE_NAME . ".id = :annonceId;";
         
         $query = $this->dbConnect()->prepare($sql);
         $query->bindParam(':annonceId', $annonceId, PDO::PARAM_INT);
@@ -214,6 +215,15 @@ class annoncesManager extends AbstractManager {
         $query = $this->db->prepare($sql);
         $query->execute([
             ':id_user' => $idUser
+        ]);
+    }
+
+
+    function supprimerCommentaire($commId) {
+            $sql = "DELETE FROM " . annoncesManager::TABLE_NAME . " WHERE id = :commId";
+            $query = $this->db->prepare($sql);
+            $query->execute([
+            ':commId' => $commId
         ]);
     }
     
