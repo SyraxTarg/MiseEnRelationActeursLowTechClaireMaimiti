@@ -159,4 +159,8 @@
         color: white;
         font-family: "Montserrat", sans-serif;
     }
+
+    .croixSuppression{
+        cursor: pointer;
+    }
 </style>
