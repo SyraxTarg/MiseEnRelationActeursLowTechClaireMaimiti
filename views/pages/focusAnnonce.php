@@ -1,5 +1,5 @@
 <?php
-?><a href="index.php?page=mur" class="retourArriere"><i class="fas fa-arrow-left"></i></a><br>
+?><a href="index.php?page=mur&p=1" class="retourArriere"><i class="fas fa-arrow-left"></i></a><br>
 <?php
 if (!$annonceId) {
     echo "Oups :/ une erreur est survenue.";

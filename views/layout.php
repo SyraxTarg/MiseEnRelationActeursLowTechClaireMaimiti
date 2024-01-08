@@ -11,11 +11,11 @@
     <script src="public/script/script.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
 </head>
 
 <body>
-
     <?php $activitesPossibles = ["Soudure", "Electricité", "Charpenterie", "Plomberie", "Chauffage", "Maçonnerie", "Isolation", "Carrelage", "Verrerie", "Peinture", "Sidérurgie", "Mécanique"]; ?>
 
     <?php require('./views/partials/__header.php'); ?>
@@ -26,4 +26,6 @@
 </body>
 
 </html>
+
+
 

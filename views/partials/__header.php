@@ -14,7 +14,7 @@
                     <a href="index.php?page=annuaire">Annuaire public</a>
                 </li>
                 <li>
-                    <a href="index.php?page=mur">Mur d'annonces</a>
+                    <a href="index.php?page=mur&p=1">Mur d'annonces</a>
                 </li>
 
 

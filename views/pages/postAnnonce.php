@@ -5,6 +5,10 @@
     } else{
         echo "<h1 class='postTitre'>Poster une disponibilité</h1>";
     }
+
+    if(isset($alert)){
+        echo $alert;
+    }
 ?>
 <br>
 <form method="post" enctype="multipart/form-data" class="posterUneAnnonce">
@@ -55,6 +59,12 @@
 
 
 <style>
+    .errorPostAnnonce{
+        font-family: "Montserrat", sans-serif;
+        color: red;
+        text-align: center;
+    }
+
 
     .postTitre{
         text-align: center;

@@ -324,3 +324,4 @@ input[type="checkbox"]:hover+label, input[type="checkbox"]:checked+label {
   background-color: var(--bleu-marine);
   color: white;
 }
+
