@@ -1,3 +1,5 @@
+<a href="index.php?page=profil&id=<?= $_SESSION['idUser'] ?>" class="retourArriere"><i class="fas fa-arrow-left"></i></a>
+
 <div class="user">
     <h1>Modifier le profil de
         <?= $user['username'] ?>
@@ -42,12 +44,12 @@
             <textarea name="bio" id="bio" cols="30" rows="10"><?= $user['bio'] ?></textarea>
         </div>
 
-        <div class="user_form_select">
-            <label for="activites">Quelles sont vos compétences ? </label>
 
+        <label for="activites">Quelles sont vos compétences ? </label>
+        <div class="user_form_select" id="activitesCheckboxDiv">
             <?php
             foreach ($activitesPossibles as $act) { ?>
-                <div>
+                <div class="activitesCheckbox">
                     <input type="checkbox" name="activites[]" id="<?= $act ?>" value="<?= $act ?>"
                         <?= estActiviteSelectionnee($act, $activitesUser) ? 'checked' : '' ?> hidden>
                     <label class="unique_act" for="<?= $act ?>">
@@ -63,9 +65,6 @@
                     array_push($activitesUserText, $act);
                 }
             } ?>
-
-
-
         </div>
 
         <div class="user_form_group column_align" id="user_form_group_act">
@@ -131,6 +130,12 @@
 </script>
 
 <style>
+    .retourArriere {
+        color: #0F3F6C;
+        margin: 1vw;
+        font-size: 2vw;
+    }
+
     #user_form_group_act input {
         width: 15vw;
     }
@@ -142,10 +147,25 @@
         margin: 1vh 1vw;
     }
 
-    #autresActivites{
+    #autresActivites {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+    }
+
+    #activitesCheckboxDiv {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 60vw;
+    }
+
+    .activitesCheckbox {
+        margin: 1vh 0;
+    }
+
+    label[for="activites"] {
+        margin: 1.5vh;
     }
 
     #buttonActivite {
@@ -160,7 +180,7 @@
         font-family: "Montserrat", sans-serif;
     }
 
-    .croixSuppression{
+    .croixSuppression {
         cursor: pointer;
     }
 </style>

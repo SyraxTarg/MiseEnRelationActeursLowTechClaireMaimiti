@@ -32,19 +32,21 @@
             <input type="password" name="reEnterPassword" id="reEnterPassword" required>
         </div>
 
-        <div class="user_form_select">
-            <label for="activites">Quelles sont vos compétences ? </label>
-
+        <label for="activites">Quelles sont vos compétences ? </label>
+        <div class="user_form_select" id="activitesCheckboxDiv">
             <?php
             foreach ($activitesPossibles as $act) { ?>
-                <input type="checkbox" name="activites[]" id="<?= $act ?>" value="<?= $act ?>" hidden>
-                <label class="unique_act" for="<?= $act ?>">
-                    <?= $act ?>
-                </label>
+                <div class="activitesCheckbox">
+                    <input type="checkbox" name="activites[]" id="<?= $act ?>" value="<?= $act ?>" hidden>
+                    <label class="unique_act" for="<?= $act ?>">
+                        <?= $act ?>
+                    </label>
+                </div>
                 <?php
             }
             ?>
         </div>
+
         <div class="user_form_group column_align" id="user_form_group_act">
             <button type="button" id="buttonActivite">Ajouter une autre activité</button>
             <div id="autresActivites" class="row_align"></div>
@@ -107,6 +109,21 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+    }
+
+    #activitesCheckboxDiv {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 60vw;
+    }
+
+    .activitesCheckbox {
+        margin: 1vh 0;
+    }
+
+    label[for="activites"] {
+        margin: 1.5vh;
     }
 
     #buttonActivite {
