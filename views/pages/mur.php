@@ -162,9 +162,23 @@
                                 echo $date[0]; ?>
                             </p>
                         </div>
-                        <div class="commentContentMur">
-                            <p>
-                                <?php echo $comm['description']; ?>
+                        <div class="divCommentContentMur">
+                            <p class="commentContentMur">
+                                <?php 
+                                if(strlen($comm['description']) > 900){
+                                    $commContent=$comm['description'][0];
+                                    for($i=1; $i<900; $i++){
+                                            $commContent=$commContent.$comm['description'][$i];
+                                    } 
+                                        $commContent = $commContent."...";
+                                        echo $commContent;
+                                }
+                                
+                                 else{
+                                    echo $comm['description'];
+                                }
+                                
+                                    ?>
                             </p>
                         </div>
                     </div>
@@ -230,6 +244,19 @@
 
 
 <style>
+
+    .divCommentContentMur{
+        word-wrap:break-word;
+        padding-left: 1vw;
+    }
+
+    .commentContentMur{
+        max-width: 50vw;
+        max-height: fit-content;
+        
+    }
+
+
     #pageMurAnnonces{
         position: relative;
         overflow-x: hidden;
@@ -373,10 +400,10 @@
 
     .commentairesMur {
         margin-left: 5vw;
-        margin-right: 3vw;
+        margin-right: 1vw;
         border: none;
         display: flex;
-        gap: 8%;
+        /* gap: 8%; */
         font-family: "Montserrat", sans-serif;
     }
 
