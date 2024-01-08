@@ -10,20 +10,8 @@
         <img src="./public/images/elements/elements3_hammer.png" alt="hammer"id="hammer3">
         <img src="./public/images/elements/elements4_piggybank.png" alt="piggy"id="piggy">
     </div>
-    <div id="filterAnnonces">
-        <form method="post">
-            <label for="typeFiltre">Filtrer par type :</label>
-            <br>
-            <select id="typeFiltre" name="typeFiltre">
-                <option value="">Tous</option>
-                <option value="Avancees">Avancées</option>
-                <option value="Dispos">Dispos</option>
-                <option value="Recherche">Recherches</option>
-            </select>
-            <br>
-            <input type="submit" value="Filtrer" name="filtrer" id="filtrer">
-        </form>
-    </div>
+    
+
     <?php
     if (!isset($_SESSION['idUser'])) {
         $userId = null;
@@ -34,59 +22,19 @@
     }
 
 
+    $annoncesParPage = 20;
 
     $numPage = isset($_GET['p']) ? (int) $_GET['p'] : 1;
+
+
+    $offset = ($numPage - 1) * $annoncesParPage;
+
+
     $annonces = array_merge($annoncesPinned, $annoncesNonPinned);
-    if(isset($_POST['filtrer'])){
-        if($_POST['typeFiltre'] == "Avancees"){
-            $annonces = $avancees;
-        }
-        if($_POST['typeFiltre'] == "Dispos"){
-            $annonces = $dispos;
-        }
-        if($_POST['typeFiltre'] == "Recherche"){
-            $annonces = $recherches;
-        }
-        if($_POST['typeFiltre'] == ""){
-            $annonces = array_merge($annoncesPinned, $annoncesNonPinned);
-        }
-    }
 
 
-    $nbPages=intdiv(count($annonces), 10);
-    $nbPages2 = count($annonces)%10;
+    $annoncesPaginees = array_slice($annonces, $offset, $annoncesParPage);
 
-    $nbPagesTotal = $nbPages;
-    if($nbPages2 != null || $nbPages2 != 0){
-        $nbPagesTotal +=1;
-    }
-    $offsets=[0,0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400, 410, 420, 430, 440, 450, 460, 470, 480, 490, 500];
-    $k=0;
-    echo "<div class='pagination'>";
-    for ($i=0; $i < $nbPagesTotal ; $i++) { 
-        $k+=1;
-        if($k==$numPage){
-                    $class = 'active';
-                } else{
-                    $class = '';
-                }
-        ?>
-        <a href="index.php?page=mur&p=<?php echo $k;?>" class='paginationBtn <?php echo $class;?>'><?php echo $k;?></a>
-        <?php
-    }
-    echo "</div>";
-    if(isset($_GET['p'])){
-        $annoncesPaginees = $annoncesManager->getTenPinnedAnnonces($offsets[$_GET['p']]);
-        if(isset($_POST['filtrer'])){
-            if($_POST['typeFiltre'] != ""){
-                $annoncesPaginees = $annoncesManager->rechercheAnnoncesByType($offsets[$_GET['p']]);
-            } else{
-                $annoncesPaginees = $annoncesManager->getTenPinnedAnnonces($offsets[$_GET['p']]);
-            }
-            
-        }
-    }
-    
 
 
     foreach ($annoncesPaginees as $index => $annonce) {
@@ -251,18 +199,18 @@
 
 
 
+    $totalAnnonces = count($annonces);
+    $totalPages = ceil($totalAnnonces / $annoncesParPage);
+
+
     echo "<div class='pagination'>";
-    $k=0;
-    for ($i=0; $i < $nbPagesTotal ; $i++) { 
-        $k+=1;
-        if($k==$numPage){
-                    $class = 'active';
-                } else{
-                    $class = '';
-                }
-        ?>
-        <a href="index.php?page=mur&p=<?php echo $k;?>" class='paginationBtn <?php echo $class;?>'><?php echo $k;?></a>
-        <?php
+    for ($i = 1; $i <= $totalPages; $i++) {
+        if($i==$numPage){
+            $class = 'active';
+        } else{
+            $class = '';
+        }
+        echo "<a href='index.php?page=mur&p=$i'class='paginationBtn $class'>$i</a>";
     }
     echo "</div>";
     ?>
@@ -301,28 +249,6 @@
 
 <style>
 
-    #filterAnnonces{
-        font-family: "Montserrat", sans-serif;
-        width: fit-content;
-        margin-left: 2vw;
-    }
-
-    #typeFiltre{
-        font-family: "Montserrat", sans-serif;
-    }
-
-    #filtrer{
-        font-family: "Montserrat", sans-serif;
-        border: none;
-        background-color: white;
-        color: #9B91C3;
-        font-size: 2vh;
-        cursor: pointer;
-    }
-
-    #filtrer:hover{
-        color: #31356E;
-    }
     .divCommentContentMur{
         word-wrap:break-word;
         padding-left: 1vw;
@@ -481,6 +407,7 @@
         margin-right: 1vw;
         border: none;
         display: flex;
+        /* gap: 8%; */
         font-family: "Montserrat", sans-serif;
     }
 
@@ -523,7 +450,6 @@
         display: flex;
         justify-content: center;
     }
-
 
     .paginationBtn {
         text-decoration: none;

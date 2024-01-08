@@ -41,6 +41,49 @@ class annoncesManager extends AbstractManager {
         return $query->fetchAll();
     }
 
+    function getTenPinnedAnnonces($offset){
+        $sql = "WITH AnnoncesTri AS (SELECT Annonces.id, titre, description, username, Users.id AS id_user, date, nb_likes, image, profile_picture FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere is null ORDER BY date DESC, pinned) SELECT Annonces.id, titre, description, username, Users.id AS id_user, date, nb_likes, image, profile_picture FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere is null ORDER BY pinned is true desc, date desc LIMIT 10 OFFSET ".$offset.";";
+        $query = $this->dbConnect()->query($sql);
+        return $query->fetchAll();
+    }
+
+    // $sql = "select Annonces.id, titre, description, username, Users.id AS id_user, date, nb_likes, image, profile_picture from ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id where id_annonce_mere is null order by date desc, pinned offset ".$offset.";";
+    //     $query = $this->dbConnect()->query($sql);
+    //     return $query->fetchAll();
+
+
+    function getNumberAnnonces(){
+        $sql="select count(id) from Annonces where id_annonce_mere is null;";
+        $query = $this->dbConnect()->query($sql);
+        return $query->fetchAll();
+    }
+
+    function rechercheAnnoncesByType($offset){
+        $sql = "WITH AnnoncesTri AS (
+            SELECT Annonces.id, titre, description, username, Users.id AS id_user, date, nb_likes, image, profile_picture
+            FROM " . annoncesManager::TABLE_NAME . "
+            JOIN Users ON " . annoncesManager::TABLE_NAME . ".id_user = Users.id
+            WHERE id_annonce_mere IS NULL
+            ORDER BY date DESC, pinned
+        )
+        SELECT Annonces.id, titre, description, username, Users.id AS id_user, date, nb_likes, image, profile_picture
+        FROM " . annoncesManager::TABLE_NAME . "
+        JOIN Users ON " . annoncesManager::TABLE_NAME . ".id_user = Users.id
+        JOIN " . $_POST['typeFiltre'] . " ON " . annoncesManager::TABLE_NAME . ".id = " . $_POST['typeFiltre'] . ".id_annonce
+        WHERE id_annonce_mere IS NULL
+            AND Annonces.id IN (SELECT id_annonce FROM " . $_POST['typeFiltre'] . ")
+        ORDER BY pinned IS TRUE DESC, date DESC
+        LIMIT 10 OFFSET " . $offset . ";";
+
+
+
+
+
+        $query = $this->dbConnect()->query($sql);
+        return $query->fetchAll();
+
+    }
+
     function getNonPinnedAnnonces(){
         $sql = "SELECT Annonces.id, titre, description, username, Users.id AS id_user, date, nb_likes, image, profile_picture FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere IS NULL AND (pinned = 'f' OR pinned IS NULL) ORDER BY date DESC;";
         $query = $this->dbConnect()->query($sql);
