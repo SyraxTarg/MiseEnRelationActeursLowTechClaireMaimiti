@@ -183,10 +183,6 @@
     @media (max-width: 992px) {}
 
     @media (max-width: 768px) {
-        #menu {
-            display: none;
-        }
-
         #menu_icon {
             display: block;
         }
@@ -194,24 +190,19 @@
 </style>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var largeurViewport = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-        if(largeurViewport < 768){
-            menu_icon = document.querySelector('#menu_icon');
-            menu = document.querySelector('#menu');
-            panel_open = false;
-    
-            menu_icon.addEventListener("click", function () {
-                panel_open = !panel_open;
-            })
-    
-            if (panel_open) {
-                menu.style.display = "block";
-            } else {
-                menu.style.display = "none";
-            }
-        }
+    // let largeurViewport = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    let menu_icon = document.querySelector('#menu_icon');
+    let menu = document.querySelector('nav');
+    let panel_open = false;
+    menu.style.display = "none";
 
+    menu_icon.addEventListener("click", function () {
+        panel_open = !panel_open;
+        if (panel_open) {
+            menu.style.display = "block";
+        } else {
+            menu.style.display = "none";
+        }
     })
 
 </script>
