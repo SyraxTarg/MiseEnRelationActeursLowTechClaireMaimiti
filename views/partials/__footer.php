@@ -17,19 +17,24 @@
         <h2>Réseaux</h2>
         <ul id="liensReseaux">
             <li class="socialLogo">
-                <a href="https://www.facebook.com/lowtechbordeaux"><img src="./public/images/facebook.png" alt="facebook"></a>
+                <a href="https://www.facebook.com/lowtechbordeaux"><img src="./public/images/facebook.png"
+                        alt="facebook"></a>
             </li>
             <li class="socialLogo">
-                <a href="https://www.instagram.com/lowtechlabbordeaux/"><img src="./public/images/instagram.png" alt="instagram"></a>
+                <a href="https://www.instagram.com/lowtechlabbordeaux/"><img src="./public/images/instagram.png"
+                        alt="instagram"></a>
             </li>
             <li class="socialLogo">
-                <a href="https://www.youtube.com/@low-techbordeaux5463"><img src="./public/images/youtube.png" alt="youtube"></a>
+                <a href="https://www.youtube.com/@low-techbordeaux5463"><img src="./public/images/youtube.png"
+                        alt="youtube"></a>
             </li>
             <li class="socialLogo">
-                <a href="https://discord.com/invite/DHAfV7N43U"><img src="./public/images/discord.png" alt="discord"></a>
+                <a href="https://discord.com/invite/DHAfV7N43U"><img src="./public/images/discord.png"
+                        alt="discord"></a>
             </li>
             <li class="socialLogo">
-                <a href="https://www.helloasso.com/associations/low-tech-bordeaux"><img src="./public/images/helloasso.png" alt="helloasso"></a>
+                <a href="https://www.helloasso.com/associations/low-tech-bordeaux"><img
+                        src="./public/images/helloasso.png" alt="helloasso"></a>
             </li>
         </ul>
     </div>
@@ -39,7 +44,7 @@
             <img src="./public/images/ue.png" alt="union europeenne">
             <img src="./public/images/nvlleAquitaine.png" alt="nouvelle aquitaine">
         </div>
-        
+
     </div>
 </footer>
 
@@ -50,14 +55,13 @@
         height: 5vw;
     }
 
-    footer #reseaux img{
-        height:2vw;
+    footer #reseaux img {
+        height: 2vw;
         margin: 2%;
-
     }
 
-    footer{
-        display:flex;
+    footer {
+        display: flex;
         flex-direction: row;
         justify-content: space-around;
         background-color: #0F3F6C;
@@ -67,19 +71,19 @@
         padding-bottom: 2vw;
         bottom: 0;
         font-family: "Montserrat", sans-serif;
-        
+
     }
 
-    #liensReseaux{
+    #liensReseaux {
         list-style: none;
         display: flex;
         flex-grow: 2;
         gap: 3%;
-        
-       
+
+
     }
 
-    footer h2{
+    footer h2 {
         display: flex;
         justify-content: center;
         margin-bottom: 1vw;
@@ -89,9 +93,14 @@
         color: white;
     }
 
-    #soutien #logos{
+    #soutien #logos {
         display: flex;
         gap: 3%;
     }
 
+    @media (max-width: 992px){
+        footer{
+            font-size: 2vw;
+        }
+    }
 </style>
