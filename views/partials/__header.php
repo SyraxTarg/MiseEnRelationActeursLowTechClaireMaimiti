@@ -189,7 +189,7 @@
     }
 </style>
 
-<script>
+<!-- <script>
     // let largeurViewport = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     let menu_icon = document.querySelector('#menu_icon');
     let menu = document.querySelector('nav');
@@ -205,4 +205,4 @@
         }
     })
 
-</script>
+</script> -->
