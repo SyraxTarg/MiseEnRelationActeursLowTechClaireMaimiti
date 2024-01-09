@@ -32,27 +32,7 @@
         $userId = $_SESSION['idUser'];
         $isLoggedIn = true;
     }
-
-
-
     $numPage = isset($_GET['p']) ? (int) $_GET['p'] : 1;
-    $annonces = array_merge($annoncesPinned, $annoncesNonPinned);
-    if(isset($_POST['filtrer'])){
-        if($_POST['typeFiltre'] == "Avancees"){
-            $annonces = $avancees;
-        }
-        if($_POST['typeFiltre'] == "Dispos"){
-            $annonces = $dispos;
-        }
-        if($_POST['typeFiltre'] == "Recherche"){
-            $annonces = $recherches;
-        }
-        if($_POST['typeFiltre'] == ""){
-            $annonces = array_merge($annoncesPinned, $annoncesNonPinned);
-        }
-    }
-
-
     $nbPages=intdiv(count($annonces), 10);
     $nbPages2 = count($annonces)%10;
 
@@ -60,7 +40,7 @@
     if($nbPages2 != null || $nbPages2 != 0){
         $nbPagesTotal +=1;
     }
-    $offsets=[0,0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400, 410, 420, 430, 440, 450, 460, 470, 480, 490, 500];
+    
     $k=0;
     echo "<div class='pagination'>";
     for ($i=0; $i < $nbPagesTotal ; $i++) { 
@@ -75,17 +55,7 @@
         <?php
     }
     echo "</div>";
-    if(isset($_GET['p'])){
-        $annoncesPaginees = $annoncesManager->getTenPinnedAnnonces($offsets[$_GET['p']]);
-        if(isset($_POST['filtrer'])){
-            if($_POST['typeFiltre'] != ""){
-                $annoncesPaginees = $annoncesManager->rechercheAnnoncesByType($offsets[$_GET['p']]);
-            } else{
-                $annoncesPaginees = $annoncesManager->getTenPinnedAnnonces($offsets[$_GET['p']]);
-            }
-            
-        }
-    }
+    
     
 
 

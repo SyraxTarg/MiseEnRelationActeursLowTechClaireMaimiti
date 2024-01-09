@@ -72,19 +72,17 @@ if (isset($_POST['like'])) {
     $_SESSION[$etatBoutonKey] = $etatBouton;
 }
 
-    // }
-// }
 
 if(isset($_POST['supprimerAnnonce'])) {
     $annoncesManager->supprimerCommentaires($annonceId);
     $annoncesManager->supprimerAnnonce($annonceId, $annoncesManager->getAnnonceType($annonceId, $avancees, $dispos, $recherches));
-    header('Location: index.php?page=mur');
+    header('Location: index.php?page=mur&p=1');
 }
 
 
 if(isset($_POST['pinAnnonce'])) {
     $annoncesManager->pinAnnonce($annonceId);
-    header('Location: index.php?page=mur');
+    header('Location: index.php?page=mur&p=1');
 }
 
 if(isset($_POST['unPinAnnonce'])){
