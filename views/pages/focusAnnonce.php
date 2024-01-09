@@ -42,7 +42,7 @@ if (!$annonceId) {
         <div class="mainAnnonce">
             <div class="userPicture">
                 <?php
-                if ($annonce['id_user'] == 5) { ?>
+                if ($annonce['id_user'] == 1) { ?>
                     <h2>
                         <?php echo $annonce['username']; ?>
                     </h2>
@@ -129,7 +129,7 @@ if (!$annonceId) {
 
                 <div class="commentUser">
                     <?php
-                    if ($comm['id_user'] == 5) { ?>
+                    if ($comm['id_user'] == 1) { ?>
                         <h3>
                             <?php echo $comm['username']; ?>
                         </h3>
