@@ -87,7 +87,7 @@ if(isset($_POST['pinAnnonce'])) {
 
 if(isset($_POST['unPinAnnonce'])){
     $annoncesManager->unpinAnnonce($annonceId);
-    header('Location: index.php?page=mur');
+    header('Location: index.php?page=murp=1');
 }
 
 
