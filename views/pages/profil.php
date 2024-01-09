@@ -1,7 +1,7 @@
 <div id="profil" class="column_align">
     <?php
 
-    if ($user['id'] == 5 && $user['username'] == "utilisateur introuvable") { ?>
+    if ($user['id'] == 1 && $user['username'] == "utilisateur introuvable") { ?>
         <h1 class="user_infos">Cet utilisateur n'existe pas.</h1>
         <?php
     } else {

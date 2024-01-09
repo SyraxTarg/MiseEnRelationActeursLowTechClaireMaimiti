@@ -116,7 +116,7 @@
             <div class="mainAnnonce">
                 <div class="userPicture">
                     <?php
-                    if ($annonce['id_user'] == 5) { ?>
+                    if ($annonce['id_user'] == 1) { ?>
                         <p>
                             <?php echo $annonce['username']; ?>
                         </p>
@@ -187,7 +187,7 @@
                     <div class="commentairesMur" style="overflow: hidden; word-wrap:break-word;">
                         <div class="commentUserMur">
                             <?php
-                            if ($comm['id_user'] == 5) { ?>
+                            if ($comm['id_user'] == 1) { ?>
                                 <p>
                                     <?php echo $comm['username']; ?>
                                 </p>
