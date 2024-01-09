@@ -43,7 +43,7 @@ INSERT INTO Recherche (id_annonce) VALUES (1), (2);
 
 INSERT INTO Annonces (titre, description, id_user, nb_likes, pinned, date) VALUES
 ('Merci a EauPro Solutions Plomberie', 'Nous remercions tres chaleureusement EauPro Solutions Plomberie pour leur don genereux de systemes de plomberie.', 3, 4, true, NOW()),
-('Recherche don de charpente', 'Bonjour, nous recherchons une entreprise ou un particulier qui aurait la capacite et la generosite de nous faire un don de bois qui servira a la structure du toit de la tiny house.', 4, 2, false, NOW());
+('Bientot notre tiny house n''aura plus froid', 'Max travaille actuellement sur l''isolation de la tiny house. Merci a lui pour sa participation active sur le chantier. L''isolation devrait etre terminee d''ici quelques jours.', 4, 5, false, NOW());
 
 INSERT INTO Avancees (id_annonce) VALUES (3), (4);
 
