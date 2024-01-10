@@ -175,16 +175,3 @@ function checkActivityValidity($activite)
         return true;
     }
 }
-
-?>
-
-<script>
-    //appelé au click sur le bouton "Supprimer mon profil"
-    function confirmDelete() {
-        var confirmation = confirm("Êtes-vous sûr de vouloir supprimer votre profil ? Cette action est irréversible.");
-
-        if (confirmation) {
-            window.location.href = "index.php?page=modifierProfil&action=delete";
-        }
-    }
-</script>

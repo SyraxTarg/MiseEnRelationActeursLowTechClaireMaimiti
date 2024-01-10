@@ -1,4 +1,5 @@
-<a href="index.php?page=profil&id=<?= $_SESSION['idUser'] ?>" class="retourArriere"><i class="fas fa-arrow-left"></i></a>
+<a href="index.php?page=profil&id=<?= $_SESSION['idUser'] ?>" class="retourArriere"><i
+        class="fas fa-arrow-left"></i></a>
 
 <div class="user">
     <h1>Modifier le profil de
@@ -92,37 +93,45 @@
 </div>
 
 <script>
-        var boutonAjouter = document.querySelector("#buttonActivite");
-        var conteneurAutresActivites = document.querySelector("#autresActivites");
+    var boutonAjouter = document.querySelector("#buttonActivite");
+    var conteneurAutresActivites = document.querySelector("#autresActivites");
 
-        boutonAjouter.addEventListener("click", function () {
-            var nouvelleActiviteDiv = document.createElement("div");
-            nouvelleActiviteDiv.className = "autreActiviteInput";
+    boutonAjouter.addEventListener("click", function () {
+        var nouvelleActiviteDiv = document.createElement("div");
+        nouvelleActiviteDiv.className = "autreActiviteInput";
 
-            var nouvelInput = document.createElement("input");
-            nouvelInput.type = "text";
-            nouvelInput.name = "autresActivites[]";
+        var nouvelInput = document.createElement("input");
+        nouvelInput.type = "text";
+        nouvelInput.name = "autresActivites[]";
 
-            var croixSuppression = document.createElement("span");
-            croixSuppression.textContent = "X";
-            croixSuppression.style.cursor = "pointer";
+        var croixSuppression = document.createElement("span");
+        croixSuppression.textContent = "X";
+        croixSuppression.style.cursor = "pointer";
 
-            nouvelleActiviteDiv.appendChild(nouvelInput);
-            nouvelleActiviteDiv.appendChild(croixSuppression);
+        nouvelleActiviteDiv.appendChild(nouvelInput);
+        nouvelleActiviteDiv.appendChild(croixSuppression);
 
-            conteneurAutresActivites.appendChild(nouvelleActiviteDiv);
+        conteneurAutresActivites.appendChild(nouvelleActiviteDiv);
 
-            croixSuppression.addEventListener("click", function () {
-                conteneurAutresActivites.removeChild(nouvelleActiviteDiv);
-            });
+        croixSuppression.addEventListener("click", function () {
+            conteneurAutresActivites.removeChild(nouvelleActiviteDiv);
         });
+    });
 
-        conteneurAutresActivites.addEventListener("click", function (event) {
-            if (event.target && event.target.className == "croixSuppression") {
-                var parentDiv = event.target.parentNode;
-                conteneurAutresActivites.removeChild(parentDiv);
-            }
-        });
+    conteneurAutresActivites.addEventListener("click", function (event) {
+        if (event.target && event.target.className == "croixSuppression") {
+            var parentDiv = event.target.parentNode;
+            conteneurAutresActivites.removeChild(parentDiv);
+        }
+    });
+
+    function confirmDelete() {
+        var confirmation = confirm("Êtes-vous sûr de vouloir supprimer votre profil ? Cette action est irréversible.");
+
+        if (confirmation) {
+            window.location.href = "index.php?page=modifierProfil&action=delete";
+        }
+    }
 </script>
 
 <style>
