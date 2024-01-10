@@ -28,7 +28,7 @@ if (isset($_GET['msg'])) {
     }
 }
 
-if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEnterPassword']) && isset($_POST['email']) && isset($_POST['activites'])) {
+if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEnterPassword']) && isset($_POST['email'])) {
     if (isset($_POST['autresActivites'])) {
         $formValidity = checkFormValidity($_POST['username'], $_POST['password'], $_POST['reEnterPassword'], $_POST['email'], $_POST['autresActivites']);
     } else {
@@ -38,10 +38,14 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEn
     if (gettype($formValidity) == "string") {
         header("Location: index.php?page=inscription&msg=" . $formValidity);
     } else {
-        $activites = $_POST['activites'];
-        if(isset($_POST['autresActivites'])){
-            foreach($_POST['autresActivites'] as $act){
-                if($act){
+        if (isset($_POST['activites'])) {
+            $activites = $_POST['activites'];
+        } else {
+            $activites = [];
+        }
+        if (isset($_POST['autresActivites'])) {
+            foreach ($_POST['autresActivites'] as $act) {
+                if ($act) {
                     array_push($activites, $act);
                 }
             }

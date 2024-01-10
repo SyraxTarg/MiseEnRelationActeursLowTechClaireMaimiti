@@ -72,7 +72,11 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reEn
             }
         }
 
-        $activites = $_POST['activites'];
+        if (isset($_POST['activites'])) {
+            $activites = $_POST['activites'];
+        } else {
+            $activites = [];
+        }
         if (isset($_POST['autresActivites'])) {
             foreach ($_POST['autresActivites'] as $act) {
                 if ($act) {
