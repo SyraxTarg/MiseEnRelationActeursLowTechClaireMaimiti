@@ -232,14 +232,14 @@
         console.log(fen);
         console.log(fenVH);
 
-        if (fenVH < 500) {
+        if (fenVH < 200) {
             document.getElementById("earthMur").style.display = "none";
             document.getElementById("recycleMur").style.display = "none";
             document.getElementById("mapMur").style.display = "none";
             document.getElementById("hammer3").style.display = "none";
             document.getElementById("piggy").style.display = "none";
         } else {
-            if(fenVH < 1000){
+            if(fenVH < 500){
                 document.getElementById("earthMur").style.display = "block";
                 document.getElementById("recycleMur").style.display = "block";
             } else{
@@ -457,6 +457,11 @@
         padding-right: 1vw;
     }
 
+    .commentUserMur > a{
+        color: #31356E;
+        text-decoration: none;
+    }
+
     .dateMur {
         color: #9B91C3;
     }
@@ -508,6 +513,7 @@
     }
     .userPicture > a{
         text-decoration: none;
+        color: #31356E;
     }
 
     .userPicture .pfp{

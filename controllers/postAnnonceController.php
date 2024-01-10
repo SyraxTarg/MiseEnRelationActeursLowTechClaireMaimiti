@@ -41,6 +41,16 @@ $modos = $modérateursManager->getModérateurs();
 
 if (isset($_SESSION['username'])) {
     if (isset($_POST['postAnnonce'])) {
+        $motsInterdits = [
+            "trou du cul","sac à merde","sac à foutre","nique ta race","nique ta mère","ménage à trois","la putain de ta mère","grande folle","fils de pute","fille de pute","brouter le cresson","emmerdeuse","zizi","zigounette","turlute","troncher","trique","tringler","teuch","tanche","tapette","suce","salope","salaud","ramoner","pute","putain","pousse-crotte","pouffiasse","pisser","pipi","péter","pédé","pédale","palucher","negro","nègre","meuf","merdeux","merdeuse","MALPT","jouir","grogniasse","gouine","gerber","foutre","étron","enfoirée","enfoiré","enculeurs","enculeur","enculée","enculé","emmerdeur","emmerder","emmerdant","déconner","déconne","cul","cramouille","couilles","conne","connasse","connard","clitoris","clito","chiottes","chier","chiasse","caca","branleuse","branleur","branlette","branler","branlage","brackmard","bourrée","bourré","bordel","bloblos","bitte","bite","bigornette","merde"
+        ];
+        foreach ($motsInterdits as $motInterdit) {
+            $pattern = "/\b" . preg_quote($motInterdit, '/') . "\b/ui";
+            $replacement = str_repeat("*", mb_strlen($motInterdit));
+    
+            $_POST['description'] = preg_replace($pattern, $replacement, $_POST['description']);
+            $_POST['titre'] = preg_replace($pattern, $replacement, $_POST['titre']);
+        }
         $titreLength = strlen($_POST['titre']);
         $descriptionLength = strlen($_POST['description']);
         if($titreLength <= 50){

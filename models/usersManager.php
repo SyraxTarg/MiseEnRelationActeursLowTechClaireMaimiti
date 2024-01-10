@@ -91,14 +91,5 @@ class usersManager extends AbstractManager {
         ]);
     }
 
-    // function getUsersByActivites($activites) {
-    //     $sql = "SELECT id, username, email FROM " . usersManager::TABLE_NAME . " WHERE activites IN (:activites)";
-    //     $query = $this->db->prepare($sql);
-    //     $query->execute([
-    //         ':activites' => $activites
-    //     ]);
-    
-    //     return $query->fetchAll();
-    // }
     
 }

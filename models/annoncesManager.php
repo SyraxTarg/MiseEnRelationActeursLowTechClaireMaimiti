@@ -7,7 +7,6 @@ require 'public\PHPMailer-master\src\PHPMailer.php';
 require 'public/PHPMailer-master/src/SMTP.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 
@@ -24,12 +23,6 @@ class annoncesManager extends AbstractManager {
         return $query->fetchAll();
     }
     
-
-    public function set_annonce_mère($id_annonce, $id_annonce_mère) {
-        $sql = "UPDATE ".annoncesManager::TABLE_NAME." SET id_annonce_mere = ".$id_annonce_mère. " WHERE id = ".$id_annonce.";";
-        $query = $this->dbConnect()->query($sql);
-        return $query->fetchAll();
-    }
 
     public function getCommentaires($id_annonce){
         $sql = "SELECT Annonces.id, titre, description, username, Users.id AS id_user, date, profile_picture, email FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere = ".$id_annonce." ORDER BY date DESC;";
@@ -64,26 +57,6 @@ class annoncesManager extends AbstractManager {
         return $query->fetchAll();
     }
 
-    function rechercheAnnoncesByType($offset, $typeFiltre){
-        $sql = "WITH AnnoncesTri AS (
-            SELECT Annonces.id, titre, description, username, Users.id AS id_user, date, nb_likes, image, profile_picture
-            FROM " . annoncesManager::TABLE_NAME . "
-            JOIN Users ON " . annoncesManager::TABLE_NAME . ".id_user = Users.id
-            WHERE id_annonce_mere IS NULL
-            ORDER BY date DESC, pinned
-        )
-        SELECT Annonces.id, titre, description, username, Users.id AS id_user, date, nb_likes, image, profile_picture
-        FROM " . annoncesManager::TABLE_NAME . "
-        JOIN Users ON " . annoncesManager::TABLE_NAME . ".id_user = Users.id
-        JOIN " . $typeFiltre . " ON " . annoncesManager::TABLE_NAME . ".id = " . $typeFiltre . ".id_annonce
-        WHERE id_annonce_mere IS NULL
-            AND Annonces.id IN (SELECT id_annonce FROM " . $typeFiltre . ")
-        ORDER BY pinned IS TRUE DESC, date DESC
-        LIMIT 10 OFFSET " . $offset . ";";
-        $query = $this->dbConnect()->query($sql);
-        return $query->fetchAll();
-
-    }
 
     function getNonPinnedAnnonces(){
         $sql = "SELECT Annonces.id, titre, description, username, Users.id AS id_user, date, nb_likes, image, profile_picture FROM ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id WHERE id_annonce_mere IS NULL AND (pinned = 'f' OR pinned IS NULL) ORDER BY date DESC;";
@@ -91,17 +64,7 @@ class annoncesManager extends AbstractManager {
         return $query->fetchAll();
     }
 
-    function leaveLike($id_annonce){
-        $sql = "UPDATE Annonces SET nb_likes = nb_likes + 1 WHERE id = " . $id_annonce . ";";
-        $query = $this->dbConnect()->query($sql);
-        return $query->fetchAll();
-    }
-
-    function removeLike($id_annonce){
-        $sql = "UPDATE Annonces SET nb_likes = nb_likes - 1 WHERE id = " . $id_annonce . ";";
-        $query = $this->dbConnect()->query($sql);
-        return $query->fetchAll();
-    }
+    
     
     function getLikesCount($id_annonce) {
         $sql = "SELECT nb_likes FROM Annonces WHERE id = " . $id_annonce . ";";
@@ -239,18 +202,6 @@ class annoncesManager extends AbstractManager {
             }
         }
         return false;
-    }
-        function sendNotification($user) {
-        $to = $user['email'];
-        $subject = 'Notification: Nouvelle annonce correspondant à vos activités';
-        $message = 'Bonjour ' . $user['username'] . ', une nouvelle annonce correspondant à vos activités a été postée. Consultez-la sur notre site.';
-    
-
-        $headers = 'From: webmaster@example.com' . "\r\n" .
-            'Reply-To: webmaster@example.com' . "\r\n" .
-            'X-Mailer: PHP/' . phpversion();
-    
-        mail($to, $subject, $message, $headers);
     }
     
     

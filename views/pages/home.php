@@ -25,10 +25,6 @@
                         et du réemploi.</li>
                     <li>Proposer des chantiers participatifs où chacun peut venir contribuer ou apprendre à bricoler
                     </li>
-                    <li>Produire une documentation, éventuellement sous forme d'un livre blanc open source pour attester
-                        du retour d'expérience et des performances du démonstrateur</li>
-                    <li>Experimentation d'une plateforme de mise en relation entre les différents acteurs, mécènes et
-                        bénévoles</li>
                 </ul>
                 <p class="home_description">En créant un maillage des acteurs Low Tech sur le territoire, l’association
                     veut devenir la vitrine du réseau Low Tech de la région, développer des partenariats avec les autres
