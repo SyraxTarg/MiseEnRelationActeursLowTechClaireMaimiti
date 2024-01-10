@@ -17,6 +17,13 @@
                     <h1 class="user_info">
                         <?= $user['username'] ?>
                     </h1>
+                    <div>
+                        <?php
+                        if (isset($userPrivileges)) { ?>
+                            <p><?=$userPrivileges?></p>
+                        <?php }
+                        ?>
+                    </div>
                     <p class="user_info">
                         <?= $user['bio'] ?>
                     </p>
@@ -29,7 +36,8 @@
 
                     <?php
                     if ($user['activites']) { ?>
-                        <div class="user_info"><p>Activités :</p>
+                        <div class="user_info">
+                            <p>Activités :</p>
                             <?php
                             foreach ($activites as $act) { ?>
                                 <p class="unique_act">
@@ -38,7 +46,6 @@
                                 <?php
                             }
                             ?>
-                            <!-- <?= $activites ?> -->
                         </div>
                         <?php
                     }
@@ -58,15 +65,15 @@
                     <?php
                 } else {
                     if (isset($_SESSION['privileges']) && $_SESSION['privileges'] == "admin") {
-                        if ($userPrivileges != "admin") { ?>
+                        if ($userPrivileges != "Administrateur") { ?>
                             <a class="link_action" href="#"
                                 onclick="confirmDelete(<?= $user['id'] ?>, 'Êtes-vous sûr de vouloir bannir cet utilisateur ? Il ne sera pas prévenu.', 'ban')">Ban</a>
                             <p> | </p>
                         <?php }
-                        if ($userPrivileges == "particulier") { ?>
+                        if ($userPrivileges == "Particulier") { ?>
                             <a class="link_action" href="index.php?page=profil&id=<?= $user['id'] ?>&action=grantModo">Nommer
                                 modérateur</a>
-                        <?php } elseif ($userPrivileges == "modo") { ?>
+                        <?php } elseif ($userPrivileges == "Modérateur") { ?>
                             <a class="link_action" href="index.php?page=profil&id=<?= $user['id'] ?>&action=removeModo">Supprimer les
                                 privilèges de modérateur</a>
                             <p> | </p>

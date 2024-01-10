@@ -45,7 +45,7 @@ if (isset($_GET['id'])) {
 
 if (isset($_GET['action'])) {
     $adminsManager = new adminsManager();
-    if (isset($_SESSION['privileges']) && $_SESSION['privileges'] == "admin") {
+    if (isset($_SESSION['privileges']) && $_SESSION['privileges'] == "Administrateur") {
         switch ($_GET['action']) {
             case "grantModo":
                 $adminsManager->give_modo_rights($user['id']);
@@ -97,11 +97,11 @@ function getPrivileges($id)
     $modo = $moderateursManager->getUniqueModo($id);
 
     if ($admin)
-        return "admin";
+        return "Administrateur";
     elseif ($modo)
-        return "modo";
+        return "Modérateur";
     else
-        return "particulier";
+        return "Particulier";
 }
 
 ?>
