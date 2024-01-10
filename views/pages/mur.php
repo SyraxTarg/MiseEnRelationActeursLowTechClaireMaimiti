@@ -10,26 +10,6 @@
         <img src="./public/images/elements/elements3_hammer.png" alt="hammer"id="hammer3">
         <img src="./public/images/elements/elements4_piggybank.png" alt="piggy"id="piggy">
     </div>
-    <div id="filterAnnonces">
-        <form method="get" action="index.php">
-            <input type="hidden" name="page" value="mur">
-            <input type="hidden" name="p" value="<?php echo $_GET['p']; ?>">
-
-            <label for="typeFiltre">Filtrer par type :</label>
-            <br>
-            <select id="typeFiltre" name="typeFiltre">
-                <option value="none">Tous</option>
-                <option value="Avancees">Avancées</option>
-                <option value="Dispos">Dispos</option>
-                <option value="Recherche">Recherches</option>
-            </select>
-            <br>
-            <input type="submit" value="Filtrer" name="filtrer" id="filtrer">
-        </form>
-
-
-
-    </div>
     <?php
     if (!isset($_SESSION['idUser'])) {
         $userId = null;
