@@ -35,6 +35,30 @@ Exécutez les requêtes SQL initiales qui se trouvent dans le fichier `db.sql`.
 
 Vous pouvez ouvrir le terminal de requêtes de PostgreSQL et coller le contenu du fichier.
 
+### Configurer vos données personnelles nécéssaires 
+
+Pour le bon fonctionnement du site, il vous faudra faire quelques modifications. Vous trouverez dans le projet le fichier `config\global_values_template.php`. Ce fichier est, comme son nom l'indique, un template qui va vous permettre de renseigner vos données personnelles tels que vos mots de passes et noms d'utilisateurs de votre base de données ou de votre boîte mail. 
+
+**PASSWORD_DB** : doit contenir votre mot de passe vous permettant de vous connecter à votre base de données.
+
+**USERNAME_DB** : doit contenir votre nom d'utilisateur vous permettant de vous connecter à votre base de données.
+
+**MAIL_HOST** : doit contenir le serveur SMTP de votre boîte mail. Quelques exemples :
+- outlook: `smtp.office365.com`
+- gmail: `smtp.gmail.com`
+- orange: `smtp.orange.fr`
+- yahoo: `mail.yahoo.com`
+
+**MAIL_USERNAME** : doit contenur le nom d'utilisateur que vous utilisez pour vous connecter à votre boite mail. Il y a de grandes chances que ce soit votre adresse mail.
+
+**MAIL_PASSWORD** : doit contenir votre mot de passe vous permettant de vous connecter à votre boite mail.
+
+**MAIL_ADRESSE_EXPEDITEUR** : doit contenir l'adresse mail à partir de laquelle vous voulez que les mails de notification s'envoient.
+
+**MAIL_NOM_EXPEDITEUR** : doit contenir votre nom.
+
+Afin que tout fonctionne dans le meilleur des mondes vous devrez donc copier le contenu de `config\global_values_template.php` et le coller dans un fichier `config\global_values.php` que vous devrez créer puis y renseigner vos informations, ou bien vous pouvez tout simplement remplir vos informations dans le template et renommer le fichier `global_values_template.php` en `global_values.php`.
+
 ## Usage
 
 Pour voir des exemples d'utilisation du site, vous pouvez exécuter les requêtes SQL d'exemples contenues dans le fichier `examples.sql`.
