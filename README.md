@@ -6,6 +6,13 @@ Ce projet a été réalisé par Maimiti Saint-Marc et Claire Sbaffe en B2 Dével
 
 Ce site est un site de mise en relation d'acteurs dans la cadre d'un chantier participatif de tiny house par Low-Tech Bordeaux.
 
+## Sommaire
+
+- [Architecture](#architecture)
+- [Dépendances](#dépendances)
+- [Installation](#installation)
+- [Usage](#usage)
+
 ## Architecture
 
 Ce site a été développé avec HTML, CSS, JavaScript pour le front-end et PHP, PostgreSQL pour le back-end.
