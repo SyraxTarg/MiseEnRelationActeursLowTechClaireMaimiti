@@ -200,15 +200,15 @@ class annoncesManager extends AbstractManager {
         $mail->isSMTP();
         $mail->Host       = 'smtp.office365.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'maimiti.saint-marc@efrei.net';
-        $mail->Password   = 'Fairytail.0';
+        $mail->Username   = 'adressemailexpediteur';
+        $mail->Password   = 'mdpexpediteur';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
         $mail->CharSet = 'UTF-8';
 
     foreach ($users as $user) {
         if ($user['activites'] && $this->containsActivite($user['activites'], $titre, $description)) {
-            $mail->setFrom('maimiti.saint-marc@efrei.net', 'Maimiti');
+            $mail->setFrom('adressemailexpediteur', 'nomexpediteur');
             $mail->addAddress($user['email'], $user['username']);
 
             $mail->isHTML(true);
