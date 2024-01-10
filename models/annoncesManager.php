@@ -1,8 +1,8 @@
 <?php
 
 require_once 'models/abstactManager.php';
+require_once 'config/global_values.php';
 require 'public/PHPMailer-master/src/Exception.php';
-// require 'public/PHPMailer-master/src/PHPMailer.php';
 require 'public\PHPMailer-master\src\PHPMailer.php';
 require 'public/PHPMailer-master/src/SMTP.php';
 
@@ -198,21 +198,21 @@ class annoncesManager extends AbstractManager {
     
         $mail = new PHPMailer();
         $mail->isSMTP();
-        $mail->Host       = 'smtp.office365.com';
+        $mail->Host       = MAIL_HOST;
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'adressemailexpediteur';
-        $mail->Password   = 'mdpexpediteur';
+        $mail->Username   = MAIL_USERNAME;
+        $mail->Password   = MAIL_PASSWORD;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
         $mail->CharSet = 'UTF-8';
 
     foreach ($users as $user) {
         if ($user['activites'] && $this->containsActivite($user['activites'], $titre, $description)) {
-            $mail->setFrom('adressemailexpediteur', 'nomexpediteur');
+            $mail->setFrom(MAIL_ADRESSE_EXPEDITEUR, MAIL_NOM_EXPEDITEUR);
             $mail->addAddress($user['email'], $user['username']);
 
             $mail->isHTML(true);
-            $mail->Subject = 'Nouvelle annonce correspondant à vos activités';
+            $mail->Subject = 'Low-Tech Bordeaux : Nouvelle annonce correspondant à vos activités';
             $mail->Body    = 'Une nouvelle annonce a été postée correspondant à vos activités.';
 
             try {
