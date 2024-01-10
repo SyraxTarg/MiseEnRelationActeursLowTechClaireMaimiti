@@ -63,7 +63,6 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
         var boutonAjouter = document.querySelector("#buttonActivite");
         var conteneurAutresActivites = document.querySelector("#autresActivites");
 
@@ -89,8 +88,6 @@
                 conteneurAutresActivites.appendChild(divNouvelInput);
             });
         });
-    });
-
 </script>
 
 <style>
