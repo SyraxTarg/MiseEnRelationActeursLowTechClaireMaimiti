@@ -489,6 +489,7 @@
         margin: 1vh;
         font-size: 2vh;
         font-family: "Montserrat", "sans-serif";
+        color: #31356E;
     }
 
     .paginationBtn:hover {
