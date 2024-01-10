@@ -35,7 +35,7 @@ Exécutez les requêtes SQL initiales qui se trouvent dans le fichier `db.sql`.
 
 Vous pouvez ouvrir le terminal de requêtes de PostgreSQL et coller le contenu du fichier.
 
-### Configurer vos données personnelles nécéssaires 
+### Configurer vos données personnelles nécessaires 
 
 Pour le bon fonctionnement du site, il vous faudra faire quelques modifications. Vous trouverez dans le projet le fichier `config\global_values_template.php`. Ce fichier est, comme son nom l'indique, un template qui va vous permettre de renseigner vos données personnelles tels que vos mots de passes et noms d'utilisateurs de votre base de données ou de votre boîte mail. 
 
