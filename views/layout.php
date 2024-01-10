@@ -27,4 +27,24 @@
 </html>
 
 
+<style>
+    ::-webkit-scrollbar {
+  width: 0.8vw;
+}
+
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background:#31356E;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background:#9B91C3;
+}
+</style>
+
 

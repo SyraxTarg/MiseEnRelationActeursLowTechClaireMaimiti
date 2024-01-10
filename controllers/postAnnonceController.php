@@ -6,6 +6,9 @@ require_once('models/annoncesManager.php');
 require_once('models/rechercheManager.php');
 require_once('models/avancéesManager.php');
 require_once('models/disposManager.php');
+require_once('models/usersManager.php');
+require_once('models/particuliersManager.php');
+require_once('models/modérateursManager.php');
 
 
 
@@ -23,6 +26,15 @@ $disposManager->dbConnect();
 
 $rechercheManager = new rechercheManager();
 $rechercheManager->dbConnect();
+
+$usersManager = new usersManager();
+$users = $usersManager->getUsers();
+
+$particuliersManager = new particuliersManager();
+$particuliers = $particuliersManager->getParticuliers("desc");
+
+$modérateursManager = new modérateursManager();
+$modos = $modérateursManager->getModérateurs();
 
 
 
@@ -50,7 +62,12 @@ if (isset($_SESSION['username'])) {
                     $imagePath = './upload/'.$file;
                 }
             } 
-            $annoncesManager->postAnnonce($pinned, $imagePath);
+            if($_SESSION['privileges'] == "modo" ){
+                $annoncesManager->postAnnonce($pinned, $imagePath, $particuliers);
+            } else{
+                $annoncesManager->postAnnonce($pinned, $imagePath, $modos);
+            }
+            
             $lastAnnonce = $annoncesManager->getlastAnnonce();
             unset($_FILES['file']);
             if(isset($_POST['type'])){

@@ -11,11 +11,14 @@
         <img src="./public/images/elements/elements4_piggybank.png" alt="piggy"id="piggy">
     </div>
     <div id="filterAnnonces">
-        <form method="post">
+        <form method="get" action="index.php">
+            <input type="hidden" name="page" value="mur">
+            <input type="hidden" name="p" value="<?php echo $_GET['p']; ?>">
+
             <label for="typeFiltre">Filtrer par type :</label>
             <br>
             <select id="typeFiltre" name="typeFiltre">
-                <option value="">Tous</option>
+                <option value="none">Tous</option>
                 <option value="Avancees">Avancées</option>
                 <option value="Dispos">Dispos</option>
                 <option value="Recherche">Recherches</option>
@@ -23,6 +26,9 @@
             <br>
             <input type="submit" value="Filtrer" name="filtrer" id="filtrer">
         </form>
+
+
+
     </div>
     <?php
     if (!isset($_SESSION['idUser'])) {
@@ -32,6 +38,7 @@
         $userId = $_SESSION['idUser'];
         $isLoggedIn = true;
     }
+
     $numPage = isset($_GET['p']) ? (int) $_GET['p'] : 1;
     $nbPages=intdiv(count($annonces), 10);
     $nbPages2 = count($annonces)%10;
@@ -492,6 +499,7 @@
     .pagination {
         display: flex;
         justify-content: center;
+        flex-wrap: wrap;
     }
 
 
@@ -524,8 +532,6 @@
     .userPicture .pfp{
         border-radius: 50px;
     }
-
-
 
 
 </style>

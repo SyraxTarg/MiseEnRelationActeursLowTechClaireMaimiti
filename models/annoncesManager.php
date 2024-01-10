@@ -1,6 +1,15 @@
 <?php
 
 require_once 'models/abstactManager.php';
+require 'public/PHPMailer-master/src/Exception.php';
+// require 'public/PHPMailer-master/src/PHPMailer.php';
+require 'public\PHPMailer-master\src\PHPMailer.php';
+require 'public/PHPMailer-master/src/SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 
 class annoncesManager extends AbstractManager {
 
@@ -47,18 +56,15 @@ class annoncesManager extends AbstractManager {
         return $query->fetchAll();
     }
 
-    // $sql = "select Annonces.id, titre, description, username, Users.id AS id_user, date, nb_likes, image, profile_picture from ".annoncesManager::TABLE_NAME." JOIN Users ON ".annoncesManager::TABLE_NAME.".id_user = Users.id where id_annonce_mere is null order by date desc, pinned offset ".$offset.";";
-    //     $query = $this->dbConnect()->query($sql);
-    //     return $query->fetchAll();
 
 
-    function getNumberAnnonces(){
-        $sql="select count(id) from Annonces where id_annonce_mere is null;";
+    function getIdAnnonces(){
+        $sql="select id from Annonces where id_annonce_mere is null;";
         $query = $this->dbConnect()->query($sql);
         return $query->fetchAll();
     }
 
-    function rechercheAnnoncesByType($offset){
+    function rechercheAnnoncesByType($offset, $typeFiltre){
         $sql = "WITH AnnoncesTri AS (
             SELECT Annonces.id, titre, description, username, Users.id AS id_user, date, nb_likes, image, profile_picture
             FROM " . annoncesManager::TABLE_NAME . "
@@ -69,16 +75,11 @@ class annoncesManager extends AbstractManager {
         SELECT Annonces.id, titre, description, username, Users.id AS id_user, date, nb_likes, image, profile_picture
         FROM " . annoncesManager::TABLE_NAME . "
         JOIN Users ON " . annoncesManager::TABLE_NAME . ".id_user = Users.id
-        JOIN " . $_POST['typeFiltre'] . " ON " . annoncesManager::TABLE_NAME . ".id = " . $_POST['typeFiltre'] . ".id_annonce
+        JOIN " . $typeFiltre . " ON " . annoncesManager::TABLE_NAME . ".id = " . $typeFiltre . ".id_annonce
         WHERE id_annonce_mere IS NULL
-            AND Annonces.id IN (SELECT id_annonce FROM " . $_POST['typeFiltre'] . ")
+            AND Annonces.id IN (SELECT id_annonce FROM " . $typeFiltre . ")
         ORDER BY pinned IS TRUE DESC, date DESC
         LIMIT 10 OFFSET " . $offset . ";";
-
-
-
-
-
         $query = $this->dbConnect()->query($sql);
         return $query->fetchAll();
 
@@ -150,15 +151,22 @@ class annoncesManager extends AbstractManager {
         }
     }
 
-    function postCommentaire($annonceId){
-        $sql="INSERT INTO ". annoncesManager::TABLE_NAME . "(description, id_annonce_mere, id_user, date) VALUES(:description, ".$annonceId.", :id, (SELECT NOW()));";
+    function postCommentaire($annonceId) {
+        $sql = "INSERT INTO " . annoncesManager::TABLE_NAME . "(description, id_annonce_mere, id_user, date) VALUES(:description, :id_annonce_mere, :id, (SELECT NOW()));";
         $query = $this->db->prepare($sql);
+    
+        $description = htmlspecialchars($_POST['description']);
+    
         $query->execute([
-            ':description' => $_POST['description'],
+            ':description' => $description,
+            ':id_annonce_mere' => $annonceId,
             ':id' => $_SESSION['idUser']
         ]);
+    
         return $query->fetch();
     }
+    
+    
 
     
 
@@ -174,20 +182,78 @@ class annoncesManager extends AbstractManager {
     }
 
 
-    function postAnnonce(bool $pinned, string $imagePath) {
+    function postAnnonce(bool $pinned, string $imagePath, array $users) {
         $sql = "INSERT INTO ".annoncesManager::TABLE_NAME."(titre, description, image, id_user, pinned, date, nb_likes) VALUES (:titre, :description, :image, :id_user, :pinned, (SELECT NOW()), 0);";
         $query = $this->db->prepare($sql);
-        
+        $titre = htmlspecialchars($_POST['titre']);
+        $description = htmlspecialchars($_POST['description']);
+    
         $query->execute([
-            ':titre' => $_POST['titre'],
-            ':description' => $_POST['description'],
+            ':titre' => $titre,
+            ':description' => $description,
             ':image' => $imagePath,
             ':id_user' => $_SESSION['idUser'],
             ':pinned' => $pinned ? 1 : 0, 
         ]);
     
-        return $query->fetchAll();
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.office365.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'maimiti.saint-marc@efrei.net';
+        $mail->Password   = 'Fairytail.0';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587;
+        $mail->CharSet = 'UTF-8';
+
+    foreach ($users as $user) {
+        if ($user['activites'] && $this->containsActivite($user['activites'], $titre, $description)) {
+            $mail->setFrom('maimiti.saint-marc@efrei.net', 'Maimiti');
+            $mail->addAddress($user['email'], $user['username']);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Nouvelle annonce correspondant à vos activités';
+            $mail->Body    = 'Une nouvelle annonce a été postée correspondant à vos activités.';
+
+            try {
+                $mail->send();
+            } catch (Exception $e) {
+                echo "Erreur lors de l'envoi du courriel : {$mail->ErrorInfo}";
+            }
+        }
     }
+
+    return $query->fetchAll();
+}
+    
+
+    function containsActivite($activites, $titre, $description) {
+
+        $activitesArray = explode(';', $activites);
+    
+        foreach ($activitesArray as $activite) {
+
+            $pattern = "/\b" . preg_quote($activite, '/') . "\b/i";
+            if (preg_match($pattern, $titre) || preg_match($pattern, $description)) {
+                return true;
+            }
+        }
+        return false;
+    }
+        function sendNotification($user) {
+        $to = $user['email'];
+        $subject = 'Notification: Nouvelle annonce correspondant à vos activités';
+        $message = 'Bonjour ' . $user['username'] . ', une nouvelle annonce correspondant à vos activités a été postée. Consultez-la sur notre site.';
+    
+
+        $headers = 'From: webmaster@example.com' . "\r\n" .
+            'Reply-To: webmaster@example.com' . "\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+    
+        mail($to, $subject, $message, $headers);
+    }
+    
+    
 
     
 

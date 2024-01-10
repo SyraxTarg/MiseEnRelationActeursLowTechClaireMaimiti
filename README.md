@@ -4,7 +4,7 @@ Projet de conception de site web pour Low-Tech Bordeaux dans le cadre de la mati
 
 Ce projet a été réalisé par Maimiti Saint-Marc et Claire Sbaffe en B2 Développement web & application à Efrei.
 
-Ce site est un site de mise en relation d'acteurs dans la cadre d'un chantier participatif de tiny house par Low-Tech Bordeaux.
+Ce site est un site de mise en relation d'acteurs dans le cadre d'un chantier participatif de tiny house par Low-Tech Bordeaux.
 
 ## Sommaire
 
@@ -21,7 +21,7 @@ Ce site a été développé avec HTML, CSS, JavaScript pour le front-end et PHP,
 
 Pour faire tourner ce site, vous avez besoin d'un serveur web permettant d'utiliser PHP et d'une base de données PostgreSQL.
 
-Le plus d'utiliser un serveur WAMP sur Windows ou MAMP sur MacOS. Cette méthode met en place tout ce qui est requis pour faire tourner ce site.
+Le plus simple est  d'utiliser un serveur WAMP sur Windows ou MAMP sur MacOS. Cette méthode met en place tout ce qui est requis pour faire tourner ce site.
 
 Il important de placer le dossier contenant le site dans le répertoire `C:\wamp64\www` sur Windows ou `Applications\MAMP\htdocs` sur MacOS afin qu'il puisse être utilisable par le serveur.
 
