@@ -6,7 +6,7 @@ START TRANSACTION;
 
 INSERT INTO Users (username, password, email, profile_picture) VALUES
 ('Alice Smith', '6acEn65z8', 'alice.smith@email.com', '.\public\images\defaultPfp.png'),
-('Natalie Brady', 'usC8453XT', 'alex_23@email.com', '.\public\images\defaultPfp.png');
+('Natalie Brady', 'usC8453XT', 'nathalie.brady@email.com', '.\public\images\defaultPfp.png');
 
 INSERT INTO Modérateurs (id_user) VALUES (3), (4);
 
